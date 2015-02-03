@@ -4,6 +4,7 @@ title: ruby实现各种排序算法
 excerpt:
 comments: true
 categories: blog
+share: true
 ---
 
 之前在微博上看到旧金山大学的David Galles教授用HTML5+js技术分别演示了6中数学排序算法的基本原理，便想用ruby分别实现这六种算法。

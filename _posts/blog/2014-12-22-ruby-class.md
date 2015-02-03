@@ -4,6 +4,7 @@ title: ruby中的类和对象
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 最近在ruby－china中闲逛，无意中发现了一位网友提出的问题，这个问题相当有意思，并且促使我写下了这篇博客。

@@ -4,6 +4,7 @@ title: Learn Mysql
 excerpt:
 comments: true
 categories: blog
+share: true
 ---
 
 #启动和关闭mysql服务

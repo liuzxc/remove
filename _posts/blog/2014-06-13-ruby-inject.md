@@ -4,6 +4,7 @@ title: ruby inject的用法
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 inject方法可以帮助你写出更简短的代码，唯一的缺点就是如果看你代码的人不太熟悉inject，那么对方就很难理解你代码的意图。

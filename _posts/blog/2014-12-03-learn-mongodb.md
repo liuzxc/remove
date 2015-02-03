@@ -4,6 +4,7 @@ title: Learn Mongodb
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 #### Installation

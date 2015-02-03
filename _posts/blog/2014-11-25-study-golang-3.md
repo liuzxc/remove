@@ -4,6 +4,7 @@ title: go语言学习笔记（三）
 excerpt:
 modified:
 categories: blog
+share: true
 ---
 
 常用package解释

@@ -4,6 +4,7 @@ title: Rails App中重复记录产生的原因
 excerpt:
 modified:
 categories: blog
+share: true
 ---
 
 在我工作的rails项目中，经常发现数据库中存在重复的记录，重复的记录会导致用户获取不到准确的数据，也会让数据库产生

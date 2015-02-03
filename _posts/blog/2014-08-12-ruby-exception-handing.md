@@ -4,6 +4,7 @@ title: ruby异常处理
 excerpt:
 comments: true
 categories: blog
+share: true
 ---
 
 ##考虑异常

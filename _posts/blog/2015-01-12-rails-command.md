@@ -4,6 +4,7 @@ title: Rails常用命令
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 创建新的rails项目

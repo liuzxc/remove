@@ -4,6 +4,7 @@ title: go语言学习笔记（一）
 excerpt:
 modified:
 categories: blog
+share: true
 ---
 
 ###Go的基本类型

@@ -4,6 +4,7 @@ title: linux常用命令
 excerpt:
 comments: true
 categories: blog
+share: true
 ---
 
 ####ps 产看当前进程状态

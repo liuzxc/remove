@@ -4,6 +4,7 @@ title: go语言学习笔记（二）
 excerpt:
 modified:
 categories: blog
+share: true
 ---
 
 流程控制

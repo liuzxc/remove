@@ -4,6 +4,7 @@ title: Rails 查询数据库的几种方式
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 其实，了解rails查询数据库最好的地方是[rails guide](http://guides.rubyonrails.org/active_record_querying.html)

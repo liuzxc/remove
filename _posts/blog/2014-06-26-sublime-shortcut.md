@@ -4,12 +4,15 @@ title: sublime 快捷键集合
 excerpt:
 comments: true
 categories: blog
+share: true
+image:
+  feature: sublime_text.jpg
 ---
 
-<figure>
+<!-- <figure>
     <img src="/images/sublime1.jpeg">
     <figcaption>sublime text 被称作最性感的编辑器!</figcaption>
-</figure>
+</figure> -->
 
 ##查找功能
 

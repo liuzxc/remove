@@ -4,6 +4,7 @@ title: 使用RSpec测试Rails程序（1）
 excerpt:
 categories: blog
 comments: true
+share: true
 ---
 
 虽然`test::unit`测试框架是rails的官方标配，但是毋庸置疑的是，Rspec才是rails社区最流行的测试框架。
