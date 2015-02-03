@@ -1,17 +1,21 @@
 # Site wide configuration
 
-title: Site Title
+title: Jason's blog
 locale: en_US
-description: Describe your website here.
-logo: site-logo.png
+description: Write the code Change myself.
+logo: coder.jpeg
 search: true
-url: http://localhost:4000
+
+
+# url: http://liuzxc.github.io
+url:
+
 
 # Jekyll configuration
-
 permalink:   /:categories/:title/
 markdown:    kramdown
 highlighter: pygments
+# highlighter: rouge
 sass:
   sass_dir: _sass
   style: compressed
@@ -31,22 +35,22 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 
 # Site owner
 owner:
-  name: Your Name
-  avatar: bio-photo.jpg
-  email: you@email.com
-  disqus-shortname:
+  name: Jasonliu
+  avatar: ruboto.png
+  email: lxq_102172@163.com
+  disqus-shortname: liuzxc
   twitter: #username
   facebook: #username
-  github: #username
-  stackexchange: #http://stackoverflow.com/users/123456/username
+  github: liuzxc
+  stackexchange: http://stackoverflow.com/users/1805902/liuzxc
   linkedin: #username
   instagram: #username
   flickr: #username
   tumblr: #username
   google:
-    plus: #username
-    analytics:
-    verify:
+    plus:
+    analytics: UA-56528768-1
+    verify: tv5bNlWn10A3WQJztb3XW68lftOBKJfwNgjLs-Eoxl0
     ad-client:
-    ad-slot: 
+    ad-slot:
   bing-verify:
