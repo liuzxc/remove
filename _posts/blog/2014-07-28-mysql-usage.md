@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Learn Mysql
+excerpt:
 comments: true
 categories: blog
 ---

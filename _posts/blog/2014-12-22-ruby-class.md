@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ruby中的类和对象
+excerpt:
 categories: blog
 comments: true
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ruby inject的用法
+excerpt:
 categories: blog
 comments: true
 ---

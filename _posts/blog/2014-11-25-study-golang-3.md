@@ -1,6 +1,7 @@
 ---
 layout: post
 title: go语言学习笔记（三）
+excerpt:
 modified:
 categories: blog
 ---

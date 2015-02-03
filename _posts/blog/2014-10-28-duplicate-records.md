@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rails App中重复记录产生的原因
+excerpt:
 modified:
 categories: blog
 ---

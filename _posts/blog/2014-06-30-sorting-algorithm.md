@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ruby实现各种排序算法
+excerpt:
 comments: true
 categories: blog
 ---

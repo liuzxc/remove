@@ -1,6 +1,7 @@
 ---
 layout: post
 title: linux常用命令
+excerpt:
 comments: true
 categories: blog
 ---

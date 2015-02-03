@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Learn Mongodb
+excerpt:
 categories: blog
 comments: true
 ---

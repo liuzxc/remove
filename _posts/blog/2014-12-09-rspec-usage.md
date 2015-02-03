@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 使用RSpec测试Rails程序（1）
+excerpt:
 categories: blog
 comments: true
 ---

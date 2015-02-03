@@ -9,11 +9,11 @@
 - title: Blog
   url: /blog/
 
-- title: Theme Setup
-  url: /theme-setup/
+- title: COMMON LINKS
+  url: /common-links/
 
-- title: Made Mistakes
-  url: http://mademistakes.com
+# - title: Made Mistakes
+#   url: http://mademistakes.com
 
 - title: Search
   url: /search/

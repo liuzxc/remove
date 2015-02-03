@@ -1,6 +1,7 @@
 ---
 layout: post
 title: sublime 快捷键集合
+excerpt:
 comments: true
 categories: blog
 ---

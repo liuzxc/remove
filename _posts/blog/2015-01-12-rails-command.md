@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rails常用命令
+excerpt:
 categories: blog
 comments: true
 ---
