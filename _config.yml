@@ -36,7 +36,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 # Site owner
 owner:
   name: Jasonliu
-  avatar: ruboto.png
+  avatar: my_photo.png
   email: lxq_102172@163.com
   disqus-shortname: liuzxc
   twitter: #username

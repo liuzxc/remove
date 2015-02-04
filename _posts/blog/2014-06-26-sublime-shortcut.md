@@ -14,7 +14,7 @@ image:
     <figcaption>sublime text 被称作最性感的编辑器!</figcaption>
 </figure> -->
 
-##查找功能
+####查找功能
 
 * `Command + Shift + F`: 从当前项目中搜索目标;
 * `Command + F`: 从当前文件中搜索目标;
@@ -24,9 +24,9 @@ image:
 * `@`: 跳转到指定的方法或函数;
 
 
-##编辑功能
+####编辑功能
 
-###单行或多行编辑
+#####单行或多行编辑
 
 * `Command + L`: 选中当前行, 按住Command，持续点击L可以依次选取多行
 * `Command + Shift + L`: 同时编辑多行，此时光标位于每行的行末，点击右键可以将光标移至行首
@@ -37,19 +37,19 @@ image:
 * `Command + J`: 合并单行或多行J
 * `Control + M`: 跳转至对应的括号
 
-###注释
+#####注释
 
 * `Command + /`: 注释当前行或所选的行
 * `Command + Alt + /`: 块注释
 
-###选取字符
+#####选取字符
 
 * `Command + D`: 首先用光标选取字符，按住Command，持续点击D可以选取当前文件相同的字符,如果需要跳过当前选中的字符，`Command+K, Command +D`,如过要消除当前选中的字符，`Command + U`
 * `Command + Control + G`: 一次性选取所有相同的词
 * `Control + Shift + M`: 选取括号中的内容
 
 
-###拆分窗口
+#####拆分窗口
 
 * `Command + Alt + 1`: 单个窗口;
 * `Command + Alt + 2`: 拆分为两个窗口;
