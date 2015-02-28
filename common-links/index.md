@@ -18,6 +18,7 @@ modified: 2014-08-08T20:04:41.231140-04:00
 * [Rails官网中文版](http://guides.ruby-china.org/)
 * [Rails API](http://api.rubyonrails.org/)
 * [RailsCasts](http://railscasts.com/)
+* [Rails实战圣经](https://ihower.tw/rails4/index.html)
 
 #####数据库
 
