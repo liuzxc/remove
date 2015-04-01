@@ -56,3 +56,47 @@ image:
 * `Command + Alt + 5`: 拆分为两行两列（共四格）窗口;
 * `Control + (1,2,3,4)`: 跳转至相应的窗口;
 * `Control + shift + (1,2,3,4)`: 将当前的文件移动到对应的窗口;
+
+#####其他设置
+
+######打开vim模式
+
+在`Preferences->Setting:user`中添加以下代码：
+
+{% highlight ruby %}
+"ignored_packages": [
+  "Vintage"
+]
+{% endhighlight %}
+
+######显示全路径
+
+{% highlight ruby %}
+"show_full_path": true
+{% endhighlight %}
+
+######高亮编辑中的那一行
+
+{% highlight ruby %}
+"highlight_line": true
+{% endhighlight %}
+
+######保存的时候把无用的空格去掉
+
+{% highlight ruby %}
+"trim_trailing_white_space_on_save": true
+{% endhighlight %}
+
+######宽度指导线
+
+{% highlight ruby %}
+"rulers": [80]
+{% endhighlight %}
+
+这个数字是字符的宽度，当开启这个设置的时候，会出现一条垂直的虚线。但你的代码宽度超出这条线的时候，说明你要重新组织一下了
+
+######加粗文件夹名称
+
+{% highlight ruby %}
+"bold_folder_labels": true
+{% endhighlight %}
