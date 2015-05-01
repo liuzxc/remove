@@ -15,6 +15,11 @@ share: true
 
 `rails g model User name:string age:integer`
 
+创建controller
+
+`rails g controller Users`
+
+
 <figure>
     <img src="/images/rails_type.png">
     <figcaption>rails中的字段类型</figcaption>

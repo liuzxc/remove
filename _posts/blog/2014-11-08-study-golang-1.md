@@ -27,6 +27,8 @@ var f float64 = float64(i)
 var u uint = uint(f)
 var a, b, c int = 0, 1, 2 //左右的数量要匹配，否则会报错
 
+const Pi float64 = 3.14159265358979323846  //常量定义
+
 i := 42
 f := float64(i)
 u := uint(f)
@@ -80,7 +82,7 @@ func toString(a interface{}) string {
 }
 {% endhighlight %}
 
-> 
+>
 Go语言里面有一个语法，可以直接判断是否是该类型的变量： value, ok = element.(T)，这里value就是变量的值，ok是一个bool类型，element是interface变量，T是断言的类型。
 如果element里面确实存储了T类型的数值，那么ok返回true，否则返回false。
 
