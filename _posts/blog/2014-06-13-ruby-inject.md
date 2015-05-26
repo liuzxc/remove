@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ruby中的一些神奇方法
+title: ruby中一些好用的方法
 excerpt: 总结了自己在工作中和stackoverflow上学到的一些很有用的方法
 categories: blog
 comments: true
@@ -23,7 +23,7 @@ array.inject({}) { |sum, e| sum.merge e } #{:a=>100, :b=>200, :c=>300}
 {% endhighlight %}
 
 * inject():括号中的是sum的初始值
-* |sum, e|: 和在前，数组元素在后，中间必须以逗号隔开
+* sum, e: 和在前，数组元素在后，中间必须以逗号隔开
 
 #####group_by
 
@@ -88,21 +88,27 @@ array.group_by { |e| e["school_id"] }.values.map { |i| i.reduce(:merge) }
 
 `zip`可以将两个数组合并为一个二维数组
 
+{% highlight ruby linenos %}
 a= [1,2,3,4,5]
 b=[6,7,8,9,10]
 a.zip(b)
 => [[1, 6], [2, 7], [3, 8], [4, 9], [5, 10]]
+{% endhighlight %}
 
 如果`a.length > b.length`，b中缺少的以nil代替 ，
 
+{% highlight ruby linenos %}
 a=[1,2,3,4,5,6]
 b=[6,7,8,9,10]
 a.zip(b)
 => [[1, 6], [2, 7], [3, 8], [4, 9], [5, 10], [6, nil]]
+{% endhighlight %}
 
 如果`a.length < b.length`，b中多余的直接被丢弃
 
+{% highlight ruby linenos %}
 a= [1,2,3,4]
 b=[6,7,8,9,10]
 a.zip(b)
 => [[1, 6], [2, 7], [3, 8], [4, 9]]
+{% endhighlight %}
