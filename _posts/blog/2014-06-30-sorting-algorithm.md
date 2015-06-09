@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ruby实现各种排序算法
+title: ruby实现各种排序查找算法
 excerpt:
 comments: true
 categories: blog
@@ -69,3 +69,29 @@ def quicksort(list)
     quicksort(less) + [pivot] + quicksort(greater)
 end
 {% endhighlight %}
+
+###二分查找
+
+####算法要求
+
+1. 必须采用顺序存储结构；
+2. 数组必须是有序的；
+
+####算法原理
+
+折半查找法也称为二分查找法，它充分利用了元素间的次序关系，采用分治策略，可在最坏的情况下用O(log n)完成搜索任务。它的基本思想是，将n个元素分成个数大致相同的两半，取a[n/2]与欲查找的x作比较，如果x=a[n/2]则找到x，算法终止。如 果x<a[n/2]，则我们只要在数组a的左半部继续搜索x（这里假设数组元素呈升序排列）。如果x>a[n/2]，则我们只要在数组a的右 半部继续搜索x。
+
+def binary_search(list, len, key)
+    left, right = 0, len - 1
+    while left <= right
+        mid = (left + right) >> 1
+        if list[mid] == key
+            return mid
+        elsif list[mid] > key
+            right = mid -1
+        else
+            left = mid + 1
+        end
+    end
+    return -1
+end

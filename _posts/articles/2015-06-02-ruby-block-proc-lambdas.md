@@ -15,7 +15,7 @@ categories: articles
 * [Method Objects](#method-objects)
 * [Conclusion](#conclusion)
 
-Blocks，Procs 和 Lambdas（在计算机科学中被称作“闭包”）是 Ruby 中最强大的方面之一，也是最容易让人误解的，
+Blocks，Procs 和 Lambdas（在计算机科学中被称作`闭包`）是 Ruby 中最强大的方面之一，也是最容易让人误解的，
 这可能是因为 Ruby 采用了多种方式来处理闭包。让事情变的复杂的原因是由于 Ruby 采用4种不同的方式来使用闭包，并且每一种都有所不同，甚至在某些时候使用闭包的方式看起来很荒谬。对于 Ruby 是如何使用闭包的，
 有相当多的网站提供有用的信息，但是至今为止我一直都没有找到一个非常好的，希望本教程可以做到。
 
