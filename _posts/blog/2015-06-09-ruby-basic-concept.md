@@ -7,7 +7,12 @@ comments: true
 share: true
 ---
 
+* [Public VS Protected VS Private](#private)
+* [require VS load](#require)
+* [include VS extend](#include)
+
 #### Public VS Protected VS Private
+{: #private}
 
 1. Public 方法可以被任何人调用——无强制的访问限制。一个实例方法默认是 public 的，任何人都可以调用，
 但 initialize 方法是 private 的；
@@ -109,6 +114,8 @@ A.test5 => hello, Jason!
 并且 protected 可以被属于同一类或子类的其他对象所调用，但 private 却不可以。
 
 #### require VS load
+{: #require}
+
 
 ##### require
 
@@ -166,6 +173,8 @@ true
 从上面两个例子可以看出，require 和 load 的区别是：如果多次加载同一文件，require 只加载一次，而 load 会加载多次。
 
 #### include VS extend
+{: #include}
+
 
 定义一个 module A, class Test1, class Test2:
 
