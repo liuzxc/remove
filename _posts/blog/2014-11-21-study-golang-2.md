@@ -1,6 +1,6 @@
 ---
 layout: post
-title: go语言学习笔记（二）
+title: go 语言学习笔记（二）
 excerpt:
 modified:
 categories: blog
@@ -73,7 +73,7 @@ golang只支持`for`循环，不支持`while`
 
 {% highlight go %}
 //类似于C语言的循环
-for i := 0; i < count; i++ {	
+for i := 0; i < count; i++ {
 }
 //无限循环
 i := 0

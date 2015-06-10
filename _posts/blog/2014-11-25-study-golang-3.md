@@ -1,7 +1,7 @@
 ---
 layout: post
-title: go语言学习笔记（三）
-excerpt: 理解go语言中的interface
+title: go 语言学习笔记（三）
+excerpt: 理解 go 语言中的 interface
 modified:
 categories: blog
 share: true

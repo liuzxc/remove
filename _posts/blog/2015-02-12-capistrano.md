@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 使用Capistrano 3部署rails应用
-excerpt: Capistrano是Rails App最常用的自动化部署工具，本篇文章将介绍Capistrano 3的安装及配置
+title: 使用 Capistrano 3部署 Rails 应用
+excerpt: Capistrano 是 Rails App 最常用的自动化部署工具，本篇文章将介绍 Capistrano 3的安装及配置
 categories: blog
 comments: true
 share: true

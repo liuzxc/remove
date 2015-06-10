@@ -1,6 +1,6 @@
 ---
 layout: post
-title: go语言学习笔记（一）
+title: go 语言学习笔记（一）
 excerpt:
 modified:
 categories: blog

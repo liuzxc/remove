@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 为什么ruby2.0的垃圾回收器让我们如此兴奋(译文)
-excerpt: 你不会学到任何与ruby相关的编程技巧，但你可以更好的理解垃圾回收器是如何工作的
+title: 为什么 Ruby2.0 的垃圾回收器让我们如此兴奋(译文)
+excerpt: 你不会学到任何与 Ruby 相关的编程技巧，但你可以更好的理解垃圾回收器是如何工作的
 comments: true
 share: true
 categories: articles

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 使用RSpec测试Rails程序（1）
+title: 使用 RSpec 测试 Rails 程序（1）
 excerpt:
 categories: blog
 comments: true
@@ -309,7 +309,7 @@ end
 {% highlight ruby %}
 class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 20}
-  validates :email, presence: true, length: {maximum: 50}, 
+  validates :email, presence: true, length: {maximum: 50},
                     format: { with: /\A[\w]+@[a-z\d]+\.[a-z]/ },
                     uniqueness: true
 end
@@ -397,7 +397,7 @@ end
 require 'spec_helper'
 
 describe User do
-	before :each do 
+	before :each do
 		@user = User.new(name: "test", email: "test@test.com")
 	end
 
@@ -468,7 +468,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 {% highlight ruby %}
 describe User do
-	before :each do 
+	before :each do
 		@user = User.new(name: "test", email: "test@test.com", password: "123456", password_confirmation: "123456")
 	end
 	......
@@ -485,7 +485,7 @@ end
 {% highlight ruby %}
 class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 20}
-  validates :email, presence: true, length: {maximum: 50}, 
+  validates :email, presence: true, length: {maximum: 50},
                     format: { with: /\A[\w]+@[a-z\d]+\.[a-z]/ },
                     uniqueness: true
   has_secure_password

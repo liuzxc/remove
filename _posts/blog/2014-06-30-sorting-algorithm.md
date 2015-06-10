@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ruby实现各种排序查找算法
+title: Ruby 实现各种排序查找算法
 excerpt:
 comments: true
 categories: blog

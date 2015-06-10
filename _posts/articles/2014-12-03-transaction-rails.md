@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails中的事务
+title: Rails 中的事务
 excerpt: 使用事务过程中常见的错误和解决方案
 comments: true
 share: true

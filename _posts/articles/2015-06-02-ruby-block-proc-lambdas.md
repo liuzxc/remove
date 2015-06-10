@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 理解 ruby 中的 Blocks，Procs 和 Lambdas
-excerpt: Blocks，Procs 和 Lambdas 是 ruby 最强有力的武器，也是最容易误解的
+title: 理解 Ruby 中的 Blocks，Procs 和 Lambdas
+excerpt: Blocks，Procs 和 Lambdas 是 Ruby 最强有力的武器，也最难理解
 comments: true
 share: true
 categories: articles

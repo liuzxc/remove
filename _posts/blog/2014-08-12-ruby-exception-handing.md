@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ruby异常处理
+title: Ruby 异常处理
 excerpt:
 comments: true
 categories: blog
