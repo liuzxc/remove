@@ -33,6 +33,50 @@ def bubble_sort(list)
 end
 {% endhighlight %}
 
+#### 直接插入排序
+
+算法原理：
+
+第一趟比较前两个数，然后把第二个数按大小插入到有序表中； 第二趟把第三个数据与前两个数从前向后扫描，把第三个数按大小插入到有序表中；依次进行下去，进行了(n-1)趟扫描以后就完成了整个排序过程。
+
+{% highlight ruby linenos %}
+def straight_insertion_sort(list)
+  (1...list.length).each do |i|
+    temp = list[i]
+    (0...i).each { |j| list[j], list[i] = list[i], list[j] if list[j] >= temp }
+  end
+  list
+end
+{% endhighlight %}
+
+直接插入排序属于稳定的排序，最坏时间复杂性为O(n^2)，空间复杂度为O(1)。
+
+#### 希尔排序
+
+算法原理：
+
+排序过程：先取一个正整数d1<n，把所有序号相隔d1的数组元素放一组，组内进行直接插入排序；然后取d2<d1，重复上述分组和排序操作；直至di=1，即所有记录放进一个组中排序为止。
+
+{% highlight ruby linenos %}
+def shell_sort(list)
+  d = list.length
+  while d > 1
+    d = d / 2
+   (0...list.length).each do |i|
+    (0...list.length-d).step(d) do |j|
+     if list[j] >= list[j+d]
+      list[j], list[j+d] = list[j+d], list[j]
+     end
+    end
+   end
+    break if d == 1
+  end
+  list
+end
+{% endhighlight %}
+
+希尔排序的时间复杂度与增量序列的选取有关, 希尔排序的时间复杂度与增量序列的选取有关.
+
 ###快速排序
 
 算法原理：
@@ -81,6 +125,7 @@ end
 
 折半查找法也称为二分查找法，它充分利用了元素间的次序关系，采用分治策略，可在最坏的情况下用O(log n)完成搜索任务。它的基本思想是，将n个元素分成个数大致相同的两半，取a[n/2]与欲查找的x作比较，如果x=a[n/2]则找到x，算法终止。如 果x<a[n/2]，则我们只要在数组a的左半部继续搜索x（这里假设数组元素呈升序排列）。如果x>a[n/2]，则我们只要在数组a的右 半部继续搜索x。
 
+{% highlight ruby linenos %}
 def binary_search(list, len, key)
     left, right = 0, len - 1
     while left <= right
@@ -95,3 +140,4 @@ def binary_search(list, len, key)
     end
     return -1
 end
+{% endhighlight %}
