@@ -7,11 +7,19 @@ categories: blog
 share: true
 ---
 
+* [冒泡排序](#bubble)
+* [直接插入排序](#straight_insertion)
+* [希尔排序](#shell)
+* [快速排序](#quickly)
+* [直接选择排序](#straight_select)
+* [堆排序](#heap)
+
 之前在微博上看到旧金山大学的David Galles教授用HTML5+js技术分别演示了6中数学排序算法的基本原理，便想用ruby分别实现这六种算法。
 
 [用HTML5实现的各种排序算法的动画比较](http://www.webhek.com/misc/comparison-sort/)
 
 ###冒泡排序
+{: #bubble}
 
 算法原理：
 
@@ -34,6 +42,7 @@ end
 {% endhighlight %}
 
 #### 直接插入排序
+{: #straight_insertion}
 
 算法原理：
 
@@ -52,6 +61,7 @@ end
 直接插入排序属于稳定的排序，最坏时间复杂性为O(n^2)，空间复杂度为O(1)。
 
 #### 希尔排序
+{: #shell}
 
 算法原理：
 
@@ -78,6 +88,7 @@ end
 希尔排序的时间复杂度与增量序列的选取有关, 希尔排序的时间复杂度与增量序列的选取有关.
 
 ###快速排序
+{: #quickly}
 
 算法原理：
 快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
@@ -113,6 +124,89 @@ def quicksort(list)
     quicksort(less) + [pivot] + quicksort(greater)
 end
 {% endhighlight %}
+
+###直接选择排序
+{: #straight_select}
+
+####算法原理
+
+第一次从R[0]~R[n-1]中选取最小值，与R[0]交换，第二次从R[1]~R[n-1]中选取最小值，与R[1]交换，....，第i次从R[i-1]~R[n-1]中选取最小值，与R[i-1]交换，.....，第n-1次从R[n-2]~R[n-1]中选取最小值，与R[n-2]交换，总共通过n-1次，得到一个按排序码从小到大排列的有序序列
+
+{% highlight ruby linenos %}
+def straight_select_sort(array)
+  return array if array.length == 0
+  (0...array.length).each do |i|
+    min, index = array[i], i
+    (i...array.length).each { |j| min, index = array[j], j if array[j] < min }
+    array[i], array[index] = array[index] , array[i]
+  end
+  array
+end
+{% endhighlight %}
+
+平均时间复杂度为O(n^2)
+
+###堆排序
+{: #heap}
+
+堆排序(Heapsort)是指利用堆积树（堆）这种数据结构所设计的一种排序算法，它是选择排序的一种。可以利用数组的特点快速定位指定索引的元素。堆分为大根堆和小根堆，是完全二叉树。
+
+完全二叉树：除最后一层外，每一层上的节点数均达到最大值；在最后一层上只缺少右边的若干结点。
+
+堆（二叉堆）：二叉堆的数据结构是一个可以被看成是完全二叉树（或近似完全二叉树）的数组，二叉树的每一个节点都对应了数组中的一个元素。
+
+大根堆和小根堆：根结点（亦称为堆顶）的关键字是堆里所有结点关键字中最小者的堆称为小根堆，又称最小堆。根结点（亦称为堆顶）的关键字是堆里所有结点关键字中最大者，称为大根堆，又称最大堆。
+
+将数组转化为堆：
+
+{% highlight ruby linenos %}
+def make_min_heap(arr)
+   (arr.length/2-1).downto(0).each do |i|
+     puts i
+     min_heap_fixdown(arr, i, arr.length)
+   end
+   arr
+end
+
+def min_heap_fixdown(arr, i, n)
+   left = 2 * i + 1
+   while(left < n)
+     if left + 1 < n and arr[left] > arr[left + 1]
+       left += 1
+     end
+     if arr[left] < arr[i]
+      arr[left], arr[i] = arr[i], arr[left]
+      i = left
+      left = 2 * i + 1
+     else
+      break
+     end
+   end
+end
+
+puts make_min_heap([40, 10, 30, 15, 1]).inspect => [1, 10, 30, 15, 40]
+puts make_min_heap([9,12,17,30,50,20,60,65,4,19]).inspect => [4, 9, 17, 12, 19, 20, 60, 65, 30, 50]
+{% endhighlight %}
+
+堆排序：
+
+首先可以看到堆建好之后堆中第0个数据是堆中最小的数据。取出这个数据再执行下堆的删除操作。这样堆中第0个数据又是堆中最小的数据，重复上述步骤直至堆中只有一个数据时就直接取出这个数据。由于堆也是用数组模拟的，故堆化数组后，第一次将A[0]与A[n - 1]交换，再对A[0…n-2]重新恢复堆。第二次将A[0]与A[n – 2]交换，再对A[0…n - 3]重新恢复堆，重复这样的操作直到A[0]与A[1]交换。由于每次都是将最小的数据并入到后面的有序区间，故操作完成后整个数组就有序了。有点类似于直接选择排序。
+
+{% highlight ruby linenos %}
+def heap_sort(arr)
+   (arr.length - 1).downto(0).each do |i|
+     arr[i], arr[0] = arr[0], arr[i]
+     min_heap_fixdown(arr, 0, i)
+   end
+   arr
+end
+
+puts heap_sort(make_min_heap([9,12,17,30,50,20,60,65,4,19])).inspect => [65, 60, 50, 30, 20, 19, 17, 12, 9, 4]
+{% endhighlight %}
+
+注意使用最小堆排序后是递减数组，要得到递增数组，可以使用最大堆。
+
+堆排序的时间复杂度为O(NlogN)
 
 ###二分查找
 
