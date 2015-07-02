@@ -10,21 +10,21 @@ share: true
 #启动和关闭mysql服务
 
 ##linux：
-$ /etc/init.d/mysql start|stop|restart|status
+`$ /etc/init.d/mysql start|stop|restart|status`
 
 ##mac：
-$ /Library/StartupItems/MySQLCOM/MySQLCOM start|stop|restart
+`$ /Library/StartupItems/MySQLCOM/MySQLCOM start|stop|restart`
 
 #备份和还原数据库
 
 ##备份：
-$ mysqldump -u (user_name) -p (db_name) (table_name) > 备份文件名称
+`$ mysqldump -u (user_name) -p (db_name) (table_name) > 备份文件名称`
 
 * 没有table_name时备份整个数据库；
 * 备份文件名可加上绝对路径；
 
 ##还原：
-$ mysql -u root -p (db_name) < 备份文件名
+`$ mysql -u root -p (db_name) < 备份文件名`
 
 #mysql常用命令行参数
 * -h : 连接的服务器名或者IP
@@ -101,9 +101,11 @@ end;
 4. drop   从表中删除某列
 5. rename to 修改表名
 
+{% highlight sql %}
 alter table my_contacts
 add column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
 add primary key (contact_id);
+{% endhighlight %}
 
 > 可以使用first, last, before column_name, after column_name, second, third 等关键字调整列的顺序
 
