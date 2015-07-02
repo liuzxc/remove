@@ -35,6 +35,78 @@ $ mysql -u root -p (db_name) < 备份文件名
 * --reconnect : 如果与服务器之间的连接断开，自动尝试重新连接
 * --max_allowed_packet : 服务器接收／发送包的最大长度
 
+#### 数据和表
+
+##### 创建数据库和表
+
+1. CREATE DATABSE gregs_list; 创建数据库 gregs_list
+2. show databases; 列出当前所有的数据库
+3. use gregs_list; 使用 gregs_list 这个数据库
+4. create table my_contacts
+    (
+    last_name varchar(30),
+    first_name varchar(20),
+    email varchar(50),
+    gender char(1),
+    birthday date,
+    profession varchar(50),
+    location varchar(50),
+    status varchar(20),
+    interests varchar(100),
+    seeking varchar(100)
+    ); 创建 my_contacts 表
+5. desc my_contacts; 查看 my_contacts 表
+6. drop table my_contacts; 删除 my_contacts 表
+7. show create table my_contacts; 返回建表的 create table 语句
+
+##### insert 语句
+
+`insert into your_table (column_name1, column_name2, ...) values ('value1', 'value2', ...);`
+
+列名可省略：
+
+`insert into your_table values ('value1', 'value2', ...);`
+
+##### select 语句
+
+* Like与通配符
+	1. % : 表示任意数量的未知字符串的替身；
+	2. _ : 一个未知字符串的替身；
+
+##### delete 语句
+
+`delete from your_table where ....`
+
+##### update 语句
+
+`update your_table set first_column = 'new_value', second_column = 'new_value1' where ...;`
+
+使用 case 表达式 update
+
+{% highlight sql %}
+update my_table
+set new_column =
+case
+  when column1 = somavalue1
+  when column2 = somevalue2
+  else newvalue3
+end;
+{% endhighlight %}
+
+##### alter 语句
+
+1. change 可同时改变现有列的名称和数据类型
+2. modify 修改现有列的数据类型和位置
+3. add    在当前表中添加一列
+4. drop   从表中删除某列
+5. rename to 修改表名
+
+alter table my_contacts
+add column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+add primary key (contact_id);
+
+> 可以使用first, last, before column_name, after column_name, second, third 等关键字调整列的顺序
+
 ####mysql建立索引的几大原则
 
 引用自：[美团技术博客](http://tech.meituan.com/mysql-index.html)

@@ -8,8 +8,9 @@ share: true
 ---
 
 * [Public VS Protected VS Private](#private)
-* [require VS load](#require)
-* [include VS extend](#include)
+* [Require VS Load](#require)
+* [Include VS Extend](#include)
+* [Dup VS Clone](#clone)
 
 #### Public VS Protected VS Private
 {: #private}
@@ -113,11 +114,11 @@ A.test5 => hello, Jason!
 所调用，但在方法定义中可以被调用，只是在方法定义中，private 也不能被显式调用，但是 protected 可以，
 并且 protected 可以被属于同一类或子类的其他对象所调用，但 private 却不可以。
 
-#### require VS load
+#### Require VS Load
 {: #require}
 
 
-##### require
+##### Require
 
 require.rb:
 
@@ -143,7 +144,7 @@ true
 false
 {% endhighlight %}
 
-##### load
+##### Load
 
 load.rb:
 
@@ -172,7 +173,7 @@ true
 
 从上面两个例子可以看出，require 和 load 的区别是：如果多次加载同一文件，require 只加载一次，而 load 会加载多次。
 
-#### include VS extend
+#### Include VS Extend
 {: #include}
 
 
@@ -221,7 +222,49 @@ class Test3
 end
 
 Test3.new.test => hello Jason
-
 {% endhighlight %}
 
 如果类中 include 了多个模块，并且模块中有相同的方法，后加载的会覆盖之前加载的方法。
+
+#### Dup VS Clone
+
+这两个方法分配一个调用者所属的实例，然后把调用者的所有实例变量及修改都拷贝到新创建的对象中。
+dup 和 clone 用的都是浅拷贝，即如果实例变量包含对其他对象的引用，那么拷贝的是引用而不是对象本身。
+它们的区别是：
+
+* clone 比 dup 拷贝更彻底，它还拷贝调用者的单键方法。
+
+{% highlight ruby %}
+class A
+end
+
+a = A.new
+
+def a.play
+   puts "play"
+end
+
+a.play => "play"
+b = a.clone
+b.play => "play"
+c = a.dup
+c.play => "undefined method `play' for #<A:0x007fcbb184eed0> (NoMethodError)"
+{% endhighlight %}
+
+> 单键方法是指只对单个对象生效的方法，类方法是特殊的单键方法
+
+* clone 保留对象 frozen 状态， 而 dup 不会
+
+{% highlight ruby %}
+class Foo
+  attr_accessor :bar
+end
+o = Foo.new
+o.freeze # 防止对象被修改
+
+o.dup.bar = 10   # succeeds
+o.clone.bar = 10 # RuntimeError: can't modify frozen Foo
+{% endhighlight %}
+
+
+
