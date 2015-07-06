@@ -5,17 +5,31 @@ excerpt:
 categories: blog
 comments: true
 share: true
+image:
+   feature: ruby_on_rails_logo.jpg
 ---
 
-创建新的rails项目
+####创建新的rails项目
 
 `rails new <app_name>`
 
-创建模型(模型的名字是单数，对应的数据表名是复数)
+####创建模型(模型的名字是单数，对应的数据表名是复数)
 
 `rails g model User name:string age:integer`
 
-创建controller
+####添加新字段
+
+`rails g migration add_email_to_users email:string`
+
+添加新字段经常会遇到的问题是如何把新字段添加到合适的位置，一般默认是添加在表的结尾，但是
+对于某些字段来说，我们希望添加到某一列之前或之后。我们可以添加一个参数 `after` 来指定
+新列的位置。
+
+`add_column :users, :email, :string, after: :user_name` 把 email 添加到 user_name之后
+
+
+
+####创建controller
 
 `rails g controller Users`
 
