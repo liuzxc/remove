@@ -27,6 +27,10 @@ image:
 
 `add_column :users, :email, :string, after: :user_name` 把 email 添加到 user_name之后
 
+##### 同时添加多个新字段
+
+`rails g migration add_email_to_users email:string new_column:string new_column:integer ...`
+
 
 
 ####创建controller
