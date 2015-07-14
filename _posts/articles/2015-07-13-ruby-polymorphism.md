@@ -60,13 +60,13 @@ parser.parse
 
 输出结果：
 
-```
+{% highlight plaintext %}
 Using the XmlParser
 An instance of the XmlParser class received the parse message
 
 Using the JsonParser
 An instance of the JsonParser class received the parse message
-```
+{% endhighlight %}
 
 我们注意到代码行为的不同依赖于子类接收的 parse 方法。 XML 和 JSON 解析器修改了 GenericParser 的行为。
 
@@ -114,13 +114,13 @@ parser.parse(JsonParser.new)
 
 输出结果：
 
-```
+{% highlight plaintext %}
 Using the XmlParser
 An instance of the XmlParser class received the parse message
 
 Using the JsonParser
 An instance of the JsonParser class received the parse message
-```
+{% endhighlight %}
 
 我们注意到方法行为的不同依赖于对象接收的消息。这就是多态！
 
@@ -183,7 +183,7 @@ JsonParser.new(XmlParser.new(parser)).parse
 
 输出结果：
 
-```
+{% highlight plaintext %}
 Using the XmlParser
 The Parser class received the parse method
 An instance of the XmlParser class received the parse message
@@ -196,7 +196,7 @@ Using both Parsers!
 An instance of the JsonParser class received the parse message
 The Parser class received the parse method
 An instance of the XmlParser class received the parse message
-```
+{% endhighlight %}
 
 ### 多态的优点
 
