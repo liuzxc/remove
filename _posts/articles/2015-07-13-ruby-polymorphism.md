@@ -72,7 +72,7 @@ An instance of the JsonParser class received the parse message
 
 ### 鸭子类型（Duck Typing)
 
-再静态类型语言中，运行时多态（runtime polymorphism）更难以实现。幸运的是，Ruby 可以使用鸭子类型。
+对于静态类型语言，运行时多态（runtime polymorphism）更难以实现。幸运的是，Ruby 可以使用鸭子类型。
 
 我们再次以 XML 和 JSON 解析器为例，去掉继承：
 
