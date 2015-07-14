@@ -60,7 +60,7 @@ parser.parse
 
 输出结果：
 
-{% highlight plaintext %}
+{% highlight text %}
 Using the XmlParser
 An instance of the XmlParser class received the parse message
 
@@ -114,7 +114,7 @@ parser.parse(JsonParser.new)
 
 输出结果：
 
-{% highlight plaintext %}
+{% highlight text %}
 Using the XmlParser
 An instance of the XmlParser class received the parse message
 
@@ -183,7 +183,7 @@ JsonParser.new(XmlParser.new(parser)).parse
 
 输出结果：
 
-{% highlight plaintext %}
+{% highlight text %}
 Using the XmlParser
 The Parser class received the parse method
 An instance of the XmlParser class received the parse message

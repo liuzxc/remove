@@ -29,16 +29,16 @@ share: true
 2. 重载方法也许有不同的返回类型，返回类型本身并不足以区别两个版本的方法；
 
 {% highlight java %}
-public class Overload {
-	void test(){
-		System.out.println("no params");
+	public class Overload {
+		void test(){
+			System.out.println("no params");
+		}
+	  //无法通过编译，因为只根据返回类型无法区分这两个方法, 必须根据参数的类型和个数
+		int test(){
+			System.out.println("return a int");
+			return 1;
+		}
 	}
-  //无法通过编译，因为只根据返回类型无法区分这两个方法, 必须根据参数的类型和个数
-	int test(){
-		System.out.println("return a int");
-		return 1;
-	}
-}
 {% endhighlight %}
 
 3. 当 Java 要调用一个重载方法的时候，它只简单的执行参数匹配的那个方法；
@@ -167,7 +167,3 @@ class Overrid{
 7. 构造函数不能被覆盖；
 8. 方法覆盖也被称作运行时多态；
 9. 使用 super 关键字调用父类被覆盖的方法；
-
-
-
-
