@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java 基础篇(一) --- Java 关键字
+title: Java 提高篇(一) --- Java 关键字
 excerpt: static, abstract, final
 categories: blog
 comments: true
