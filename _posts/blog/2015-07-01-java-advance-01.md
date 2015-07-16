@@ -31,21 +31,21 @@ static修饰的变量我们称之为静态变量，没有用static修饰的变�
 public class Test {
   // 静态变量和实例变量都有默认值，局部变量没有默认值
   private static int i;
-	private int j;
+  private int j;
 
-	public Test(){
-		i++;
-		j++;
-	}
+  public Test(){
+    i++;
+    j++;
+  }
 
-	public static void main(String[] args){
-		Test t1 = new Test();
-		Test t2 = new Test();
-		System.out.println("t1 i is: " + Test.i);
-		System.out.println("t2 i is: " + Test.i);
-		System.out.println("t1 j is: " + t1.j);
-		System.out.println("t2 j is: " + t2.j);
-	}
+  public static void main(String[] args){
+    Test t1 = new Test();
+    Test t2 = new Test();
+    System.out.println("t1 i is: " + Test.i);
+    System.out.println("t2 i is: " + Test.i);
+    System.out.println("t1 j is: " + t1.j);
+    System.out.println("t2 j is: " + t2.j);
+  }
 }
 
 output:
@@ -154,20 +154,20 @@ final variable 就是一个常量，一旦被初始化就不可以被改变。
 
 {% highlight java %}
 class Test1 {
-	final double PI = 3.14; //常量的名称最好大写
+  final double PI = 3.14; //常量的名称最好大写
 
-	public Test1(){
-		PI = 3.14;
-	}
+  public Test1(){
+    PI = 3.14;
+  }
 
     void test(){
-    	System.out.println("PI is: " + PI);
+      System.out.println("PI is: " + PI);
     }
 
-	public static void main(String[] args){
-		Test1 t = new Test1();
-		t.test();
-	}
+  public static void main(String[] args){
+    Test1 t = new Test1();
+    t.test();
+  }
 }
 
 PI is: 3.14

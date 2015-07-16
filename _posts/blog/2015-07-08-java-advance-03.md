@@ -29,16 +29,16 @@ share: true
 * 重载方法也许有不同的返回类型，返回类型本身并不足以区别两个版本的方法；
 
 {% highlight java %}
-	public class Overload {
-		void test(){
-			System.out.println("no params");
-		}
-	  //无法通过编译，因为只根据返回类型无法区分这两个方法, 必须根据参数的类型和个数
-		int test(){
-			System.out.println("return a int");
-			return 1;
-		}
+public class Overload {
+	void test(){
+		System.out.println("no params");
 	}
+  //无法通过编译，因为只根据返回类型无法区分这两个方法, 必须根据参数的类型和个数
+	int test(){
+		System.out.println("return a int");
+		return 1;
+	}
+}
 {% endhighlight %}
 
 * 当 Java 要调用一个重载方法的时候，它只简单的执行参数匹配的那个方法；
@@ -96,12 +96,10 @@ has two params
 
 * 仅适用于继承的方法；
 * 在运行时，对象类型决定了哪一个覆盖方法被调用；
-* 覆盖方法可以有不同的返回类型；
+* 覆盖方法可以有不同的返回类型，需要注意的是：
 
-		需要注意的是：
-
-		* 如果返回类型是 void 或主数据类型，覆盖方法的返回类型必须保持一致；
-		* 如果返回类型是引用类型（reference type)，那么可以不同，但必须兼容（如下所示）；
+	> 如果返回类型是 void 或主数据类型，覆盖方法的返回类型必须保持一致；
+	> 如果返回类型是引用类型（reference type)，那么可以不同，但必须兼容（如下所示）；
 
 {% highlight java %}
 class Pet{

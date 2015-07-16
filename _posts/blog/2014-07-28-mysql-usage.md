@@ -67,6 +67,15 @@ share: true
 
 `insert into your_table values ('value1', 'value2', ...);`
 
+insert into ... select:
+
+{% highlight sql %}
+INSERT INTO table (col1, col2, ..., coln)
+SELECT col1, col2, ..., coln
+FROM table
+WHERE entry_date < '2011-01-01 00:00:00';
+{% endhighlight %}
+
 ##### select 语句
 
 * Like与通配符
