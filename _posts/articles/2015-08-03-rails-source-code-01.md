@@ -80,7 +80,7 @@ when 'console'
   Rails::Console.start(Rails.application, options)
 {% endhighlight %}
 
-进入 console 分支后，此时的 ARGV 数组中只剩下一个元素 `--sandbox, 因为元素 "console" 已经在之前被弹出，接着 Rails::Console 类中的 parse_arguments 方法会去解析 ARGV：
+进入 console 分支后，此时的 ARGV 数组中只剩下一个元素 `--sandbox`, 因为元素 "console" 已经在之前被弹出，接着 Rails::Console 类中的 parse_arguments 方法会去解析 ARGV：
 
 {% highlight ruby %}
 #rails/railties/lib/rails/commands/console.rb
@@ -113,7 +113,7 @@ options
 * `--sandbox` 表明任何对于数据库的修改操作在退出的时候都会被回滚；
 * rails console 的环境有三种：test/development/production，默认环境是 development
 
-如果第一个参数包含了 '－'，则直接将参数返回，否则就说明该参数是用于指定环境的，rails 提供的环境可以在 `config/environments
+如果第一个参数包含了 '－'，则直接将参数返回，否则就说明该参数是用于指定环境的，rails 提供的环境可以在 `config/environments`
 目录中配置，并不仅仅限于 test/development/production 这三种，但如果没有指定自己特有的环境，则在默认的 test/development/production 中选择。
 
 `ARGV.shift if ARGV.first && ARGV.first[0] != '-'
