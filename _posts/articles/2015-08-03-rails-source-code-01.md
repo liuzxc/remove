@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Rails 源码解读（一）--- Rails console
+title: Rails 源码解读（一）--- rails console
 excerpt:
 comments: true
 share: true
 categories: articles
 ---
 
-Rails console 命令时我们经常使用的，它可以让我们通过命令行很方便的与 Rails 应用进行交互，类似于IRB，
-其实，rails console 的底层就是用 irb 来实现的。让我们来扒一扒相关的源码。
+rails console 命令时我们经常使用的，它可以让我们通过命令行很方便的与 Rails 应用进行交互，类似于 irb，
+其实，rails console 的底层就是用 irb 来实现的，让我们来扒一扒相关的源码。
 
 {% highlight ruby %}
-//rails/railties/lib/rails/commands.rb
+#rails/railties/lib/rails/commands.rb
 ARGV << '--help' if ARGV.empty?
 
 aliases = {
@@ -49,13 +49,13 @@ when 'console'
   ...
 {% endhighlight %}
 
-ARGV 是一个数组，它包含了从标准处输出传来的命令行参数。例如：
+ARGV 是一个数组，它包含了从标准处输出传来的命令行参数。例如在命令行输入以下命令的时候：
 
 `rails console --sandbox`
 
-`ARGV = ["console", "--sandbox"]`
+ARGV 的值是： `["console", "--sandbox"]`
 
-当 ARGV 为空的时候，即 Rails 命令后面不加任何参数，程序会将 －－help 参数自动添加到ARGV数组中。
+当 ARGV 为空的时候，即 Rails 命令后面不加任何参数，程序会将 `－－help` 参数自动添加到ARGV 数组中。
 
 {% highlight ruby %}
 command = ARGV.shift
@@ -80,11 +80,10 @@ when 'console'
   Rails::Console.start(Rails.application, options)
 {% endhighlight %}
 
-进入 console 分支后，此时的 ARGV 数组中只剩下一个元素 --sandbox, 因为元素 "console" 已经在之前
-被弹出，接着 Rails::Console 类中的 parse_arguments 方法会去解析 ARGV：
+进入 console 分支后，此时的 ARGV 数组中只剩下一个元素 `--sandbox, 因为元素 "console" 已经在之前被弹出，接着 Rails::Console 类中的 parse_arguments 方法会去解析 ARGV：
 
 {% highlight ruby %}
-//rails/railties/lib/rails/commands/console.rb
+#rails/railties/lib/rails/commands/console.rb
 require 'optparse'
 ...
  OptionParser.new do |opt|
@@ -109,22 +108,21 @@ end
 options
 {% endhighlight %}
 
-通过 ruby 开发命令行工具，optparse 是个非常好的选择，大多数的 ruby 命令行工具的开发都会使用到它。从上面的代码
-中我们可以看到：
+通过 ruby 开发命令行工具，optparse 是个非常好的选择，大多数的 ruby 命令行工具的开发都会使用到它。从上面的代码中我们可以看出：
 
-* --sandbox表明任何对于数据库的修改操作在退出的时候都会被回滚；
-* rails console的环境有三种：test/development/production，默认环境是development
+* `--sandbox` 表明任何对于数据库的修改操作在退出的时候都会被回滚；
+* rails console 的环境有三种：test/development/production，默认环境是 development
 
-如果第一个参数包含了 '－'，则直接将参数返回，否则就说明该参数是用于指定环境的，rails 提供的环境可以在 config/environments
-目录中配置，并不仅仅限于 test/development/production 这三种，但如果没有指定自己特有的环境，则默认在 test/development/production 中选择。
+如果第一个参数包含了 '－'，则直接将参数返回，否则就说明该参数是用于指定环境的，rails 提供的环境可以在 `config/environments
+目录中配置，并不仅仅限于 test/development/production 这三种，但如果没有指定自己特有的环境，则在默认的 test/development/production 中选择。
 
-ARGV.shift if ARGV.first && ARGV.first[0] != '-'
+`ARGV.shift if ARGV.first && ARGV.first[0] != '-'
 
 在参数被解析完毕之后，如果 ARGV 中包含 '－'，则需要把参数弹出，避免将其继续传递给 irb，因为 irb 并不需要也不理解该参数。接下来
 就要准备启动 rails console 了。
 
 {% highlight ruby %}
-//rails/railties/lib/rails/commands/console.rb
+#rails/railties/lib/rails/commands/console.rb
 module Rails
   class Console
     class << self
@@ -168,4 +166,4 @@ module Rails
 
 该行代码表明了 rails conlose 的底层实现就是通过 irb 完成的。
 
-`console.start => IRB.satrt`
+`console.start` 相当于 `IRB.satrt`
