@@ -116,7 +116,7 @@ options
 如果第一个参数包含了 '－'，则直接将参数返回，否则就说明该参数是用于指定环境的，rails 提供的环境可以在 `config/environments`
 目录中配置，并不仅仅限于 test/development/production 这三种，但如果没有指定自己特有的环境，则在默认的 test/development/production 中选择。
 
-`ARGV.shift if ARGV.first && ARGV.first[0] != '-'
+`ARGV.shift if ARGV.first && ARGV.first[0] != '-'`
 
 在参数被解析完毕之后，如果 ARGV 中包含 '－'，则需要把参数弹出，避免将其继续传递给 irb，因为 irb 并不需要也不理解该参数。接下来
 就要准备启动 rails console 了。
