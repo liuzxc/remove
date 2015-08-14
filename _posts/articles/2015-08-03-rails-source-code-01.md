@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails 源码解读（一）--- rails console
+title: Rails 源码解读（一）rails console
 excerpt:
 comments: true
 share: true
