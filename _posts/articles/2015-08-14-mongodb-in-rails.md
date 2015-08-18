@@ -123,7 +123,7 @@ end
 
 创建一个 Comment 模型：
 
-$ rails g model comment name:string content:text
+`$ rails g model comment name:string content:text
 
 然后在 Comment 模型中定义它与 Article 的关联关系：
 
@@ -149,7 +149,7 @@ end
 
 创建 comments controller，并添加一个 create 方法
 
-$ rails g controller comments
+`$ rails g controller comments`
 
 {% highlight ruby %}
 CommentsController < ApplicationController
