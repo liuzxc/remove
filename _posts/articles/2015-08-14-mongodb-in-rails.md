@@ -27,6 +27,10 @@ categories: articles
 
 `mongod`
 
+后台启动mongod，并将日志输出到相应的文件
+
+`mongod --fork --logpath /var/log/mongodb.log`
+
 启动 mongo shell
 
 `mongo`
@@ -98,3 +102,85 @@ end
 </figure>
 
 mongoid 的数据验证和 ActiveRecord 的方法是一致的，因此可以通用。
+
+#### 关联
+
+文章一般都会有评论，因此创建一个 Comment 模型与 Article 模型相关联，mongoid 的模型关联与 ActiveRecord
+有稍稍有些不同，但是用法是相似的，它使用 embeds_many 方法而不是 has_many 方法。ActiveRecord 是通过外键来
+关联不同的数据库表，而 mongodb 没有外键的概念，`embeds_many :comments` 表示将 comments 这个文档嵌入到 Article 文档中。
+
+{% highlight ruby %}
+class Article
+  include Mongoid::Document
+  field :title, type: String
+  field :content, type: String
+  field :category, type: String, default: 'diary'
+  validates :title, presence: true
+
+  embeds_many :comments
+end
+{% endhighlight %}
+
+创建一个 Comment 模型：
+
+$ rails g model comment name:string content:text
+
+然后在 Comment 模型中定义它与 Article 的关联关系：
+
+{% highlight ruby %}
+class Comment
+  include Mongoid::Document
+  field :name
+  field :content
+  embedded_in :article, :inverse_of => :comments
+end
+{% endhighlight %}
+
+> inverse_of 用来告诉 Rails 两个模型之间的关系,与 ActiveRecord 的用法是一致的
+> 参考链接：http://guides.ruby-china.org/association_basics.html
+
+然后修改 `routes.rb`
+
+{% highlight ruby %}
+resources :articles do
+  resources :comments
+end
+{% endhighlight %}
+
+创建 comments controller，并添加一个 create 方法
+
+$ rails g controller comments
+
+{% highlight ruby %}
+CommentsController < ApplicationController
+  def create
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.create!(params[:comment])
+    redirect_to @article, :notice => "Comment created!"
+  end
+end
+{% endhighlight %}
+
+添加以下代码到 article 的 show view，用来显示 comments
+
+{% highlight ruby %}
+<% if @article.comments.size > 0 %>
+  <h2>Comments</h2>
+  <% for comment in @article.comments %>
+    <h3><%= comment.name %></h3>
+    <p><%= comment.content %></p>
+  <% end %>
+<% end %>
+
+<h2>New Comment</h2>
+
+<%= form_for [@article, Comment.new] do |f| %>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.text_area :content, :rows => 10 %></p>
+  <p><%= f.submit %></p>
+<% end %>
+{% endhighlight %}
+
+<figure>
+    <img src="/images/20150814-03.png">
+</figure>
