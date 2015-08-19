@@ -11,6 +11,10 @@ categories: articles
 还是 GitHub 上的一些开源项目，都开始在使用 MongoDB 了。虽然我还没有在项目中实际使用 MongoDB，
 但是我已经有兴趣去尝试，暂时就先拿一个 rails demo 来试手！
 
+> 本文引用了 RailsCasts 的部分内容，不过 RailsCasts 中使用的版本比较老，某些地方不适用于新版的
+Rails， 因此做了部分修改
+> RailsCasts 链接： http://railscasts.com/episodes/238-mongoid
+
 
 #### 安装MongoBD
 
@@ -123,7 +127,7 @@ end
 
 创建一个 Comment 模型：
 
-`$ rails g model comment name:string content:text
+`$ rails g model comment name:string content:text`
 
 然后在 Comment 模型中定义它与 Article 的关联关系：
 
