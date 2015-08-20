@@ -107,11 +107,11 @@ end
 
 mongoid 的数据验证和 ActiveRecord 的方法是一致的，因此可以通用。
 
-#### 关联
+#### 嵌套关联（Embedding）
 
-文章一般都会有评论，因此创建一个 Comment 模型与 Article 模型相关联，mongoid 的模型关联与 ActiveRecord
-有稍稍有些不同，但是用法是相似的，它使用 embeds_many 方法而不是 has_many 方法。ActiveRecord 是通过外键来
-关联不同的数据库表，而 mongodb 没有外键的概念，`embeds_many :comments` 表示将 comments 这个文档嵌入到 Article 文档中。
+文章一般都会有评论，因此创建一个 Comment 模型与 Article 模型相关联。对于关系型数据库，两个表之间的
+关联是通过外键来实现的，而mongodb不同，它提供了两种方式来关联不同的文档，其中一种就是使用嵌套（Embedding），
+即把一个文档嵌入另一个文档中，`embeds_many :comments` 表示将 comments 这个文档嵌入到 Article 文档。
 
 {% highlight ruby %}
 class Article
@@ -188,3 +188,50 @@ end
 <figure>
     <img src="/images/20150814-03.png">
 </figure>
+
+#### 引用关联（Referencing）
+
+除了嵌套关联以外，mongodb 还支持引用关联，这类似于关系型数据库中使用的外键。与 ActiveRcord 相同，
+它也是通过 `has_many` 和 `belongs_to` 来关联两个文档。我们创建一个 User 模型的脚手架，将其与 Article
+相关联，表示每个用户有多篇文章。
+
+`$ rails g scaffold user user_name:string email:string`
+
+{% highlight ruby %}
+class User
+  include Mongoid::Document
+  field :user_name, type: String
+  field :email, type: String
+  has_many :articles
+end
+
+class Article
+  include Mongoid::Document
+  field :title, type: String
+  field :content, type: String
+  field :category, type: String, default: 'diary'
+  validates :title, presence: true
+
+  embeds_many :comments
+  belongs_to :user
+end
+{% endhighlight %}
+
+使用 `rails c` 打开控制台，通过手动创建记录，我们可以明白 User 和 Article 两者之间的关联关系
+
+{% highlight sh %}
+> user = User.create({user_name: "liuzxc", email: "lxq_102172@163.com"})
+=> #<User _id: 55d5959c416a410eda000000, user_name: "liuzxc", email: "lxq_102172@163.com">
+> user.articles
+=> []
+> user.articles.create({title: "first article", content: "i love rails!", category: "rails"})
+=> #<Article _id: 55d595de416a410eda000001, title: "first article", content: "i love rails!", category: "rails", user_id: BSON::ObjectId('55d5959c416a410eda000000')>
+> user.articles
+=> [#<Article _id: 55d595de416a410eda000001, title: "first article", content: "i love rails!", category: "rails", user_id: BSON::ObjectId('55d5959c416a410eda000000')>]
+> user.articles.count
+=> 1.0
+> a = user.articles.first
+=> #<Article _id: 55d595de416a410eda000001, title: "first article", content: "i love rails!", category: "rails", user_id: BSON::ObjectId('55d5959c416a410eda000000')>
+> a.user
+=> #<User _id: 55d5959c416a410eda000000, user_name: "liuzxc", email: "lxq_102172@163.com">
+{% endhighlight %}
