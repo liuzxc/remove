@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 简单介绍如何在 Rails 项目中使用 MongoDB
-excerpt:
+title:  Rails 应用开发笔记（一）
+excerpt: 简单介绍如何在 Rails 项目中使用 MongoDB 及模型之间的关联
 comments: true
 share: true
 categories: articles
