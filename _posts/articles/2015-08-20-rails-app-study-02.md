@@ -20,10 +20,10 @@ categories: articles
 
 2. 需要使用 bcrypt 这个 gem package，只需要在 Gemfile 中取消相应的注释即可。
 
-{% highlight ruby %}
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
-{% endhighlight %}
+  {% highlight ruby %}
+  # Use ActiveModel has_secure_password
+  gem 'bcrypt', '~> 3.1.7'
+  {% endhighlight %}
 
 3. 在User模型中加入 `has_secure_password` 方法，如果使用的是非关系型数据库，还需要 `include ActiveModel::SecurePassword` 模块。
 
