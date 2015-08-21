@@ -12,20 +12,20 @@ categories: articles
 
 #### has_secure_password
 
-处于安全角度的考虑，用户的密码不会以纯文本的形式存储在数据库中，ActiveModel has_secure_password 方法可以对你的密码进行加密操作，并提供相应的数据验证和密码校验功能，你不用自己再去写这些代码，提高了编码效率。如果
-要使用 has_secure_password，只需要添加少量代码和配置：
+处于安全角度的考虑，用户的密码不会以纯文本的形式存储在数据库中，`ActiveModel has_secure_password` 方法可以对你的密码进行加密操作，并提供相应的数据验证和密码校验功能，你不用自己再去写这些代码，提高了编码效率。如果
+要使用 `has_secure_password`，只需要添加少量代码和配置：
 
-1. has_secure_password 方法要求你的用户表中有 password_digest 属性，用于存储加密后的密码，所以
-你需要在User模型中添加一个password_digest字段。
+1. `has_secure_password` 方法要求你的用户表中有 password_digest 属性，用于存储加密后的密码，所以
+你需要在 User 模型中添加一个 password_digest 字段。
 
-2. 需要使用 bcrypt 这个 gem package，只需要在Gemfile中取消相应的注释即可。
+2. 需要使用 bcrypt 这个 gem package，只需要在 Gemfile 中取消相应的注释即可。
 
 {% highlight ruby %}
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 {% endhighlight %}
 
-3. 在User模型中加入 has_secure_password 方法，如果使用的是非关系型数据库，还需要 include ActiveModel::SecurePassword 模块。
+3. 在User模型中加入 `has_secure_password` 方法，如果使用的是非关系型数据库，还需要 `include ActiveModel::SecurePassword` 模块。
 
 {% highlight ruby %}
 class User
@@ -59,8 +59,6 @@ end
 
 `get 'sign_up' => 'users#new'`
 
-浏览器输入： `http://localhost:3000/sign_up`
-
 <figure>
     <img src="/images/20150820-01.png">
 </figure>
@@ -82,6 +80,7 @@ resources :sessions
 创建一个登录表单
 
 {% highlight ruby %}
+#view/sessions/new.html.erb
 <h1>Log in</h1>
 
 <%= form_tag("/sessions", method: 'create') do %>
@@ -101,9 +100,7 @@ resources :sessions
 </figure>
 {% endhighlight %}
 
-用户在登录的时候，需要去验证邮箱是否注册和密码输入是否正确，has_secure_password 提供了校验
-密码的方法`user.authenticate(params[:password])`，同时也需要将用户的 id 存入 session 当中，
-用于记录用户的状态。退出操作需要将玩家的 id 从 seesion 中清除。
+用户在登录的时候，需要去验证邮箱是否注册和密码输入是否正确，`has_secure_password` 提供了校验密码的方法 `authenticate`，同时也需要将用户的 id 存入 session 当中，用于记录用户的状态。退出操作需要将玩家的 id 从 seesion 中清除。
 
 {% highlight ruby %}
 class SessionsController < ApplicationController
