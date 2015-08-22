@@ -11,6 +11,8 @@ categories: articles
 大大提高了 web 应用的生产效率。有很多的 gem package 提供了分页的功能，今天要介绍的是其中最为强大的一种：
 kaminari。
 
+> github link: [kaminari](https://github.com/amatsuda/kaminari)
+
 Kaminari 是一个强大的，可定制化的分页引擎，支持多种 ORM(ActiveRecord, mongoid)，多种 web 框架（Rails，
 Sinatra，Grape)，以及多种模版引擎(ERB, Haml, Slim).
 
