@@ -216,3 +216,22 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 <figure>
     <img src="/images/20150823-05.png">
 </figure>
+
+#### 搜索框
+
+{% highlight js %}
+<%= form_for home_path, method: :get, html: { role: "search", class: "navbar-form navbar-left"} do %>
+
+  <div class="form-group">
+     <%= text_field_tag :search, params[:search], class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Search", class: "btn btn-default" %>
+  </div>
+<% end %>
+{% endhighlight %}
+
+ <figure>
+    <img src="/images/20150823-07.png">
+</figure>
