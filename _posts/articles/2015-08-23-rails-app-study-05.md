@@ -232,6 +232,47 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 <% end %>
 {% endhighlight %}
 
- <figure>
+<figure>
     <img src="/images/20150823-07.png">
+</figure>
+
+#### 面板
+
+{% highlight html %}
+#app/views/articles/home.html.erb
+<div class="panel panel-default">
+  <div class="panel-heading"></div>
+  <ul class="list-group">
+    <% @all_articles.each do |article| %>
+      <li class="list-group-item">
+        <h4><%= link_to article.title, user_article_path(article.user, article) %></h4>
+      </li>
+    <% end %>
+  </ul>
+  <div class="panel-footer">
+    <%= paginate @all_articles %>
+  </div>
+</div>
+{% endhighlight %}
+
+<figure>
+    <img src="/images/20150823-08.png">
+</figure>
+
+
+#### Glyphicons 字体图标
+
+{% highlight html %}
+#app/views/articles/show.html.erb
+<% if current_user == @article.user %>
+  <%= link_to edit_user_article_path(@user, @article) do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <% end %> |
+  <%= link_to [@user, @article], method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <span class="glyphicon glyphicon-trash"></span>
+<% end %>
+{% endhighlight %}
+
+<figure>
+    <img src="/images/20150823-09.png">
 </figure>
