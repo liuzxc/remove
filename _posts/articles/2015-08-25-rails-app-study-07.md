@@ -15,6 +15,7 @@ categories: articles
 #### Redcarpet 和 coderay
 
 > [Redcarpet for GitHub](https://github.com/vmg/redcarpet)
+
 > [coderay for GitHub](https://github.com/rubychan/coderay)
 
 Redcarpet 是一个 Markdown 的解析器，功能强大，但是官方的文档太简略而且不好懂，也许是我的英文太差了😓！
@@ -28,14 +29,12 @@ gem 'redcarpet' #markdown 解析器
 gem 'coderay'   #代码高亮
 {% endhighlight %}
 
-由于没有什么使用简介之类的东西，本着万事不会问 Google 的指导思想，果断搜出了两篇指南（感谢美帝人民的
-分享精神😄）
+由于没有看懂原文的使用指南，本着万事不会问 Google 的指导思想，果断搜出了两篇指南（感谢美帝人民的分享精神😄）
 
 > http://crabonature.pl/posts/16-markdown-in-ruby-on-rails
 > http://allfuzzy.tumblr.com/post/27314404412/markdown-and-code-syntax-highlighting-in-ruby-on
 
-以上两篇文章都是将文本的处理封装成了 helper 方法，目的是方便使用，不用在每一个显示的地方做改动，只需要
-调用固定的方法即可。
+以上两篇文章都是将文本的处理封装成了 helper 方法，目的是方便使用，不用在每一个显示的地方做改动，只需要调用固定的方法即可。
 
 {% highlight ruby %}
 #app/helper/application_helper.rb
@@ -113,9 +112,7 @@ end
     <img src="/images/20150825-01.png">
 </figure>
 
-原作者中的代码存在一个问题，当代码块中没有制定语言的时候就会出错，导致文章创建失败：
-
-例如文本中出现这样的代码：
+原作者中的代码存在一个问题，当代码块中没有制定语言的时候就会出错，导致文章创建失败，例如文本中出现这样的代码：
 
 {% highlight html %}
 ```
