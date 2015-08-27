@@ -78,21 +78,25 @@ before_action :require_login, expect: [:new, :create]
  方法验证当前用户是否登录，只有登录的用户才能进行操作，而用户的创建（new,create)需要跳过验证。
 
 > before_action 和 before_filter 的区别
-> before_action 和 before_filter其实是一个东西，只是在rails4.0之前使用的是before_filter，之后改成了
+> before_action 和 before_filter 其实是一个东西，只是在 Rails4.0 之前使用的是 before_filter，之后改成了
 before_action，相当于功能一样，只是名字不同而已。
 
-我们希望普通用户只更新自己的信息，而没有权限去更改别人的信息，只有管理员才可以这样做，但是用户组信息页面
-却显示可以对所有用户进行更新和删除操作，我们需要采取措施，对普通用户屏蔽掉更新和删除按钮：
+我们希望普通用户只更新自己的信息，而没有权限去更改别人的信息，实现的办法是对比 session 和参数中传过来的 user_id 是否
+相同，如果相同则表明更新的是玩家自身的信息。
 
 {% highlight ruby %}
-<% if admin? %>
-  <td><%= link_to 'Show', user %></td>
-  <td><%= link_to 'Edit', edit_user_path(user) %></td>
-  <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
+def validate_user
+  # current_user.id 并不是一个字符串，所以需要 to_s
+  if current_user.id.to_s != params[:user_id]
+    redirect_to home_path
+  end
+end
 {% endhighlight %}
 
-只有管理员才能看到显示用户详细信息和更新删除按钮。
+然后在相应的控制器中添加过滤器即可：
 
+{% highlight ruby %}
+before_action :validate_user, only: [:update, :destroy]
+{% endhighlight %}
 
 一个简单的访问权限控制功能就实现了，虽然有一些漏洞，之后会逐渐完善，但是我们从中主要是学习过滤器和 helper_method 的用法。已经深夜两点了，洗洗睡吧！
