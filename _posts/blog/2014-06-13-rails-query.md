@@ -14,7 +14,7 @@ share: true
 Active Record提供了很多方法供你调用
 
 例如:
-{% highlight ruby linenos %}
+{% highlight ruby %}
 User.find()
 User.where()
 User.select()
@@ -62,6 +62,7 @@ User.connection.select_all("select user_name from users where ...")
 rows = ActiveRecord::Base.connection.execute('select * from users')
 rows.each { |row| puts row }
 {% endhighlight %}
+
 result 是一个`Mysql2::Result`的实例，row是包含一条user记录的数组。
 
 #### mysql2

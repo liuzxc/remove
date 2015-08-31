@@ -31,18 +31,21 @@ end
 我们可以对文章进行收藏，也可以取消收藏，因此需要两个控制方法来实现收藏和取消收藏的功能：
 
 {% highlight ruby %}
-#app/controller/articles_controller.rb
-def favorite
-  @article = Article.find(params[:id])
-  @article.favorites.create(user_id: current_user.id)
-  redirect_to :back
-end
+#app/controller/favorites_controller.rb
+class FavoritesController < ApplicationController
+  def create
+    @article = Article.find(params[:article_id])
+    current_user.favorites.create(article_id: params[:article_id])
+    redirect_to :back
+  end
 
-def unfavorite
-  @article = Article.find(params[:id])
-  favorite = Favorite.where(user_id: current_user.id, article_id: @article.id).first
-  favorite.destroy
-  redirect_to :back
+  def destroy
+    favorite = Favorite.find(params[:id])
+    @article = favorite.article
+    favorite.destroy
+    redirect_to :back
+  end
+
 end
 {% endhighlight %}
 
@@ -51,34 +54,19 @@ end
 然后添加相应的路由：
 
 {% highlight ruby %}
-resources :articles, only: [] do
-  resources :comments
-  member do
-    post :favorite
-    delete :unfavorite
-  end
-end
+resources :favorites, only: [:create, :destroy]
 {% endhighlight %}
 
-由于收藏的标签是嵌入在文章页面的，所以在 show.html.erb 的页面插入收藏标签，为了让代码清晰，收藏标签的代码使用了一个好单独的 partial:
+为了让代码清晰，收藏标签的代码使用了一个好单独的 partial:
 
 {% highlight erb %}
-＃app/views/articles/show.html.erb
-<div class="panel-footer" >
-  <div class="row">
-  <div id="favorite" class="col-md-6 text-left">
-    <%= render 'favorite_link' %>
-  </div>
-  ...
-</div>
-
-＃app/views/articles/_favorite_link.html.erb
-<% if not Favorite.where(user_id: current_user.id, article_id: @article.id).first %>
-  <%= link_to favorite_article_path(@article), {id: @article.id, method: :post} do %>
+＃app/views/favorites/_favorite_link.html.erb
+<% if favorite = current_user.favorites.where(article_id: @article.id).first %>
+  <%= link_to favorite_path(favorite), method: :delete do %>
     <span class="glyphicon glyphicon-bookmark"></span>
   <% end %>
 <% else %>
-  <%= link_to unfavorite_article_path(@article), method: :delete do %>
+  <%= link_to favorites_path(article_id: @article.id), method: :post do %>
     <span class="glyphicon glyphicon-bookmark favorite_color"></span>
   <% end %>
 <% end %>
