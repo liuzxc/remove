@@ -15,7 +15,7 @@ categories: articles
 新的搜索需求，所以我们在views目录单独创建一个 search 文件夹，将搜索框的代码单独放在其中：
 
 
-{% highlight html %}
+{% highlight erb %}
 ＃app/views/search/_search.html.erb
 <%= form_for home_path, method: :get, html: { role: "search", class: "navbar-form navbar-left"} do %>
   <div class="form-group">
@@ -31,7 +31,7 @@ categories: articles
 然后我们将搜索框放入导航栏中：
 
 
-{% highlight ruby %}
+{% highlight erb %}
 #app/views/layouts/application.html.erb
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav">

@@ -48,7 +48,7 @@ Sinatra，Grape)，以及多种模版引擎(ERB, Haml, Slim).
 
 3. 在视图层添加paginate helper方法
 
-{% highlight ruby %}
+{% highlight erb %}
   <%= paginate @articles %>
 {% endhighlight %}
 

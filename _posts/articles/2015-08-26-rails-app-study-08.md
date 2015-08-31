@@ -54,7 +54,7 @@ end
 
 要在导航栏和首页文章标题的开头来显示用户的头像，我们需要使用 image_tag 标签，：
 
-{% highlight ruby %}
+{% highlight erb %}
 #app/views/layouts/application.html.erb
 ...
 <ul class="nav navbar-nav navbar-right">

@@ -62,7 +62,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 以本应用为例：
 
-{% highlight html %}
+{% highlight erb %}
 <div id="main-container" class="container">
   <div class="row">
 
@@ -94,7 +94,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 导航栏
 
-{% highlight html %}
+{% highlight erb %}
 <nav class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -134,7 +134,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 表单
 
-{% highlight html %}
+{% highlight erb %}
 <%= form_for(@user, html: {class: 'form-horizontal'}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -184,7 +184,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 表格
 
-{% highlight js %}
+{% highlight erb %}
 <table class="table">
   <tbody>
     <% @articles.each do |article| %>
@@ -219,7 +219,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 搜索框
 
-{% highlight js %}
+{% highlight erb %}
 <%= form_for home_path, method: :get, html: { role: "search", class: "navbar-form navbar-left"} do %>
 
   <div class="form-group">
@@ -238,7 +238,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 面板
 
-{% highlight html %}
+{% highlight erb %}
 #app/views/articles/home.html.erb
 <div class="panel panel-default">
   <div class="panel-heading"></div>
@@ -262,7 +262,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### Glyphicons 字体图标
 
-{% highlight html %}
+{% highlight erb %}
 #app/views/articles/show.html.erb
 <% if current_user == @article.user %>
   <%= link_to edit_user_article_path(@user, @article) do %>

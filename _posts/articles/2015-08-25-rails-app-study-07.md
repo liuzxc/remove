@@ -98,7 +98,7 @@ end
 
 然后在相应的视图代码中添加 markdown 方法：
 
-{% highlight ruby %}
+{% highlight erb %}
 ...
 <div class="panel-body">
   <p><%= markdown(@article.content) %></p>
@@ -114,7 +114,7 @@ end
 
 原作者中的代码存在一个问题，当代码块中没有制定语言的时候就会出错，导致文章创建失败，例如文本中出现这样的代码：
 
-{% highlight html %}
+{% highlight ruby %}
 ```
 def test
 end
