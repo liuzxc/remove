@@ -187,6 +187,43 @@ def index
 end
 {% endhighlight %}
 
+以下就是从 GitHub 获取的用户信息：
+
+{% highlight ruby %}
+{
+  "login"=>"liuzxc",
+  "id"=>1954295,
+  "avatar_url"=>"https://avatars.githubusercontent.com/u/1954295?v=3",
+  "gravatar_id"=>"",
+  "url"=>"https://api.github.com/users/liuzxc",
+  "html_url"=>"https://github.com/liuzxc",
+  "followers_url"=>"https://api.github.com/users/liuzxc/followers",
+  "following_url"=>"https://api.github.com/users/liuzxc/following{/other_user}",
+  "gists_url"=>"https://api.github.com/users/liuzxc/gists{/gist_id}",
+  "starred_url"=>"https://api.github.com/users/liuzxc/starred{/owner}{/repo}",
+  "subscriptions_url"=>"https://api.github.com/users/liuzxc/subscriptions",
+  "organizations_url"=>"https://api.github.com/users/liuzxc/orgs",
+  "repos_url"=>"https://api.github.com/users/liuzxc/repos",
+  "events_url"=>"https://api.github.com/users/liuzxc/events{/privacy}",
+  "received_events_url"=>"https://api.github.com/users/liuzxc/received_events",
+  "type"=>"User",
+  "site_admin"=>false,
+  "name"=>"Jason Liu",
+  "company"=>nil,
+  "blog"=>nil,
+  "location"=>"Chengdu",
+  "email"=>"lxq_102172@163.com",
+  "hireable"=>true,
+  "bio"=>nil,
+  "public_repos"=>21,
+  "public_gists"=>4,
+  "followers"=>2,
+  "following"=>5,
+  "created_at"=>"2012-07-11T05:10:00Z",
+  "updated_at"=>"2015-04-17T07:43:12Z"
+}
+{% endhighlight %}
+
 在获取用户信息以后，首先判断该用户在数据库中是否存在（在 User 表中添加一个 `github_id field` 用于标示是否是 GitHub 用户），如果不存在则创建一个。在这里需要注意的是，create 会触发 validation，因此必须为用户生成随机密码，否则会创建失败。创建好之后，将用户的 id 存入 session 当中，表示当前用户已经登录，然后跳转至用户主页。
 
 <figure>
