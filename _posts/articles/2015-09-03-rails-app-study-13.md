@@ -26,6 +26,7 @@ Authentication 这一块的文档比较简略，但是条例很清楚，按着�
 注意到这几个方面以后，接入 StackOverflow 帐户登录应用的流程就很简单了，可以参照文档，这里就不细说了。
 
 > [Authentication API](https://api.stackexchange.com/docs/authentication)
+
 > [OAuth 2.0 介绍](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
 
 <figure>
