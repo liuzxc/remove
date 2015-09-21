@@ -36,6 +36,8 @@ image:
 * `Command + Shift + D`: 复制当前行或多行
 * `Command + J`: 合并单行或多行J
 * `Control + M`: 跳转至对应的括号
+* `cmd + KU`:    小写转大写
+* `cmd + KL`:    大写转小写
 
 #####注释
 
