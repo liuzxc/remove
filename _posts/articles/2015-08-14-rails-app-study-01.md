@@ -47,15 +47,15 @@ PostgreSQL等，所以 ActiveRecord 不适用于 Nosql，所以如果 rails 应�
 
 #### Rails 项目中使用 mongoid
 
-> 参考链接：http://docs.mongodb.org/ecosystem/tutorial/ruby-mongoid-tutorial/#ruby-mongoid-tutorial
+> 参考链接：[ruby mongoid tutorial](http://docs.mongodb.org/ecosystem/tutorial/ruby-mongoid-tutorial/#ruby-mongoid-tutorial)
 
 mongoid是一个gem包，只需要把它添加到 Gemfile 中：
 
-gem 'mongoid', '~> 5.0.0.beta'
+`gem 'mongoid', '~> 5.0.0.beta'`
 
-然后运行 bundle install
+然后运行 `bundle install`
 
-mongoid 的配置要通过 mongoid.yml，类似于 database.yml，可以通过以下命令自动创建：
+mongoid 的配置要通过 `mongoid.yml`，类似于 `database.yml`，可以通过以下命令自动创建：
 
 `rails g mongoid:config`
 
@@ -65,7 +65,7 @@ mongoid 的配置要通过 mongoid.yml，类似于 database.yml，可以通过�
 
  > 由于 mongodb 是 nosql 数据库，是 schema-less (无模式的），因此不需要 migration 操作
 
- 然后启动 rails server，访问 http://localhost:3000/articles，即可进行文章的增删改查操作。
+然后启动 `rails server`，访问 `http://localhost:3000/articles`，即可进行文章的增删改查操作。
 
 #### 添加新字段
 
