@@ -49,7 +49,7 @@ when 'console'
   ...
 {% endhighlight %}
 
-ARGV 是一个数组，它包含了从标准处输出传来的命令行参数。例如在命令行输入以下命令的时候：
+ARGV 是一个数组，它包含了从标准输出传来的命令行参数。例如在命令行输入以下命令的时候：
 
 `rails console --sandbox`
 
@@ -105,7 +105,9 @@ if arguments.first && arguments.first[0] != '-'
   end
 end
 
-options
+def available_environments
+  Dir['config/environments/*.rb'].map { |fname| File.basename(fname, '.*') }
+end
 {% endhighlight %}
 
 通过 ruby 开发命令行工具，optparse 是个非常好的选择，大多数的 ruby 命令行工具的开发都会使用到它。从上面的代码中我们可以看出：

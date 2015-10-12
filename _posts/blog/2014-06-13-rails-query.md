@@ -12,7 +12,6 @@ share: true
 #### 从数据库检索对象
 
 Active Record提供了很多方法供你调用
-
 例如:
 {% highlight ruby %}
 User.find()
