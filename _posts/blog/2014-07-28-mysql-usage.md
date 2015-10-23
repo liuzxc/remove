@@ -109,11 +109,14 @@ end;
 3. add    在当前表中添加一列
 4. drop   从表中删除某列
 5. rename to 修改表名
+6. add index (COLUMN_NAME) 添加索引
 
 {% highlight sql %}
 alter table my_contacts
 add column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
 add primary key (contact_id);
+
+ALTER TABLE TABLE_NAME ADD INDEX (COLUMN_NAME);
 {% endhighlight %}
 
 > 可以使用first, last, before column_name, after column_name, second, third 等关键字调整列的顺序
