@@ -7,7 +7,7 @@ share: true
 categories: articles
 ---
 
-最近一段时间在忙着找工作，很久没有更新了，之前做了一个自动补全的功能，花费了我很多时间，因为涉及到很多前端开发相关的知识，包括DOM，js, coffeescript, jquery等等，现在打算详细的描述一下了。很多网站都有用户名或者输入内容自动补全的功能，我实现的是比较简单的一种，即评论区用户名自动补全，在@其他评论人的时候，文本框会自动筛选出所有评论着的名字。
+最近一段时间在忙着找工作，很久没有更新了，之前做了一个自动补全的功能，花费了我很多时间，因为涉及到很多前端开发相关的知识，包括DOM, js, coffeescript, jquery等等，现在打算详细的描述一下了。很多网站都有用户名或者输入内容自动补全的功能，我实现的是比较简单的一种，即评论区用户名自动补全，在 @ 其他评论人的时候，文本框会自动筛选出所有评论着的名字。
 
 很显然，该功能主要依靠前端相关技术，即 javascript，而我本身并不了解这门语言，所以我选用了语法更简单的 coffeescript。coffeescript 相当于一种简化版的 js，它可以完全被编译成 js 代码，它的语法很简单，有点类似 ruby，如果要尽快上手，coffeescript 是个不错的选择，另外我们还要依赖一些现成的库来帮助我们减少工作量，比如 jQuery。jQuery 是 js 的一个库，它实现了很多很酷的功能和插件，很方便的供大家调用，而我此次主要使用的就是 jQuery 的 Autocomplete 插件。
 
@@ -59,10 +59,10 @@ Autocomplete 可以帮助我减少工作量，但是我需要了解它是如何�
 </script>
 {% endhighlight %}
 
-此段代码的意思是：在网页页面加载完毕的时候，jQuery 告诉 DOM 替他做一些事情，即 function()里面需要做的。
+此段代码的意思是：在网页页面加载完毕的时候，jQuery 告诉 DOM 替他做一些事情，即 function() 里面需要做的。
 DOM 会去找一个叫 tags 的ID选择器，然后去执行自动补全，source 即是需要显示的列表内容。
 
-然后对应到我的需求，我需要给评论栏加上 tags 标签，source 对应的值是评论过的用户名列表，但是这个列表是未知的，我需要去服务器动态获取，幸运的是，autocomplete 的 source属性支持多种类型，一种是Array，就像上面的availableTags；一种是 String，说是 string，其实是一个url地址，jquery 会根据这个地址发送一个get请求道服务器，然后返回一个json格式的数据，现在然这种方式可以很好的满足我的需求。
+然后对应到我的需求，我需要给评论栏加上 tags 标签，source 对应的值是评论过的用户名列表，但是这个列表是未知的，我需要去服务器动态获取，幸运的是，autocomplete 的 source属性支持多种类型，一种是 Array，就像上面的 availableTags；一种是 String，说是 string，其实是一个 url 地址，jQuery 会根据这个地址发送一个 get 请求道服务器，然后返回一个 json 格式的数据，现在然这种方式可以很好的满足我的需求。
 
 {% highlight erb %}
 #app/view/comments/_form.html.erb
@@ -73,7 +73,7 @@ DOM 会去找一个叫 tags 的ID选择器，然后去执行自动补全，sourc
 </div>
 {% endhighlight %}
 
-为评论栏添加 ID选择器 tags，以便js找到它，data-article-id 的作用是为了让js获取文章的id，便于后面构造url。
+为评论栏添加 ID选择器 tags，以便 js 找到它，data-article-id 的作用是为了让 js 获取文章的 id，便于后面构造 url。
 
 {% highlight javascript %}
 #app/assets/javascripts/comments.coffee
@@ -85,7 +85,7 @@ $ ->
       source:  '/articles/' + id + '/autocomplete.json')
 {% endhighlight %}
 
-此段coffee代码的意思是：在页面加载完成后，js解释器会监听ID选择器为 tags 上的输入事件，一旦有输入，则获取文章id，启动自动补全功能，根据source中的url地址，发送一个ajax请求到服务器去获取用户名列表。
+此段 coffee 代码的意思是：在页面加载完成后，js 解释器会监听ID选择器为 tags 上的输入事件，一旦有输入，则获取文章id，启动自动补全功能，根据 source 中的 url 地址，发送一个 ajax 请求到服务器去获取用户名列表。
 
 {% highlight ruby %}
 #config/routes.rb
@@ -115,7 +115,7 @@ class ArticlesController < ApplicationController
 end
 {% endhighlight %}
 
-autocomplete 方法用于在服务器查找匹配的用户名，jquery 发送ajax消息的时候，会附带一个 term 的参数，内容即为当前输入框的文本，由于我希望用户在输入 @ 符号的时候进行匹配，所以在此处我需要对参数进行处理。
+autocomplete 方法用于在服务器查找匹配的用户名，jQuery 发送 ajax 消息的时候，会附带一个 term 的参数，内容即为当前输入框的文本，由于我希望用户在输入 @ 符号的时候进行匹配，所以在此处我需要对参数进行处理。
 
 {% highlight ruby %}
 Started GET "/articles/55fc103ebd172df3f600000c/autocomplete.json?term=I+love+%40liu" for ::1 at 2015-10-25 00:38:06 +0800
@@ -135,7 +135,7 @@ Processing by ArticlesController#autocomplete as JSON
 
 2. 在没有输入 @ 符号的情况下，也出现了选择列表，这是不应该的。
 
-要解决第一个问题，我们需要为autocomplete添加几个新的属性：
+要解决第一个问题，我们需要为 autocomplete 添加几个新的属性：
 
 {% highlight javascript %}
 $ ->
