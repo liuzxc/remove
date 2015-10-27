@@ -13,9 +13,9 @@ share: true
 
 #### `if __name__ == '__main__':`
 
-在很多的python脚本中都可以看到这样的声明：`if __name__ == '__main__':`，它到底是什么意思呢？
+在很多的 python 脚本中都可以看到这样的声明：`if __name__ == '__main__':`，它到底是什么意思呢？
 
-在 C/C++/Java 这样的语言中，都有入口函数/main函数的感念，python 也有 main 函数，只是实现机制有些不同。Python 使用缩进来组织代码，除了类定义和函数定义外，对于没有缩进的代码，Python 都会去执行他们，这些代码可以被理解为 main 函数。如果多个文件都含有没有缩进的代码，那么 python 如何判断应该哪个是主执行文件呢？
+在 C/C++/Java 这样的语言中，都有入口函数/main 函数的感念，python 也有 main 函数，只是实现机制有些不同。Python 使用缩进来组织代码，除了类定义和函数定义外，对于没有缩进的代码，Python 都会去执行他们，这些代码可以被理解为 main 函数。如果多个文件都含有没有缩进的代码，那么 python 如何判断应该哪个是主执行文件呢？
 
 所以 python 引入了 `__name__` 属性，当文件被调用时，`__name__` 为文件名，当文件被执行时，`__name__` 为 `__main__`。
 
@@ -47,7 +47,7 @@ test
 
 #### list comprehension（列表推导式）
 
-有一次做 python 面试题的时候，第一道题就是用 list comprehension 取列表中的偶数，当时不知道 list comprehension是什么东东，写出的代码是这个样子：
+有一次做 python 面试题的时候，第一道题就是用 list comprehension 取列表中的偶数，当时不知道 list comprehension 是什么东东，写出的代码是这个样子：
 
 {% highlight python %}
 def func(list):
@@ -125,4 +125,68 @@ reduce(lambda x, y: x + y, [1,2,3,4,5,6]) => 21
 
 > ruby 和 python 都有 lambda，lambda 可以作为匿名函数使用
 
+#### 装饰器（decorator）
 
+装饰器是 python 中比较有趣的功能，它可以在不改变原有方法的基础上，为方法添加新的功能。为了熟悉这个概念，我花了不少时间去了解，我发现网上的很多例子都显得太过复杂难懂，对于新手来说，从简单的例子开始会更好理解一点。
+
+{% highlight python %}
+#首先写一个原始方法，它简单的输出一个句子
+def original_function():
+  print "This is a original function"
+
+#然后我们添加一个装饰方法
+def decorate_original_function(func):
+  def wapper_original_function():
+    print "do something before original function runs:"
+    func()
+    print "do something after original function runs:"
+  return wapper_original_function
+
+func = decorate_original_function(original_function)
+func()
+
+output:
+do something before original function runs:
+This is a original function
+do something after original function runs:
+{% endhighlight %}
+
+{% highlight python %}
+使用 python 的装饰器语法：
+
+# decorate_original_function(original_function)
+@decorate_original_function
+def original_function():
+  print "This is a original function"
+
+original_function()
+
+output:
+do something before original function runs:
+This is a original function
+do something after original function runs:
+{% endhighlight %}
+
+> `@decorate_original_function` 是 `decorate_original_function(original_function)` 的简写
+
+向装饰器函数传递参数:
+
+{% highlight python %}
+def decorate_original_function(func):
+  def wapper_original_function(args1, args2):
+    print "do something before original function runs:"
+    func(args1, args2)
+    print "do something after original function runs:"
+  return wapper_original_function
+
+@decorate_original_function
+def original_function(args1, args2):
+  print "the arguments are:", args1, args2
+
+original_function("first", "second")
+
+output:
+do something before original function runs:
+the arguments are: first second
+do something after original function runs:
+{% endhighlight %}
