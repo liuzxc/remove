@@ -40,7 +40,7 @@ Autocomplete 可以帮助我减少工作量，但是我需要了解它是如何�
 
 以下是取自官方的示例代码：
 
-{% highlight javascript %}
+{% highlight coffeescript %}
 <script>
   $(function() {
     var availableTags = [
@@ -75,7 +75,7 @@ DOM 会去找一个叫 tags 的ID选择器，然后去执行自动补全，sourc
 
 为评论栏添加 ID选择器 tags，以便 js 找到它，data-article-id 的作用是为了让 js 获取文章的 id，便于后面构造 url。
 
-{% highlight javascript %}
+{% highlight coffeescript %}
 #app/assets/javascripts/comments.coffee
 # input: it's an event that triggers whenever the input changes
 $ ->
@@ -137,7 +137,7 @@ Processing by ArticlesController#autocomplete as JSON
 
 要解决第一个问题，我们需要为 autocomplete 添加几个新的属性：
 
-{% highlight javascript %}
+{% highlight coffeescript %}
 $ ->
   $(document).on("input", "#tags", ->
     id = $("#tags").data("article-id")
@@ -154,7 +154,7 @@ $ ->
 
 对于第二个问题，我们需要判断文本框中的内容，如果没有输入 @ 符号，就不触发自动补全的功能：
 
-{% highlight javascript %}
+{% highlight coffeescript %}
 $ ->
   $(document).on("input", "#tags", ->
     content = $("#tags").val() #获取当前输入框中的文本

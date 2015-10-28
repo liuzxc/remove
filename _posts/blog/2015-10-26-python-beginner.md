@@ -151,9 +151,8 @@ This is a original function
 do something after original function runs:
 {% endhighlight %}
 
-{% highlight python %}
 使用 python 的装饰器语法：
-
+{% highlight python %}
 # decorate_original_function(original_function)
 @decorate_original_function
 def original_function():
@@ -201,8 +200,8 @@ python 中，装饰器的应用之广泛超出了我的想象，它几乎无处�
 
 {% highlight ruby %}
 class MyClas
-  def test; end  # 实例方法
-  def self.test1; end ＃ 类方法
+  def test; end  #实例方法
+  def self.test1; end #类方法
 end
 {% endhighlight %}
 
