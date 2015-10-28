@@ -190,3 +190,146 @@ do something before original function runs:
 the arguments are: first second
 do something after original function runs:
 {% endhighlight %}
+
+python 中，装饰器的应用之广泛超出了我的想象，它几乎无处不在，从 python 基本的语法到 flask 这样的 web 框架，你都可以看到它的身影。
+
+#### 方法和访问修饰符
+
+##### 方法
+
+在 ruby 中，一个方法是实例方法还是类方法是通过判断方法当前的所属对象决定的。
+
+{% highlight ruby %}
+class MyClas
+  def test; end  # 实例方法
+  def self.test1; end ＃ 类方法
+end
+{% endhighlight %}
+
+而 python 是把当前对象作为参数传递给方法，从而判断方法是实例方法还是类方法。python 中还有一种方法叫静态方法，从 ruby 的角度来讲，类方法和静态方法是一样的，但 python 不同，它的静态方法不会以实例或类最为第一个参数，但是实例对象和类都可以调用静态方法，我到现在并不清楚 python 中静态方法的作用到底是什么，网上的说法是 **经常有一些跟类有关系的功能但在运行时又不需要实例和类参与的情况下需要用到静态方法**。
+
+{% highlight python %}
+class MyClass:
+  def test(self): #实例方法
+    pass
+
+  @classmethod
+  def test1(cls): #类方法
+    pass
+
+  @staticmethod
+  def test2(): #静态方法
+    pass
+{% endhighlight %}
+
+写个简单的例子看下：
+
+{% highlight python %}
+class MyClass(object):
+  def test(self):
+    print "this is a instance method"
+
+  @classmethod
+  def test1(cls):
+    print "this is a class method"
+
+  @staticmethod
+  def test2():
+    print "this is a static method"
+
+class MyClass1(MyClass):
+  pass
+
+
+print "MyClass:"
+
+m = MyClass()
+m.test()
+
+m.test1()
+MyClass.test1()
+
+m.test2
+MyClass.test2()
+
+print "MyClass1:"
+
+m1 = MyClass1()
+m1.test()
+m1.test1()
+m1.test2()
+
+output:
+
+MyClass:
+this is a instance method
+this is a class method
+this is a class method
+this is a static method
+MyClass1:
+this is a instance method
+this is a class method
+this is a static method
+{% endhighlight %}
+
+从上面的程序中我们可以看出 python 语言的一些特点：
+
+1. 实例方法只能被类的实例所调用（ruby 说我和你一样）
+2. 类方法除了可以被类本身调用，还可以被实例对象调用（ruby 表示做不到）
+3. 静态方法可以被类和实例对象调用（ruby 表示我没有你这样的静态方法)
+
+##### 访问修饰符
+
+令我感到惊讶的是 python 竟然没有访问修饰符，Java 和 ruby 表示你丫太前卫，我们跟不上。python 通过一种约定（convention）来实现访问权限控制。变量和方法名前面不加下划线表示它们是 public 的，
+加一个下划线表示 protected, 加两个表示 private。
+
+通过一个例子来了解一下：
+
+{% highlight python %}
+class MyClass(object):
+  _name = "liuzxc"
+  __age = 26
+
+  def test(self):
+    print "this is a instance method"
+
+  def _test(self):
+    self.__test() #私有方法只有在本类中可以调用
+    print "this is a protected instance method"
+
+  def __test(self):
+    print "this is a private instance method"
+
+class MyClass1(MyClass):
+  pass
+
+
+print "MyClass:"
+
+m = MyClass()
+m.test()
+m._test()
+# m.__test()  #调用失败
+
+print "MyClass1:"
+
+m1 = MyClass1()
+m1.test()
+m1._test()
+# m1.__test() #调用失败
+print MyClass1._name
+# print MyClass1.__age #调用失败
+
+
+output:
+
+MyClass:
+this is a instance method
+this is a private instance method
+this is a protected instance method
+MyClass1:
+this is a instance method
+this is a private instance method
+this is a protected instance method
+liuzxc
+{% endhighlight %}
