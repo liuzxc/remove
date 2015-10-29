@@ -43,6 +43,7 @@ test.py is imported
 test
 {% endhighlight %}
 
+
 > ruby 并没有main()函数的概念，它会逐行执行文件中的所有代码
 
 #### list comprehension（列表推导式）
@@ -103,7 +104,7 @@ func(1, 2, sum) => 3
 
 ##### python 中常用的内置高阶函数
 
-1. map(function, iterable, ...)
+**map(function, iterable, ...)**
 
 {% highlight python %}
 map(sum, [1,2,3,4],[5,6,7,8]) => [6, 8, 10, 12]
@@ -111,17 +112,18 @@ map(lambda x: x**2, [1,2,3,4,5]) => [1, 4, 9, 16, 25]
 map(lambda x,y: x+y, [1,2,3,4,5],[1,2,3,4,5]) => [2, 4, 6, 8, 10]
 {% endhighlight %}
 
-2. filter(function, iterable)
+**filter(function, iterable)**
 
 {% highlight python %}
 filter(lambda x: x % 2 == 0, [1,2,3,4,5,6]) => [2, 4, 6]
 {% endhighlight %}
 
-3. reduce(function, iterable[, initializer])
+**reduce(function, iterable[, initializer])**
 
 {% highlight python %}
 reduce(lambda x, y: x + y, [1,2,3,4,5,6]) => 21
 {% endhighlight %}
+
 
 > ruby 和 python 都有 lambda，lambda 可以作为匿名函数使用
 
@@ -152,6 +154,7 @@ do something after original function runs:
 {% endhighlight %}
 
 使用 python 的装饰器语法：
+
 {% highlight python %}
 # decorate_original_function(original_function)
 @decorate_original_function
@@ -302,7 +305,6 @@ class MyClass(object):
 class MyClass1(MyClass):
   pass
 
-
 print "MyClass:"
 
 m = MyClass()
@@ -318,7 +320,6 @@ m1._test()
 # m1.__test() #调用失败
 print MyClass1._name
 # print MyClass1.__age #调用失败
-
 
 output:
 
