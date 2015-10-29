@@ -13,6 +13,7 @@ categories: articles
 
 > 本文引用了 RailsCasts 的部分内容，不过 RailsCasts 中使用的版本比较老，某些地方不适用于新版的
 Rails， 因此做了部分修改
+
 > RailsCasts 链接： http://railscasts.com/episodes/238-mongoid
 
 
@@ -41,8 +42,8 @@ Rails， 因此做了部分修改
 
 #### mongoid VS ActiveRecord
 
-mongoid 和 ActiveRecord 都是数据库对象关系映射（database ORM），准确的说，mongoid 是 ODM
-（Object Document Mappers）。不同之处在于，ActiveRecord 针对关系型数据库，比如 Mysql，SQLServer，
+mongoid 和 ActiveRecord 都是数据库对象关系映射(database ORM)，准确的说，mongoid 是 ODM
+(Object Document Mappers)。不同之处在于，ActiveRecord 针对关系型数据库，比如 Mysql，SQLServer，
 PostgreSQL等，所以 ActiveRecord 不适用于 Nosql，所以如果 rails 应用要使用 mongodb，必须用 mongoid。
 
 #### Rails 项目中使用 mongoid
@@ -80,9 +81,9 @@ class Article
 end
 {% endhighlight %}
 
-只需要在 Article model 中添加一个新的 field 就可以了，然后再修改其他的相应的文件。由此我们可以看出 mongodb
-这种无模式数据库的优点所在了，即添加新的字段非常容易。相比传统的 mysql，添加新的字段是比较麻烦的，尤其是
-对于那些数据量很大的表，添加新的字段会锁表，造成当前数据无法写入，影响用户体验。而 mongodb 可以很轻松的解决
+只需要在 Article model 中添加一个新的 field 就可以了，然后再修改其他的相应的文件，由此我们可以看出 mongodb
+这种无模式数据库的优点所在了：添加新的字段非常容易。相比传统的 mysql，添加新的字段是比较麻烦的，尤其是
+对于那些数据量很大的表，添加新的字段会锁表，造成当前数据无法写入，影响用户体验，而 mongodb 可以很轻松的解决
 这个问题。
 
 <figure>
@@ -141,7 +142,7 @@ end
 {% endhighlight %}
 
 > inverse_of 用来告诉 Rails 两个模型之间的关系,与 ActiveRecord 的用法是一致的
-> 参考链接：http://guides.ruby-china.org/association_basics.html
+> 参考链接：(Association Basics)[http://guides.ruby-china.org/association_basics.html]
 
 然后修改 `routes.rb`
 
