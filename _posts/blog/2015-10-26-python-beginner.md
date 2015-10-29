@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 初探
-excerpt: 主要探寻一下 Python 和 Ruby 的一些不同之处
+excerpt: 寻找 Python 和 Ruby 的不同之处
 categories: blog
 comments: true
 share: true
