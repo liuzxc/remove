@@ -36,7 +36,7 @@ image:
 
 2. 2013 - 2015 尼毕鲁信息技术有限公司从事游戏服务器端开发。
 
-![tap4fun](http://hackcracks.com/wp-content/uploads/2013/06/spartan-logo.jpg
+![tap4fun](http://hackcracks.com/wp-content/uploads/2013/06/spartan-logo.jpg)
 
 ## 兴趣爱好
 
