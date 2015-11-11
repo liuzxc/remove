@@ -30,5 +30,22 @@ image:
     <figcaption></figcaption>
 </figure>
 
+## 工作经历
 
+1. 2012 - 2013 叠拓信息技术有限公司从事持续集成系统的开发。
 
+2. 2013 - 2015 尼毕鲁信息技术有限公司从事游戏服务器端开发。
+
+![tap4fun](http://hackcracks.com/wp-content/uploads/2013/06/spartan-logo.jpg
+
+## 兴趣爱好
+
+* 宅
+* 喜欢看纪录片（BBC、荒野求生、考古探险...)
+* 漫画迷
+
+![夏亚阿兹纳布尔](http://qingwaka.com/uploadfiles/otherpic/120301120435.jpg)
+
+![高达seed](http://hiphotos.baidu.com/oo%D5%BD%B7%E3oo/pic/item/5198e625bb43fe03d5074277.jpg)
+
+![eva](http://a.hiphotos.baidu.com/zhidao/pic/item/6d81800a19d8bc3e81a44f36838ba61ea9d34599.jpg)
