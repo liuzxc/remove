@@ -41,7 +41,7 @@ image:
 ## 兴趣爱好
 
 * 宅
-* 喜欢看纪录片（BBC、荒野求生、考古探险...)
+* 喜欢看纪录片（BBC、荒野求生、考古探险、历史战争...)
 * 漫画迷
 
 ![夏亚阿兹纳布尔](http://qingwaka.com/uploadfiles/otherpic/120301120435.jpg)
@@ -49,3 +49,5 @@ image:
 ![高达seed](http://hiphotos.baidu.com/oo%D5%BD%B7%E3oo/pic/item/5198e625bb43fe03d5074277.jpg)
 
 ![eva](http://a.hiphotos.baidu.com/zhidao/pic/item/6d81800a19d8bc3e81a44f36838ba61ea9d34599.jpg)
+
+![高达OO](http://i1.ce.cn/comic/dmmt/bz/200810/13/W020081013556144059934.jpg)
