@@ -17,7 +17,7 @@ image:
 
 ![陕北1](http://bbs.cpanet.cn/data/attachment/forum/201503/08/110754l9egq99h9zocpprn.jpg)
 
-![陕北2](http://www.jszhongzhu.com/img/aHR0cDovL2ltZy5pdnNreS5jb20vaW1nL3R1cGlhbi9pbWcvMjAxMTA1LzA2L3NoYW54aV95YW5hbl9taW5qdS0wMDUuanBn.jpg)
+![陕北2](http://pic.baike.soso.com/p/20140512/20140512155736-881359583.jpg)
 
 ## 其实我的家乡是这样的！
 
