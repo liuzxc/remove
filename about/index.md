@@ -8,7 +8,7 @@ image:
 ---
 
 
-
+<!--
 * 姓名：刘兴起
 * 城市：陕西、成都
 * 毕业院校：西南交通大学
@@ -50,4 +50,4 @@ image:
 
 ![eva](http://a.hiphotos.baidu.com/zhidao/pic/item/6d81800a19d8bc3e81a44f36838ba61ea9d34599.jpg)
 
-![高达OO](http://i1.ce.cn/comic/dmmt/bz/200810/13/W020081013556144059934.jpg)
+![高达OO](http://i1.ce.cn/comic/dmmt/bz/200810/13/W020081013556144059934.jpg) -->
