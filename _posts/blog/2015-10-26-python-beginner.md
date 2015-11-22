@@ -1,6 +1,6 @@
 ---
 layout: post
-title: python 初探
+title: Python 初探
 excerpt: 寻找 python 和 ruby 的不同之处
 categories: blog
 comments: true
@@ -153,6 +153,8 @@ This is a original function
 do something after original function runs:
 {% endhighlight %}
 
+从这个例子我们可以看出装饰器的运行原理：把原函数(original_function)作为参数(func)传递给装饰器函数(decorate_original_function)，然后返回一个函数(wapper_original_function)，你可以在返回函数中添加你想要的功能（比如此处的两个print），既可以在 func() 之前，也可以在 func() 之后。这样就会理解为什么 pyhton 中装饰器的应用如此之广泛。
+
 使用 python 的装饰器语法：
 
 {% highlight python %}
@@ -170,30 +172,6 @@ do something after original function runs:
 {% endhighlight %}
 
 > `@decorate_original_function` 是 `decorate_original_function(original_function)` 的简写
-
-向装饰器函数传递参数:
-
-{% highlight python %}
-def decorate_original_function(func):
-  def wapper_original_function(args1, args2):
-    print "do something before original function runs:"
-    func(args1, args2)
-    print "do something after original function runs:"
-  return wapper_original_function
-
-@decorate_original_function
-def original_function(args1, args2):
-  print "the arguments are:", args1, args2
-
-original_function("first", "second")
-
-output:
-do something before original function runs:
-the arguments are: first second
-do something after original function runs:
-{% endhighlight %}
-
-python 中，装饰器的应用之广泛超出了我的想象，它几乎无处不在，从 python 基本的语法到 flask 这样的 web 框架，你都可以看到它的身影。
 
 #### 方法和访问修饰符
 
