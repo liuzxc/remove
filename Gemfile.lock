@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     blankslate (2.1.2.4)
     celluloid (0.16.0)
@@ -91,3 +91,6 @@ DEPENDENCIES
   jekyll
   jekyll-sitemap
   octopress (~> 3.0.0.rc.12)
+
+BUNDLED WITH
+   1.10.6

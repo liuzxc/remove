@@ -7,7 +7,7 @@ share: true
 categories: articles
 ---
 
-最近在新工作中接触到了 vagrant 这样一个非常好的工具，便想将其应用到自己的应用当中。[vagrant](https://www.vagrantup.com/) 是一款用来构建虚拟开发环境的工具，非常适合 ruby／python 这类语言开发web应用，我们可以通过 vagrant 封装一个 Linux 开发环境，无论你使用什么样的操作系统，你都可以在虚拟机里面跑你的代码，与你本地的环境相隔离。在项目里面，这样的工具太有用了，你不会再听到 “代码在我的机器上跑不起来” 这样的抱怨了，是不是很赞呢！接下来我就尝试让自己的应用通过 vagrant 在虚拟机上跑起来。
+最近在新工作中接触到了 vagrant 这样一个非常好的工具，便想将其应用到自己的应用当中。[vagrant](https://www.vagrantup.com/) 是一款用来构建虚拟开发环境的工具，非常适合 ruby/python 这类语言开发 web 应用，我们可以通过 vagrant 封装一个 Linux 开发环境，无论你使用什么样的操作系统，你都可以在虚拟机里面跑你的代码，与你本地的环境相隔离。在项目里面，这样的工具太有用了，你不会再听到 “代码在我的机器上跑不起来” 这样的抱怨了，是不是很赞呢！接下来我就尝试让自己的应用通过 vagrant 在虚拟机上跑起来。
 
 #### Installation
 
@@ -16,15 +16,15 @@ categories: articles
 
 #### UP and RUNNING
 
-vagrant 安装好以后，在项目目录下执行 vagrant init
+vagrant 安装好以后，在项目目录下执行:
 
-{% highlight shell %}
+{% highlight sh %}
 $ vagrant init
 {% endhighlight %}
 
 该命令会生成一个名叫 Vagrantfile 的配置文件：
 
-{% highlight shell %}
+{% highlight sh %}
 ...
 # Every Vagrant development environment requires a box. You can search for
 # boxes at https://atlas.hashicorp.com/search.
@@ -32,15 +32,15 @@ config.vm.box = "ubuntu/trusty64"
 ...
 {% endhighlight %}
 
-这一部分是配置文件的关键，你可以通过它设置你想在虚拟机上跑的操作系统，我使用的是 64位 的 ubuntu， 你也可以根据它提供的链接选择自己喜欢的。然后跑下面这个命令：
+这一部分是配置文件的关键，你可以通过它设置你想在虚拟机上跑的操作系统，我使用的是 64位 的 ubuntu， 你也可以根据它提供的链接选择自己喜欢的，然后跑下面这个命令：
 
-{% highlight shell %}
+{% highlight sh %}
 $ vagrant up
 {% endhighlight %}
 
-vagrant 会自动为你安装虚拟环境。安装完成之后你就可以 ssh 上虚拟机了
+vagrant 会自动为你安装虚拟环境，安装完成之后你就可以 ssh 上虚拟机了
 
-{% highlight shell %}
+{% highlight sh %}
 $ vagrant ssh
 {% endhighlight %}
 
@@ -50,13 +50,13 @@ $ vagrant ssh
 
 ##### 安装 git
 
-{% highlight shell %}
+{% highlight sh %}
 sudo apt-get install git-core
 {% endhighlight %}
 
 ##### 安装 rbenv 和 ruby-build
 
-{% highlight shell %}
+{% highlight sh %}
 git clone git://github.com/sstephenson/rbenv.git .
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
@@ -68,7 +68,7 @@ sudo ./install.sh
 
 ##### 安装 ruby 和 rails
 
-{% highlight shell %}
+{% highlight sh %}
 sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev build-essential g++ nodejs
 
 rbenv install 2.2.2
@@ -81,25 +81,25 @@ gem install rails -v 4.2.3
 
 ##### 安装 mongodb
 
-{% highlight shell %}
+{% highlight sh %}
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 {% endhighlight %}
 
-##### start rails app
+##### start rails server
 
-{% highlight shell %}
+{% highlight sh %}
 bundle install
 rails server
 {% endhighlight %}
 
 经过这样一番折腾之后，我的应用就在 vagrant 构建的虚拟机上跑起来了，但是有个问题，怎么在本机上访问跑在在虚拟机上的应用呢？
 
-只要修改 Vagrantfile 的配置就好啦
+首先修改 Vagrantfile 的配置：
 
-{% highlight shell %}
+{% highlight sh %}
 ...
 # Create a forwarded port mapping which allows access to a specific port
 # within the machine from a port on the host machine. In the example below,
@@ -108,8 +108,24 @@ config.vm.network "forwarded_port", guest: 3000, host: 3000
 ...
 {% endhighlight %}
 
-修改之后需要退出虚拟机，运行 vagrant reload 去加载新的配置，不然修改是不会生效的哦。
+修改之后需要退出虚拟机，运行 `vagrant reload` 去加载新的配置，不然修改是不会生效的哦。
 
+把 `rails server` 默认绑定的 IP 从 `127.0.0.1` 改为 `0.0.0.0`：
 
+{% highlight ruby %}
+#config/boot.rb
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
+require 'bundler/setup' # Set up gems listed in the Gemfile.
 
+require 'rails/commands/server'
+module Rails
+  class Server
+    def default_options
+      super.merge(Host:  '0.0.0.0', Port: 3000)
+    end
+  end
+end
+{% endhighlight %}
+
+这样一来，这个开发环境就搭建好了。
