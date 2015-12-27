@@ -129,3 +129,47 @@ end
 {% endhighlight %}
 
 这样一来，这个开发环境就搭建好了。
+
+##### provision
+
+vagrant 提供了一个 provision 的功能，可以在 `vagrant up` 的时候自动安装项目运行所依赖的环境，我们只需要做简单的配置和提供一个脚本：
+
+{% highlight shell %}
+# vagrantfile
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   sudo apt-get update
+  #   sudo apt-get install -y apache2
+  # SHELL
+  config.vm.provision "shell", path: 'bootstrap.sh'
+{% endhighlight %}
+
+打开 provision，并制定 shell 脚本 `bootstrap.sh` 用于 provisioning。
+
+{% highlight shell %}
+# bootstrap.sh
+
+#!/usr/bin/env bash
+sudo update-locale LC_ALL="en_US.utf8"
+
+echo "Install mongodb:"
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+echo "Add Ruby sources:"
+sudo apt-add-repository -y ppa:brightbox/ruby-ng
+
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y git ruby2.2 ruby2.2-dev mongodb-10gen nodejs zlib1g-dev build-essential g++ libsqlite3-dev
+
+gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+
+sudo gem install bundler
+bundle config mirror.https://rubygems.org https://ruby.taobao.org
+{% endhighlight %}
+
+这样一来，在运行 `vagrant up` 的时候会自动为你安装项目所依赖的环境。
