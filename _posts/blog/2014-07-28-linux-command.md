@@ -24,3 +24,9 @@ chown :group log.txt //只更改文件群组
 // -v: 显示详细信息
 chown -R -v user:group log
 {% endhighlight %}
+
+####find 寻找指定目录下的文件
+
+{% highlight sh %}
+find . -name "*.pyc" -exec rm -rf {} \;
+{% endhighlight %}
