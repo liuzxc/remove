@@ -134,7 +134,7 @@ end
 
 vagrant 提供了一个 provision 的功能，可以在 `vagrant up` 的时候自动安装项目运行所依赖的环境，我们只需要做简单的配置和提供一个脚本：
 
-{% highlight shell %}
+{% highlight sh %}
 # vagrantfile
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
   # Enable provisioning with a shell script. Additional provisioners such as
@@ -149,7 +149,7 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 打开 provision，并制定 shell 脚本 `bootstrap.sh` 用于 provisioning。
 
-{% highlight shell %}
+{% highlight sh %}
 # bootstrap.sh
 
 #!/usr/bin/env bash
