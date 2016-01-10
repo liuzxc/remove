@@ -39,7 +39,7 @@ share: true
 
 ##### 创建数据库和表
 
-1. CREATE DATABSE gregs_list; 创建数据库 gregs_list
+1. create database gregs_list CHARACTER set utf8mb4 COLLATE = utf8mb4_unicode_ci; 创建数据库 gregs_list
 2. show databases; 列出当前所有的数据库
 3. use gregs_list; 使用 gregs_list 这个数据库
 4. create table my_contacts
