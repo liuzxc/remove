@@ -109,7 +109,7 @@ end;
 3. add    在当前表中添加一列
 4. drop   从表中删除某列
 5. rename to 修改表名
-6. add index (COLUMN_NAME) 添加索引
+6. add(drop) index (COLUMN_NAME) 添加(删除)索引
 
 {% highlight sql %}
 alter table my_contacts
