@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rails 源码解读（二）Active Record
-excerpt:
+excerpt: Rails 源码解读
 comments: true
 share: true
 categories: articles

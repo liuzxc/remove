@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rails 源码解读（一）rails console
-excerpt:
+excerpt: Rails 源码解读
 comments: true
 share: true
 categories: articles
