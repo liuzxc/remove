@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ruby 实现各种排序查找算法
-excerpt:
+excerpt: 冒泡排序，快速排序，希尔排序
 comments: true
 categories: blog
 share: true

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: tmux 快捷键
-excerpt:
+excerpt: 更改tmux默认快捷键
 categories: blog
 comments: true
 share: true
 ---
+
 
 #### 更改tmux默认快捷键
 
