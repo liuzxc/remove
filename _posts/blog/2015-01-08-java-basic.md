@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java 基础
-excerpt:
+excerpt: java
 categories: blog
 comments: true
 share: true

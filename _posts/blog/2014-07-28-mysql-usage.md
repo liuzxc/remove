@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learn Mysql
-excerpt:
+excerpt: mysql 常见操作
 comments: true
 categories: blog
 share: true

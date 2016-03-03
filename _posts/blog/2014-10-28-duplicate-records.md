@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rails App中重复记录产生的原因
-excerpt:
+excerpt: Uniqueness Validation
 modified:
 categories: blog
 share: true

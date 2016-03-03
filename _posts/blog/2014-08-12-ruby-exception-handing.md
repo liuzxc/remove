@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ruby 异常处理
-excerpt:
+excerpt: 异常处理
 comments: true
 categories: blog
 share: true

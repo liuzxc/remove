@@ -1,7 +1,7 @@
 ---
 layout: post
 title: linux 常用命令
-excerpt:
+excerpt: linux
 comments: true
 categories: blog
 share: true

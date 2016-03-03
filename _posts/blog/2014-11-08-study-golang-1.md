@@ -1,7 +1,7 @@
 ---
 layout: post
 title: go 语言学习笔记（一）
-excerpt:
+excerpt: golang
 modified:
 categories: blog
 share: true

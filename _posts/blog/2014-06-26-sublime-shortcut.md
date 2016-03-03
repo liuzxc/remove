@@ -1,7 +1,7 @@
 ---
 layout: post
 title: sublime 快捷键集合
-excerpt:
+excerpt: sublime
 comments: true
 categories: blog
 share: true

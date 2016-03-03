@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learn Mongodb
-excerpt:
+excerpt: Mongodb
 categories: blog
 comments: true
 share: true

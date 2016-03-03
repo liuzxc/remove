@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java 提高篇(六) --- 泛型（Generics）
-excerpt:
+excerpt: java
 categories: blog
 comments: true
 share: true

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rails 常用命令
-excerpt:
+excerpt: rails
 categories: blog
 comments: true
 share: true
