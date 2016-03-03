@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Rails 查询数据库的几种方式
-excerpt:
 categories: blog
 comments: true
 share: true
