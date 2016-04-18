@@ -7,26 +7,26 @@ categories: blog
 share: true
 ---
 
-#启动和关闭mysql服务
+# 启动和关闭mysql服务
 
-##linux：
+## linux：
 `$ /etc/init.d/mysql start|stop|restart|status`
 
-##mac：
+## mac：
 `$ /Library/StartupItems/MySQLCOM/MySQLCOM start|stop|restart`
 
-#备份和还原数据库
+# 备份和还原数据库
 
-##备份：
+## 备份：
 `$ mysqldump -u (user_name) -p (db_name) (table_name) > 备份文件名称`
 
 * 没有table_name时备份整个数据库；
 * 备份文件名可加上绝对路径；
 
-##还原：
+## 还原：
 `$ mysql -u root -p (db_name) < 备份文件名`
 
-#mysql常用命令行参数
+# mysql常用命令行参数
 * -h : 连接的服务器名或者IP
 * -u : 用户名
 * -p : 密码
@@ -121,9 +121,7 @@ ALTER TABLE TABLE_NAME ADD INDEX (COLUMN_NAME);
 
 > 可以使用first, last, before column_name, after column_name, second, third 等关键字调整列的顺序
 
-####mysql建立索引的几大原则
-
-引用自：[美团技术博客](http://tech.meituan.com/mysql-index.html)
+#### mysql建立索引的几大原则
 
 1. 最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(>、<、between、like)就停止匹配，比如a = 1 and b = 2 and c > 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整。
 
@@ -134,3 +132,5 @@ ALTER TABLE TABLE_NAME ADD INDEX (COLUMN_NAME);
 4. 索引列不能参与计算，保持列“干净”，比如from_unixtime(create_time) = ’2014-05-29’就不能使用到索引，原因很简单，b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大。所以语句应该写成create_time = unix_timestamp(’2014-05-29’);
 
 5. 尽量的扩展索引，不要新建索引。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可
+
+6. 如果建立复合索引(a, b), 如果搜索条件只有 b, 那么 b 是用不到索引的
