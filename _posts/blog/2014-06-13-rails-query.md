@@ -42,15 +42,19 @@ User.find_by_sql("select* from users where .....")
 
 以上方法返回的也是一个包含对象的数组。如果你的查询条件很复杂，写原生sql是一个好的选择。
 
-> 以上两种方法返回的都是包含对象的数组，很显然，针对大量数据的查询，这些方法很不实用，速度很慢而且很耗内存。
+以上两种方法返回的都是包含对象的数组，很显然，针对大量数据的查询，这些方法很不实用，速度很慢而且很耗内存。
 有些时候，我们只需要某些字段的值，而不是整个对象，强大的rails已经提供了更好的方法：
+
 {% highlight ruby %}
 User.connection.select_values("select user_name from users where ...")
 {% endhighlight %}
+
 如果我只需要得到user表的user_name, 该方法会返回一个包含user_name的数组
+
 {% highlight ruby %}
 User.connection.select_all("select user_name from users where ...")
 {% endhighlight %}
+
 该方法会返回一个元素是hash的数组(like: `[{user_name: "jason"}, {user_name: "jack"}]`)
 很明显，这两种方法的效率会更高，更节省内存。
 
