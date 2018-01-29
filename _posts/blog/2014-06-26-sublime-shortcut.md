@@ -69,40 +69,40 @@ image:
 
 在`Preferences->Setting:user`中添加以下代码：
 
-{% highlight ruby %}
+```ruby
 "ignored_packages": [
   "Vintage"
 ]
-{% endhighlight %}
+```
 
 ###### 显示全路径
 
-{% highlight ruby %}
+```ruby
 "show_full_path": true
-{% endhighlight %}
+```
 
 ###### 高亮编辑中的那一行
 
-{% highlight ruby %}
+```ruby
 "highlight_line": true
-{% endhighlight %}
+```
 
 ###### 保存的时候把无用的空格去掉
 
-{% highlight ruby %}
+```
 "trim_trailing_white_space_on_save": true
-{% endhighlight %}
+```
 
 ###### 宽度指导线
 
-{% highlight ruby %}
+```ruby
 "rulers": [80]
-{% endhighlight %}
+```
 
 这个数字是字符的宽度，当开启这个设置的时候，会出现一条垂直的虚线。但你的代码宽度超出这条线的时候，说明你要重新组织一下了
 
 ###### 加粗文件夹名称
 
-{% highlight ruby %}
+```ruby
 "bold_folder_labels": true
-{% endhighlight %}
+```

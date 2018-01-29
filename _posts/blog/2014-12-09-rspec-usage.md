@@ -17,11 +17,11 @@ share: true
 
 在Gemfile中添加如下代码：
 
-{% highlight ruby %}
+```ruby
 group :development, :test do
 	gem "rspec-rails"
 end
-{% endhighlight %}
+```
 
 然后运行bundle install
 
@@ -31,12 +31,12 @@ end
 
 gem包安装好之后，需要手动安装RSpec
 
-{% highlight vim %}
+```vim
 $ rails g rspec:install
     create  .rspec  //配置文件
     create  spec    //存放测试文件
     create  spec/spec_helper.rb
-{% endhighlight %}
+```
 
 spec目录的结构需要和app目录的结构保持一致，测试文件的命名规则：<modle class>_spec.rb
 
@@ -44,19 +44,19 @@ spec目录的结构需要和app目录的结构保持一致，测试文件的命�
 
 运行RSpec
 
-{% highlight vim %}
+```vim
 ➜ rspec
 No examples found.
 
 Finished in 0.00009 seconds
 0 examples, 0 failures
-{% endhighlight %}
+```
 
 #### 搭建测试数据库
 
 rails默认使用数据库sqlite，如果想使用mysql，可以在`database.yml`中配置，
 
-{% highlight yaml %}
+```yaml
 test:
 	adapter: mysql2
 	encoding: utf8
@@ -66,7 +66,7 @@ test:
 	username: root
 	password:
 	socket: /tmp/mysql.sock
-	{% endhighlight %}
+```
 
 运行 `rake db:create:all` 创建测试数据库
 运行 `rake db:test:clone` 把开发数据库的结构复制到测试数据库
@@ -79,13 +79,13 @@ Rspec属于BDD测试（行为驱动测试），即测试先行， 所以在下�
 
 首先创建一个user表来存放用户数据
 
-{% highlight bash %}
+```bash
 rails g migration model User name:string email:string
-{% endhighlight %}
+```
 
 自动生成如下代码：
 
-{% highlight ruby %}
+```ruby
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
@@ -99,13 +99,13 @@ end
 
 class User < ActiveRecord::Base
 end
-{% endhighlight %}
+```
 
 我们需要实现一些基本的数据验证功能，只有合法的数据才可以被存入数据库，创建一个`user_spec.rb`的测试文件，用于存放测试用例。
 
 Rspec测试文件的基本结构：
 
-{% highlight ruby %}
+```ruby
 require 'spec_helper' #测试文件必须添加该行
 
 describe <类名> do
@@ -116,13 +116,13 @@ describe <类名> do
 		expect(user).not_to be_valid  #这句可以翻译为"期望用户不是合法的"
 	end
 end
-{% endhighlight %}
+```
 
 > `to`, `not_to`, `be_valid` 是Rspec实现的匹配器，使用rspec写测试用例必须熟悉常用的匹配器，可以从[rspec-expectations](https://github.com/rspec/rspec-expectations)查找更多的匹配器。
 
 接下来让我们尝试写第一个测试用例：验证用户名和邮箱不为空
 
-{% highlight ruby %}
+```ruby
 require 'spec_helper'
 
 describe User do
@@ -136,11 +136,11 @@ describe User do
 		expect(user).not_to be_valid
 	end
 end
-{% endhighlight %}
+```
 
 运行测试用例：
 
-{% highlight vim %}
+```vim
 ➜ rspec
 User
   is invalid without user name (FAILED - 1)
@@ -149,20 +149,20 @@ User
 Finished in 0.02447 seconds
 2 examples, 2 failures
 ......
-{% endhighlight %}
+```
 
 由于未添加验证功能，所以测试用例全部失败。
 
-{% highlight ruby %}
+```ruby
 class User < ActiveRecord::Base
 	validates :name, presence: true
 	validates :email, presence: true
 end
-{% endhighlight %}
+```
 
 添加验证功能之后再运行测试用例，
 
-{% highlight vim %}
+```vim
 ➜ rspec
 User
   is invalid without user name
@@ -170,7 +170,7 @@ User
 
 Finished in 0.0169 seconds
 2 examples, 0 failures
-{% endhighlight %}
+```
 
 测试用例全部成功！
 
@@ -178,7 +178,7 @@ Finished in 0.0169 seconds
 
 通过对rspec源码的查看，我们可以找到答案：
 
-{% highlight ruby %}
+```ruby
 module Spec
   module Rails
     module Matchers
@@ -196,11 +196,11 @@ module Spec
     end
   end
 end
-{% endhighlight %}
+```
 
 `be_valid`方法会调用`ActiveRecord::Validations`的`valid?`方法，而这个方法会主动触发数据验证，无论你是使用`new`或`create`创建记录。
 
-{% highlight vim %}
+```vim
 ➜ rails c --sandbox
 Loading development environment in sandbox (Rails 3.2.15)
 Any modifications you make will be rolled back on exit
@@ -212,7 +212,7 @@ irb(main):003:0> user.valid?
 => false
 irb(main):004:0> user.errors
 => #<ActiveModel::Errors:0x007fe59b2cab90 @base=#<User id: nil, name: "", email: "jack@163.com", created_at: nil, updated_at: nil>, @messages={:name=>["can't be blank"]}>
-{% endhighlight %}
+```
 
 > 在`rails console --sandbox`中对数据库做的任何操作，在退出的时候都会被回滚。
 
@@ -220,7 +220,7 @@ irb(main):004:0> user.errors
 
 所以，之前的测试用例也可以这样写：
 
-{% highlight ruby %}
+```ruby
 require 'spec_helper'
 
 describe User do
@@ -236,11 +236,11 @@ describe User do
 		expect(user.errors[:email]).to include("can't be blank")
 	end
 end
-{% endhighlight %}
+```
 
 运行测试用例：
 
-{% highlight vim %}
+```vim
 ➜  rspec
 User
   is invalid without user name
@@ -248,13 +248,13 @@ User
 
 Finished in 0.03445 seconds
 2 examples, 0 failures
-{% endhighlight %}
+```
 
 同样运行成功!
 
 接着我们添加验证字段长度的测试用例（假设name长度不超过20，邮箱长度不超过50）
 
-{% highlight ruby %}
+```ruby
 describe User do
 	it "is invalid if name is too long" do
 		user = User.new(name: "test", email: "test@test.com")
@@ -268,11 +268,11 @@ describe User do
 		expect(user).not_to be_valid
 	end
 end
-{% endhighlight %}
+```
 
 添加邮箱格式验证：
 
-{% highlight ruby %}
+```ruby
 describe User do
 	it "is invalid with a error format email" do
 		user = User.new(name: "test", email: "test@test.com")
@@ -288,11 +288,11 @@ describe User do
 		end
 	end
 end
-{% endhighlight %}
+```
 
 添加邮箱唯一性验证：
 
-{% highlight ruby %}
+```ruby
 describe User do
 	it "is invalid with a duplication email" do
 		user = User.new(name: "test", email: "test@test.com")
@@ -302,22 +302,22 @@ describe User do
 		expect(user.errors.messages[:email]).to include("has already been taken")
 	end
 end
-{% endhighlight %}
+```
 
 写完测试用例之后，我们来实现相应的功能：
 
-{% highlight ruby %}
+```ruby
 class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 20}
   validates :email, presence: true, length: {maximum: 50},
                     format: { with: /\A[\w]+@[a-z\d]+\.[a-z]/ },
                     uniqueness: true
 end
-{% endhighlight %}
+```
 
 运行测试用例可以验证我们的功能是否符合预期，
 
-{% highlight vim %}
+```vim
 ➜ rspec
 User
   is invalid with a error format email
@@ -329,14 +329,13 @@ User
 
 Finished in 0.26591 seconds
 6 examples, 0 failures
-{% endhighlight %}
+```
 
 测试用例全部通过！
 
 让我们来看下我们写的所有的测试用例：
 
-{% highlight ruby linenos %}
-
+```ruby
 require 'spec_helper'
 
 	describe User do
@@ -386,14 +385,14 @@ require 'spec_helper'
 		expect(user.errors.messages[:email]).to include("has already been taken")
 	end
 end
-{% endhighlight %}
+```
 
 
 通过这些测试用例我们发现了一个问题，每一个测试用例中都会新建一个用户，目前的user表只有两个字段，在一般的应用当中，user表的字段远不止这个数。字段越多，构造测试数据就越麻烦，相应的代码量就越多，大部分代码都是做着重复的事情，违背了DRY原则。Rspec提供了消除重复代码的利器：`before`块
 
 让我们试着重构上面的测试用例：
 
-{% highlight ruby linenos %}
+```ruby
 require 'spec_helper'
 
 describe User do
@@ -443,22 +442,22 @@ describe User do
 		expect(@user.errors.messages[:email]).to include("has already been taken")
 	end
 end
-{% endhighlight %}
+```
 
 在运行每一个测试用例之前，会先运行`before`块中的代码。此处有6个测试用例，`before`块中的代码也会被执行六次，因此我们不必在每个测试用例中创建user，减少了代码的重复。
 
 接下来为user表建立一个`password_hash`字段，用来存放加密后的密码。
 
-{% highlight bash %}
+```bash
 rails g migration add_password_hash_to_users password_hash:string
-{% endhighlight %}
+```
 
 在`Gemfile`中需要添加一个gem包（在创建rails项目的时候，已经在`Gemfile`中添加了该包，只需要取消注释即可）：
 
-{% highlight bash %}
+```ruby
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-{% endhighlight %}
+```
 
 `has_secure_password`方法会创建虚拟的`password`和`password_confirmation`字段
 
@@ -466,7 +465,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 密码长度一般不会小于6位，让我们写出相应的测试用例：
 
-{% highlight ruby %}
+```ruby
 describe User do
 	before :each do
 		@user = User.new(name: "test", email: "test@test.com", password: "123456", password_confirmation: "123456")
@@ -478,11 +477,11 @@ describe User do
 		expect(@user).not_to be_valid
 	end
 end
-{% endhighlight %}
+```
 
 相应的实现代码：
 
-{% highlight ruby %}
+```ruby
 class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 20}
   validates :email, presence: true, length: {maximum: 50},
@@ -491,7 +490,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: {minimum: 6}
 end
-{% endhighlight %}
+```
 
 因为添加了新的字段，你需要更新测试数据库结构，不然测试无法通过。
 只需要运行`rake db:test:clone`即可。

@@ -11,7 +11,7 @@ share: true
 
 #### if语句
 
-{% highlight go %}
+```go
 if a > b {
 	fmt.Println(...)
 }
@@ -22,13 +22,13 @@ if a == b && b == c {
 if a == b || b == c {
 	fmt.Println(...)
 }
-{% endhighlight %}
+```
 
 #### switch语句
 
 golang的switch语句和ruby的截然不同：
 
-{% highlight go %}
+```go
 package main
 
 import "fmt"
@@ -64,14 +64,14 @@ func main() {
 	}
 	fmt.Println(bonus)
 }
-{% endhighlight %}
+```
 
 
 #### 循环语句
 
 golang只支持`for`循环，不支持`while`
 
-{% highlight go %}
+```go
 //类似于C语言的循环
 for i := 0; i < count; i++ {
 }
@@ -84,13 +84,13 @@ for {
 		break
 	}
 }
-{% endhighlight %}
+```
 
 #### 三元表达式
 
 golang没有三元表达式，不过可以自己通过函数模仿
 
-{% highlight go %}
+```go
 import "fmt"
 
 type B bool
@@ -105,6 +105,4 @@ func (b B) F(x, y interface{}) interface{} {
 	}
 	return y
 }
-{% endhighlight %}
-
-
+```

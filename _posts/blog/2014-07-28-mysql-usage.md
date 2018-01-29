@@ -69,12 +69,12 @@ share: true
 
 insert into ... select:
 
-{% highlight sql %}
+```sql
 INSERT INTO table (col1, col2, ..., coln)
 SELECT col1, col2, ..., coln
 FROM table
 WHERE entry_date < '2011-01-01 00:00:00';
-{% endhighlight %}
+```
 
 ##### select 语句
 
@@ -92,7 +92,7 @@ WHERE entry_date < '2011-01-01 00:00:00';
 
 使用 case 表达式 update
 
-{% highlight sql %}
+```sql
 update my_table
 set new_column =
 case
@@ -100,7 +100,7 @@ case
   when column2 = somevalue2
   else newvalue3
 end;
-{% endhighlight %}
+```
 
 ##### alter 语句
 
@@ -111,13 +111,13 @@ end;
 5. rename to 修改表名
 6. add(drop) index (COLUMN_NAME) 添加(删除)索引
 
-{% highlight sql %}
+```sql
 alter table my_contacts
 add column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
 add primary key (contact_id);
 
 ALTER TABLE TABLE_NAME ADD INDEX (COLUMN_NAME);
-{% endhighlight %}
+```
 
 > 可以使用first, last, before column_name, after column_name, second, third 等关键字调整列的顺序
 

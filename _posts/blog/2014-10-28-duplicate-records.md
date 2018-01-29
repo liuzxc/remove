@@ -13,18 +13,18 @@ share: true
 * 在应用层没有作出限制，在创建记录之前没有做任何校验；
 * 数据库设计不合理，未作唯一性约束；
 
-##Uniqueness Validation
+## Uniqueness Validation
 
 在rails应用中，通过添加唯一性验证（Uniqueness validation）可以帮助我们在应用层阻止重复记录的产生。
 
 如果我有一张user_porudct的用户产品表，我希望每一个用户的产品ID都是唯一的，可以通过以下方法来实现:
 
-{% highlight ruby %}
+```ruby
 class UserProduct < ActiveRecord::Base
   validates_uniqueness_of :product_id, scope: :user_id
   ......
 end
-{% endhighlight %}
+```
 
 在数据存入数据库之前，它会检查当前用户的product_id是否已经存在，如果存在则会引发异常。
 
@@ -33,7 +33,7 @@ end
 
 > 官方文档对此做了描述 [validates_uniqueness_of](http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of)
 
-##Race Condition
+## Race Condition
 
 > 多个线程或者进程在读写一个共享数据时结果依赖于它们执行的相对时间，这种情形叫做竞争。
 竞争条件发生在当多个进程或者线程在读写数据时，其最终的的结果依赖于多个进程的指令执行顺序。
@@ -55,14 +55,14 @@ end
 
 重复的记录就这样产生了。
 
-##Fighting Race Condition
+## Fighting Race Condition
 
 防止重复记录被创建的方法非常简单，通过创建唯一索引，从数据库的级别防止重复记录产生。在index migration之前，需要将数据库中
 已经存在的重复记录删除，否则migration会出错。
 
-{% highlight ruby %}
+```ruby
 add_index  :user_product, [:product_id, :user_id],  unique: true
-{% endhighlight %}
+```
 
 <figure>
   <img src="/images/duplicate_02.png" alt="image">
