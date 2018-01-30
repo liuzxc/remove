@@ -28,7 +28,7 @@ share: true
 * 如果在 Java 中调用一个重载方法，必须使用不同类型或（和）数量的参数去决定哪一个重载方法被调用；
 * 重载方法也许有不同的返回类型，返回类型本身并不足以区别两个版本的方法；
 
-{% highlight java %}
+```java
 public class Overload {
 	void test(){
 		System.out.println("no params");
@@ -39,11 +39,11 @@ public class Overload {
 		return 1;
 	}
 }
-{% endhighlight %}
+```
 
 * 当 Java 要调用一个重载方法的时候，它只简单的执行参数匹配的那个方法；
 
-{% highlight java %}
+```java
 public class Overload {
 	void test(){
 		System.out.println("no params");
@@ -72,7 +72,7 @@ Output:
 no params
 has one param
 has two params
-{% endhighlight %}
+```
 
 * 允许用户实现编译时多态；
 * 一个重载方法可以抛出不同的异常；
@@ -101,7 +101,7 @@ has two params
 	> 如果返回类型是 void 或主数据类型，覆盖方法的返回类型必须保持一致；
 	> 如果返回类型是引用类型（reference type)，那么可以不同，但必须兼容（如下所示）；
 
-{% highlight java %}
+```java
 class Pet{
 	Pet(){
 		System.out.println("Pet");
@@ -132,11 +132,11 @@ class Overrid{
 		obj.test();
 	}
 }
-{% endhighlight %}
+```
 
 * 覆盖方法不能有更严格的访问修饰符；
 
-{% highlight java %}
+```java
 class Overrid1 {
   int test(){
 	  return 1;
@@ -156,7 +156,7 @@ class Overrid{
 		obj.test();
 	}
 }
-{% endhighlight %}
+```
 
 * 抽象方法必须被覆盖（抽象方法的作用就是让子类的方法覆盖）；
 * static 和 final 方法不能被覆盖；

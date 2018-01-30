@@ -19,7 +19,7 @@ share: true
 
 所以 python 引入了 `__name__` 属性，当文件被调用时，`__name__` 为文件名，当文件被执行时，`__name__` 为 `__main__`。
 
-{% highlight python %}
+```python
 # name.py
 if __name__ == '__main__':
   print "name.py is executed"
@@ -27,21 +27,21 @@ else:
   print "name.py is imported"
 
 print __name__
-{% endhighlight %}
+```
 
 当执行 name.py 的时候，输出为：
 
-{% highlight python %}
+```python
 name.py is executed
 __main__
-{% endhighlight %}
+```
 
 当 import name.py 的时候：
 
-{% highlight python %}
+```python
 test.py is imported
 test
-{% endhighlight %}
+```
 
 
 > ruby 并没有main()函数的概念，它会逐行执行文件中的所有代码
@@ -50,38 +50,38 @@ test
 
 有一次做 python 面试题的时候，第一道题就是用 list comprehension 取列表中的偶数，当时不知道 list comprehension 是什么东东，写出的代码是这个样子：
 
-{% highlight python %}
+```python
 def func(list):
   temp = []
   for x in list:
     if x % 2 == 0: temp.append(x)
   return temp
-{% endhighlight %}
+```
 
 实际上应该是这个样子的：
 
-{% highlight python %}
+```python
 [x for x in list if x % 2 == 0]
-{% endhighlight %}
+```
 
 由此可见，列表推导式的最大作用就是使代码变的更简洁。
 
 嵌套循环：
 
-{% highlight python %}
+```python
 x=[1, 2, 3, 4]
 y=[5, 6, 7, 8]
 [i * j for i in x for j in y]
 => [5, 6, 7, 8, 10, 12, 14, 16, 15, 18, 21, 24, 20, 24, 28, 32]
-{% endhighlight %}
+```
 
 字典操作：
 
-{% highlight python %}
+```python
 d = {"a": 100, "b": 200, "c": 300}
 [x + str(y) for x, y in d.iteritems()]
 => ['a100', 'c300', 'b200']
-{% endhighlight %}
+```
 
 > ruby 没有列表推导式，但是 map 方法可以达到类似的效果
 
@@ -89,7 +89,7 @@ d = {"a": 100, "b": 200, "c": 300}
 
 所谓高阶函数，就是函数的参数可以是其他函数。例如：
 
-{% highlight python %}
+```python
 def sum(a, b):
   return a + b
 
@@ -100,29 +100,29 @@ def func(x, y, f):
   return f(x, y)
 
 func(1, 2, sum) => 3
-{% endhighlight %}
+```
 
 ##### python 中常用的内置高阶函数
 
 **map(function, iterable, ...)**
 
-{% highlight python %}
+```python
 map(sum, [1,2,3,4],[5,6,7,8]) => [6, 8, 10, 12]
 map(lambda x: x**2, [1,2,3,4,5]) => [1, 4, 9, 16, 25]
 map(lambda x,y: x+y, [1,2,3,4,5],[1,2,3,4,5]) => [2, 4, 6, 8, 10]
-{% endhighlight %}
+```
 
 **filter(function, iterable)**
 
-{% highlight python %}
+```python
 filter(lambda x: x % 2 == 0, [1,2,3,4,5,6]) => [2, 4, 6]
-{% endhighlight %}
+```
 
 **reduce(function, iterable[, initializer])**
 
-{% highlight python %}
+```python
 reduce(lambda x, y: x + y, [1,2,3,4,5,6]) => 21
-{% endhighlight %}
+```
 
 
 > ruby 和 python 都有 lambda，lambda 可以作为匿名函数使用
@@ -131,7 +131,7 @@ reduce(lambda x, y: x + y, [1,2,3,4,5,6]) => 21
 
 装饰器是 python 中比较有趣的功能，它可以在不改变原有方法的基础上，为方法添加新的功能。为了熟悉这个概念，我花了不少时间去了解，我发现网上的很多例子都显得太过复杂难懂，对于新手来说，从简单的例子开始会更好理解一点。
 
-{% highlight python %}
+```python
 #首先写一个原始方法，它简单的输出一个句子
 def original_function():
   print "This is a original function"
@@ -151,13 +151,13 @@ output:
 do something before original function runs:
 This is a original function
 do something after original function runs:
-{% endhighlight %}
+```
 
 从这个例子我们可以看出装饰器的运行原理：把原函数(original_function)作为参数(func)传递给装饰器函数(decorate_original_function)，然后返回一个函数(wapper_original_function)，你可以在返回函数中添加你想要的功能（比如此处的两个print），既可以在 func() 之前，也可以在 func() 之后。这样就会理解为什么 pyhton 中装饰器的应用如此之广泛。
 
 使用 python 的装饰器语法：
 
-{% highlight python %}
+```python
 # decorate_original_function(original_function)
 @decorate_original_function
 def original_function():
@@ -169,7 +169,7 @@ output:
 do something before original function runs:
 This is a original function
 do something after original function runs:
-{% endhighlight %}
+```
 
 > `@decorate_original_function` 是 `decorate_original_function(original_function)` 的简写
 
@@ -179,16 +179,16 @@ do something after original function runs:
 
 在 ruby 中，一个方法是实例方法还是类方法是通过判断方法当前的所属对象决定的。
 
-{% highlight ruby %}
+```ruby
 class MyClas
   def test; end  #实例方法
   def self.test1; end #类方法
 end
-{% endhighlight %}
+```
 
 而 python 是把当前对象作为参数传递给方法，从而判断方法是实例方法还是类方法。python 中还有一种方法叫静态方法，从 ruby 的角度来讲，类方法和静态方法是一样的，但 python 不同，它的静态方法不会以实例或类最为第一个参数，但是实例对象和类都可以调用静态方法，我到现在并不清楚 python 中静态方法的作用到底是什么，网上的说法是 **经常有一些跟类有关系的功能但在运行时又不需要实例和类参与的情况下需要用到静态方法**。
 
-{% highlight python %}
+```python
 class MyClass:
   def test(self): #实例方法
     pass
@@ -200,11 +200,11 @@ class MyClass:
   @staticmethod
   def test2(): #静态方法
     pass
-{% endhighlight %}
+```
 
 写个简单的例子看下：
 
-{% highlight python %}
+```python
 class MyClass(object):
   def test(self):
     print "this is a instance method"
@@ -250,7 +250,7 @@ MyClass1:
 this is a instance method
 this is a class method
 this is a static method
-{% endhighlight %}
+```
 
 从上面的程序中我们可以看出 python 语言的一些特点：
 
@@ -265,7 +265,7 @@ this is a static method
 
 通过一个例子来了解一下：
 
-{% highlight python %}
+```python
 class MyClass(object):
   _name = "liuzxc"
   __age = 26
@@ -310,4 +310,4 @@ this is a instance method
 this is a private instance method
 this is a protected instance method
 liuzxc
-{% endhighlight %}
+```

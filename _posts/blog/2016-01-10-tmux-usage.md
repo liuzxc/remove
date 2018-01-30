@@ -10,12 +10,12 @@ share: true
 
 #### 更改tmux默认快捷键
 
-{% highlight sh %}
+```sh
 #cat .tmux.conf
 unbind C-b
 set -g prefix C-a
 bind R source-file ~/.tmux.conf
-{% endhighlight %}
+```
 
 #### 命令
 

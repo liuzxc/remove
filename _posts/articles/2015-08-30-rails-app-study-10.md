@@ -73,7 +73,7 @@ jquery-ujs 是 一个 gem 包，是 Rails 中的一个支持jQuery的剥离式�
 
 在用户点击收藏或者取消收藏链接的时候，我们希望发起一个 Ajax 的请求，只需要在 link_to 中添加 `remote: true` 这个参数，点击链接的时候，发往控制器的就是 Ajax 请求，使用 Javascript 处理：
 
-{% highlight erb %}
+```erb
 #app/views/favorites/_favorite_link.html.erb
 <% if favorite = current_user.favorites.where(article_id: @article.id).first %>
   <%= link_to favorite_path(favorite), method: :delete, remote: true do %>
@@ -84,20 +84,20 @@ jquery-ujs 是 一个 gem 包，是 Rails 中的一个支持jQuery的剥离式�
     <span class="glyphicon glyphicon-bookmark favorite_color"></span>
   <% end %>
 <% end %>
-{% endhighlight %}
+```
 
 点击收藏链接后， 通过 rails log 我们可以看到：
 
-{% highlight ruby %}
+```ruby
 Started POST "/favorites?article_id=55dd87307b843a3780000007" for ::1 at 2015-08-31 23:04:39 +0800
 Processing by FavoritesController#create as JS
   Parameters: {"article_id"=>"55dd87307b843a3780000007"}
 ...
-{% endhighlight %}
+```
 
 POST 请求被 FavoritesController 的 create 方法作为 JS 来处理:
 
-{% highlight ruby %}
+```ruby
 class FavoritesController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
@@ -112,22 +112,22 @@ class FavoritesController < ApplicationController
     render :favorite
   end
 end
-{% endhighlight %}
+```
 
 create 方法执行完毕后，会寻找合适的模版来渲染，新建一个 `favorite.js.erb` 视图文件，编写在客户端执行的 JS 代码：
 
-{% highlight erb %}
+```erb
 $("#favorite").html("<%= escape_javascript(render partial: 'favorite_link') %>");
-{% endhighlight %}
+```
 
 这是一段 jQuery 代码，意思是获取第一个匹配 `id="favorite"` 的元素，设其元素的 html 内容为渲染的 favorite_link 页面。
 
-{% highlight erb %}
+```erb
 #app/views/articles/show.html.erb
 <div id="favorite" class="col-md-4 text-left">
   <%= render 'favorites/favorite_link' %>
 </div>
-{% endhighlight %}
+```
 
 jQuery 会根据 id 找到这段代码，并替换其中的内容。
 

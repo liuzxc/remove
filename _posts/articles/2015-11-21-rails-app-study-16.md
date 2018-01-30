@@ -18,31 +18,31 @@ categories: articles
 
 vagrant 安装好以后，在项目目录下执行:
 
-{% highlight sh %}
+```sh
 $ vagrant init
-{% endhighlight %}
+```
 
 该命令会生成一个名叫 Vagrantfile 的配置文件：
 
-{% highlight sh %}
+```sh
 ...
 # Every Vagrant development environment requires a box. You can search for
 # boxes at https://atlas.hashicorp.com/search.
 config.vm.box = "ubuntu/trusty64"
 ...
-{% endhighlight %}
+```
 
 这一部分是配置文件的关键，你可以通过它设置你想在虚拟机上跑的操作系统，我使用的是 64位 的 ubuntu， 你也可以根据它提供的链接选择自己喜欢的，然后跑下面这个命令：
 
-{% highlight sh %}
+```sh
 $ vagrant up
-{% endhighlight %}
+```
 
 vagrant 会自动为你安装虚拟环境，安装完成之后你就可以 ssh 上虚拟机了
 
-{% highlight sh %}
+```sh
 $ vagrant ssh
-{% endhighlight %}
+```
 
 现在你就有了自己的虚拟环境了，你可以在上面安装项目所需要的依赖，下面以我自己的应用为例：
 
@@ -50,13 +50,13 @@ $ vagrant ssh
 
 ##### 安装 git
 
-{% highlight sh %}
+```sh
 sudo apt-get install git-core
-{% endhighlight %}
+```
 
 ##### 安装 rbenv 和 ruby-build
 
-{% highlight sh %}
+```sh
 git clone git://github.com/sstephenson/rbenv.git .
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
@@ -64,11 +64,11 @@ source .bash_profile
 git clone https://github.com/sstephenson/ruby-build.git
 cd ruby-build/
 sudo ./install.sh
-{% endhighlight %}
+```
 
 ##### 安装 ruby 和 rails
 
-{% highlight sh %}
+```sh
 sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev build-essential g++ nodejs
 
 rbenv install 2.2.2
@@ -77,42 +77,42 @@ rbenv global 2.2.2
 gem sources --remove https://rubygems.org/
 gem sources -a https://ruby.taobao.org/
 gem install rails -v 4.2.3
-{% endhighlight %}
+```
 
 ##### 安装 mongodb
 
-{% highlight sh %}
+```sh
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
-{% endhighlight %}
+```
 
 ##### start rails server
 
-{% highlight sh %}
+```sh
 bundle install
 rails server
-{% endhighlight %}
+```
 
 经过这样一番折腾之后，我的应用就在 vagrant 构建的虚拟机上跑起来了，但是有个问题，怎么在本机上访问跑在在虚拟机上的应用呢？
 
 首先修改 Vagrantfile 的配置：
 
-{% highlight sh %}
+```sh
 ...
 # Create a forwarded port mapping which allows access to a specific port
 # within the machine from a port on the host machine. In the example below,
 # accessing "localhost:8080" will access port 80 on the guest machine.
 config.vm.network "forwarded_port", guest: 3000, host: 3000
 ...
-{% endhighlight %}
+```
 
 修改之后需要退出虚拟机，运行 `vagrant reload` 去加载新的配置，不然修改是不会生效的哦。
 
 把 `rails server` 默认绑定的 IP 从 `127.0.0.1` 改为 `0.0.0.0`：
 
-{% highlight ruby %}
+```ruby
 #config/boot.rb
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
@@ -126,7 +126,7 @@ module Rails
     end
   end
 end
-{% endhighlight %}
+```
 
 这样一来，这个开发环境就搭建好了。
 
@@ -134,7 +134,7 @@ end
 
 vagrant 提供了一个 provision 的功能，可以在 `vagrant up` 的时候自动安装项目运行所依赖的环境，我们只需要做简单的配置和提供一个脚本：
 
-{% highlight sh %}
+```sh
 # vagrantfile
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
   # Enable provisioning with a shell script. Additional provisioners such as
@@ -145,11 +145,11 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision "shell", path: 'bootstrap.sh'
-{% endhighlight %}
+```
 
 打开 provision，并制定 shell 脚本 `bootstrap.sh` 用于 provisioning。
 
-{% highlight sh %}
+```sh
 # bootstrap.sh
 
 #!/usr/bin/env bash
@@ -170,6 +170,6 @@ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
 
 sudo gem install bundler
 bundle config mirror.https://rubygems.org https://ruby.taobao.org
-{% endhighlight %}
+```
 
 这样一来，在运行 `vagrant up` 的时候会自动为你安装项目所依赖的环境。

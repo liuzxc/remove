@@ -46,7 +46,7 @@ Rails模版引擎－`ERB`是构建可变内容页面的良好方式。可是如�
 
 `current_user`方法可以返回当前登录的用户，通常情况下，代码中会出现这样的条件逻辑结构：
 
-{% highlight ruby linenos %}
+```ruby
 <h3>
   Welcome,
   <% if current_user %>
@@ -55,11 +55,11 @@ Rails模版引擎－`ERB`是构建可变内容页面的良好方式。可是如�
     Guest
   <% end %>
 </h3>
-{% endhighlight %}
+```
 
 其实有更好的方法来处理这样的问题，那就是无论用户是否登录，都确保`current_user`返回的对象总是存在。例如，你也许在`app/controllers/application_controller.rb`定义了一个`current_user`帮助函数：
 
-{% highlight ruby linenos %}
+```ruby
 require 'ostruct'
 
 helper_method :current_user
@@ -73,13 +73,13 @@ def current_user
   end
 end
 
-{% endhighlight %}
+```
 
 你可以用一行代码代替之前的代码：
 
-{% highlight ruby linenos %}
+```ruby
 <h3>Welcome, <%= current_user.name -%></h3>
-{% endhighlight %}
+```
 
 一些其他的建议：
 
@@ -140,18 +140,18 @@ Rails被一个丰富的gems生态系统所支持，并且它提供给所有的�
 
 例如，在一个典型的博客应用中，查询要显示一些文章的评论：
 
-{% highlight ruby linenos %}
+```ruby
 def comments_for_top_three_posts
   posts = Post.limit(3)
   posts.flat_map do |post|
     post.comments.to_a
   end
 end
-{% endhighlight %}
+```
 
 当一个请求调用这个方法的时候，在日志文件中我们会看到：一个查询得到了三个post对象，为了得到每个对象的评论又进行了更多的查询。
 
-{% highlight ruby linenos %}
+```ruby
 Started GET "/posts/some_comments" for 127.0.0.1 at 2014-05-20 20:05:13 -0700
 Processing by PostsController#some_comments as HTML
   Post Load (0.4ms)  SELECT "posts".* FROM "posts" LIMIT 3
@@ -160,29 +160,29 @@ Processing by PostsController#some_comments as HTML
   Comment Load (1.5ms)  SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?  [["post_id", 3]]
   Rendered posts/some_comments.html.erb within layouts/application (12.5ms)
 Completed 200 OK in 581ms (Views: 225.8ms | ActiveRecord: 10.0ms)
-{% endhighlight %}
+```
 
 Rails中，`ActiveRecord`的`eager loading`特性可以显著减少查询次数，它可以让相关联的对象提前加载，这是通过调用内建`Arel (ActiveRecord::Relation) `对象的`includes`（或`preload`）方法实现的。通过`includes`，`ActiveRecord`确保所有制定的关联都被加载，尽可能使用最小的查询次数：
 
-{% highlight ruby linenos %}
+```ruby
 def comments_for_top_three_posts
   posts = Post.includes(:comments).limit(3)
   posts.flat_map do |post|
     post.comments.to_a
   end
 end
-{% endhighlight %}
+```
 
 当以上代码被执行时，在log文件中我们看到，所有的评论都在单独的一个查询中被找到：
 
-{% highlight ruby linenos %}
+```ruby
 Started GET "/posts/some_comments" for 127.0.0.1 at 2014-05-20 20:05:18 -0700
 Processing by PostsController#some_comments as HTML
   Post Load (0.5ms)  SELECT "posts".* FROM "posts" LIMIT 3
   Comment Load (4.4ms)  SELECT "comments".* FROM "comments" WHERE"comments "."post_id" IN (1, 2, 3)
   Rendered posts/some_comments.html.erb within layouts/application (12.2ms)
 Completed 200 OK in 560ms (Views: 219.3ms | ActiveRecord: 5.0ms)
-{% endhighlight %}
+```
 
 `N+1`问题只是低效率一个例子，如果你没有引起足够的重视，类似的问题在你的应用中可能还会存在，问题在于你应该检查开发和测试日志文件来定位低效的代码。
 

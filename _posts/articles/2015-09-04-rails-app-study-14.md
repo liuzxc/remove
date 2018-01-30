@@ -18,7 +18,7 @@ categories: articles
 
 第一个思路很好理解，即在数据库表中添加一个新字段做标志位，如果需要软删除，则设置为1，否则设置为0，也可以填充其他内容。
 
-{% highlight ruby %}
+```ruby
 #app/models/comment.rb
 class Comment
   ...
@@ -31,7 +31,7 @@ class Comment
   end
   ...
 end
-{% endhighlight %}
+```
 
 此处设置 deleted_at 为标志位，如果是软删除则设置 deleted_at 的时间为当前时间。设置默认的 scope 是为了在每次查询的时候过滤掉软删除的记录。soft_destroy 是用来取代 destroy 方法。这样一来就基本上实现了软删除的功能，看起来还是比较简单的，对吧😄
 
@@ -41,7 +41,7 @@ end
 
 在 models 的 concerns 目录新添加一个文件 soft_delete.rb，将软删除的功能封装到其中的 SoftDelete module 当中。
 
-{% highlight ruby %}
+```ruby
 #app/models/concerns/soft_delete.rb
 module SoftDelete
   extend ActiveSupport::Concern
@@ -55,32 +55,32 @@ module SoftDelete
     end
   end
 end
-{% endhighlight %}
+```
 
 在 Comment model中引用 SoftDelete module：
 
-{% highlight ruby %}
+```ruby
 #app/models/comment.rb
 class Comment
   include Mongoid::Document
   include SoftDelete
   ...
 end
-{% endhighlight %}
+```
 
 将 `comments_controller.rb` 中的 destroy 方法替换为 soft_destroy 方法：
 
-{% highlight ruby %}
+```ruby
 #app/controllers/comments_controller.rb
 def destroy
   @comment.soft_destroy
   ...
 end
-{% endhighlight %}
+```
 
 修改对应的视图文件，根据 deleted_at 字段判断评论是否被删除：
 
-{% highlight erb %}
+```erb
 #app/views/comments/_show_html.erb
 <% @article.comments.unscoped.each_with_index do |comment, index| %>
   <ul class="list-group">
@@ -100,12 +100,10 @@ end
       </div>
       ...
 </div>
-{% endhighlight %}
+```
 
 然后来看看效果：
 
 <figure>
   <img src="http://zippy.gfycat.com/HairyMatureAsianpiedstarling.gif">
 </figure>
-
-

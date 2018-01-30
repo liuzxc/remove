@@ -72,14 +72,14 @@ mongoid 的配置要通过 `mongoid.yml`，类似于 `database.yml`，可以通�
 
 如果我们现在想要给 Article 添加一个 category 的字段该怎么办呢？
 
-{% highlight ruby %}
+```ruby
 class Article
   include Mongoid::Document
   field :title,   type: String
   field :content, type: String
   field :category,  type: String, default: 'diary'
 end
-{% endhighlight %}
+```
 
 只需要在 Article model 中添加一个新的 field 就可以了，然后再修改其他的相应的文件，由此我们可以看出 mongodb
 这种无模式数据库的优点所在了：添加新的字段非常容易。相比传统的 mysql，添加新的字段是比较麻烦的，尤其是
@@ -92,7 +92,7 @@ end
 
 #### 数据验证
 
-{% highlight ruby %}
+```ruby
 class Article
   include Mongoid::Document
   field :title, type: String
@@ -100,7 +100,7 @@ class Article
   field :category, type: String, default: 'diary'
   validates :title, presence: true
 end
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150814-02.png">
@@ -114,7 +114,7 @@ mongoid 的数据验证和 ActiveRecord 的方法是一致的，因此可以通�
 关联是通过外键来实现的，而mongodb不同，它提供了两种方式来关联不同的文档，其中一种就是使用嵌套（Embedding），
 即把一个文档嵌入另一个文档中，`embeds_many :comments` 表示将 comments 这个文档嵌入到 Article 文档。
 
-{% highlight ruby %}
+```ruby
 class Article
   include Mongoid::Document
   field :title, type: String
@@ -124,7 +124,7 @@ class Article
 
   embeds_many :comments
 end
-{% endhighlight %}
+```
 
 创建一个 Comment 模型：
 
@@ -132,31 +132,31 @@ end
 
 然后在 Comment 模型中定义它与 Article 的关联关系：
 
-{% highlight ruby %}
+```ruby
 class Comment
   include Mongoid::Document
   field :name
   field :content
   embedded_in :article, :inverse_of => :comments
 end
-{% endhighlight %}
+```
 
 > inverse_of 用来告诉 Rails 两个模型之间的关系,与 ActiveRecord 的用法是一致的
 > 参考链接：(Association Basics)[http://guides.ruby-china.org/association_basics.html]
 
 然后修改 `routes.rb`
 
-{% highlight ruby %}
+```ruby
 resources :articles do
   resources :comments
 end
-{% endhighlight %}
+```
 
 创建 comments controller，并添加一个 create 方法
 
 `$ rails g controller comments`
 
-{% highlight ruby %}
+```ruby
 CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
@@ -164,11 +164,11 @@ CommentsController < ApplicationController
     redirect_to @article, :notice => "Comment created!"
   end
 end
-{% endhighlight %}
+```
 
 添加以下代码到 article 的 show view，用来显示 comments
 
-{% highlight ruby %}
+```ruby
 <% if @article.comments.size > 0 %>
   <h2>Comments</h2>
   <% for comment in @article.comments %>
@@ -184,7 +184,7 @@ end
   <p><%= f.text_area :content, :rows => 10 %></p>
   <p><%= f.submit %></p>
 <% end %>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150814-03.png">
@@ -198,7 +198,7 @@ end
 
 `$ rails g scaffold user user_name:string email:string`
 
-{% highlight ruby %}
+```ruby
 class User
   include Mongoid::Document
   field :user_name, type: String
@@ -216,11 +216,11 @@ class Article
   embeds_many :comments
   belongs_to :user
 end
-{% endhighlight %}
+```
 
 使用 `rails c` 打开控制台，通过手动创建记录，我们可以明白 User 和 Article 两者之间的关联关系
 
-{% highlight sh %}
+```sh
 > user = User.create({user_name: "liuzxc", email: "lxq_102172@163.com"})
 => #<User _id: 55d5959c416a410eda000000, user_name: "liuzxc", email: "lxq_102172@163.com">
 > user.articles
@@ -235,4 +235,4 @@ end
 => #<Article _id: 55d595de416a410eda000001, title: "first article", content: "i love rails!", category: "rails", user_id: BSON::ObjectId('55d5959c416a410eda000000')>
 > a.user
 => #<User _id: 55d5959c416a410eda000000, user_name: "liuzxc", email: "lxq_102172@163.com">
-{% endhighlight %}
+```

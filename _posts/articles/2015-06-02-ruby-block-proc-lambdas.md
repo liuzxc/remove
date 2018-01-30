@@ -24,7 +24,7 @@ Blocks，Procs 和 Lambdas（在计算机科学中被称作`闭包`）是 Ruby �
 
 在 Ruby 中，最通用，最容易，也是最毫无争议的 `ruby like` 的使用闭包的方式就是 blocks 。来看看我们很熟悉的语法：
 
-{% highlight ruby linenos %}
+```ruby
 array = [1, 2, 3, 4]
 
 array.collect! do |n|
@@ -34,7 +34,7 @@ end
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 然而，这里发生了什么呢？
 
@@ -46,7 +46,7 @@ puts array.inspect
 在 collect! 方法内使用 blocks 是非常容易的，只需要想到 collect! 将对数组中的每一个元素使用代码块。
 然而，如果我们想写一个自己的 collect! 方法要怎么办呢？它看起来会是什么样子？好吧，让我们生成一个 iterate! 的方法来看看：
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!
     self.each_with_index do |n, i|
@@ -64,7 +64,7 @@ end
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 一开始，我们重新打开了 Array 类并在其中添加了一个 iterate! 方法。我们保持了 Ruby 的命名规则并在方法名后加上叹号，目的是让
 读者意识到这个方法也许很危险！接着我们就像使用 Ruby 内置方法 collect! 一样使用 iterate! 方法。
@@ -82,7 +82,7 @@ puts array.inspect
 我们现有一个灵活的方式与方法进行交互，可以认为块是作为一个`API`提供给方法，你可以决定对数组中的每个元素进行平方，开方或者
 把它们转化为字符串打印在屏幕上。yield 是执行块中代码的一种方式，还有另外一种方式，它被称作 `Proc`，让我们来看看。
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!(&code)
     self.each_with_index do |n, i|
@@ -100,13 +100,13 @@ end
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 与之前的例子非常相似，然而却有两个不同之处。首先，我们传递了一个带 & 号的参数叫 &code，这个参数就是我们所说的块。
 第二是在 iterate! 方法定义当中，使用关键字 call 来调用代码块，而不是 yield。结果是完全相同的。然而如果是这样，那
 为什么要用不同的语法呢？好吧，我们再学习一点关于 block 到底是什么的相关内容，我们来看：
 
-{% highlight ruby linenos %}
+```ruby
 def what_am_i(&block)
   block.class
 end
@@ -114,7 +114,7 @@ end
 puts what_am_i {}
 
 # => Proc
-{% endhighlight %}
+```
 
 一个块就是一个 Proc ！这样说的话， Proc 又是什么？
 
@@ -126,7 +126,7 @@ puts what_am_i {}
 这种可重用的代码就被称作 Proc ( procedure 的简写). blocks 和 Procs 的唯一区别就是块是一个 Proc，但不能被保存，
 也就是说块是一次性的解决方案。通过使用 Procs，我们可以这样做：
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!(code)
     self.each_with_index do |n, i|
@@ -150,7 +150,7 @@ puts array_2.inspect
 
 # => [1, 4, 9, 16]
 # => [4, 9, 16, 25]
-{% endhighlight %}
+```
 
 >为什么 block 要小写而 Proc 要大写？
 我总是把 Proc 大写是因为它是 Ruby 的一个类，然而 block 并不是类（毕竟它只是 Procs )而是 Ruby 的一种语法，正
@@ -160,7 +160,7 @@ puts array_2.inspect
 正因为 Procs 可以被当作其他对象一样对待，我们可以做一些有趣的事情并推动 Ruby 解释器去做一些有趣的事情，让
 我们试一下这个：
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!(code)
     self.each_with_index do |n, i|
@@ -178,13 +178,13 @@ end)
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 上面是大多数语言处理闭包的方式，并且和调用一个块的效果是一样的。如果你觉得这不像`ruby like`，我会
 表示赞同。如果事实是这样，为什么不只使用 blocks ？答案很简单，假如我们想传递两个或更多的块到方法中会怎么样？
 如果事实是这样，blocks 将很快的具有局限性。然而如果通过 Procs。我们可以这样做：
 
-{% highlight ruby linenos %}
+```ruby
 def callbacks(procs)
   procs[:starting].call
 
@@ -199,7 +199,7 @@ callbacks(:starting => Proc.new { puts "Starting" },
 # => Starting
 # => Still going
 # => Finishing
-{% endhighlight %}
+```
 
 所以，什么时候你应该使用 blocks 而不是 Procs？我的逻辑是这样的：
 
@@ -214,7 +214,7 @@ callbacks(:starting => Proc.new { puts "Starting" },
 到目前为止，你已经用两种方式来使用 Procs：当做属性直接传递和保存作为一个变量。这些 Procs 扮演的角色和
 其他语言调用匿名函数或 lambda 是很相似的。更有趣的是，Ruby 也提供 lambdas。让我们看看：
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!(code)
     self.each_with_index do |n, i|
@@ -230,12 +230,12 @@ array.iterate!(lambda { |n| n ** 2 })
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 乍看之下，lambdas 与 Procs 极其相似，然而它们有两个细微的不同之处：第一个不同之处是，不像 Porcs，
 lambdas 会检查传递参数的个数。
 
-{% highlight ruby linenos %}
+```ruby
 def args(code)
   one, two = 1, 2
   code.call(one, two)
@@ -247,14 +247,14 @@ args(lambda{|a, b, c| puts "Give me a #{a} and a #{b} and a #{c.class}"})
 
 # => Give me a 1 and a 2 and a NilClass
 # *.rb:8: ArgumentError: wrong number of arguments (2 for 3) (ArgumentError)
-{% endhighlight %}
+```
 
 我们看到，对于 Proc 这个例子，多余的参数被设置为 nil ，然而 lambdas 却抛出了异常。
 
 第二个不同之处是 lambdas 有返回。这就意味着 Proc return 将从方法中退出并返回当前值，lambdas 将返回其只到方法中并让
 方法继续运行。感到疑惑么？让我们看一个例子：
 
-{% highlight ruby linenos %}
+```ruby
 def proc_return
   Proc.new { return "Proc.new"}.call
   return "proc_return method finished"
@@ -270,7 +270,7 @@ puts lambda_return
 
 # => Proc.new
 # => lambda_return method finished
-{% endhighlight %}
+```
 
 在 proc_return 方法中，方法遇到 return 关键字，停止执行接下来的方法，然后返回字符串 `Proc.new`。
 另一方面，lambda_return 方法遇到 lambda，它返回一个字符串 `lambda`，然后继续运行知道碰到下一个 return，
@@ -282,7 +282,7 @@ puts lambda_return
 
 那么，在什么时候应该写一个匿名方法（lambdas）而不是 Proc 呢？下面的代码展示了一个这样的案例：
 
-{% highlight ruby linenos %}
+```ruby
 def generic_return(code)
   code.call
   return "generic_return method finished"
@@ -293,12 +293,12 @@ puts generic_return(lambda { return "lambda" })
 
 # => *.rb:6: unexpected return (LocalJumpError)
 # => generic_return method finished
-{% endhighlight %}
+```
 
 部分的 Ruby 语法是参数（本例中参数是一个 Proc）中是不能有 return 关键字的。然而，lambda 的行为就像一个方法，
 它有一个字面上的 return，因此它可以满足这个需求。不同的语义下会有不同的情况，就像下面这个例子：
 
-{% highlight ruby linenos %}
+```ruby
 def generic_return(code)
   one, two    = 1, 2
   three, four = code.call(one, two)
@@ -317,7 +317,7 @@ puts generic_return(Proc.new { |x, y| [x + 2, y + 2] })
 # => *.rb:9: unexpected return (LocalJumpError)
 # => Give me a 4 and a
 # => Give me a 3 and a 4
-{% endhighlight %}
+```
 
 这里，generic_return 方法期望通过闭包返回两个值，通过一个 lambda，一切都很简单！然而如果使用 Proc，
 我们最终不得不利用 Ruby 是如何赋值数组的。
@@ -333,7 +333,7 @@ puts generic_return(Proc.new { |x, y| [x + 2, y + 2] })
 你已经有一个有效的方法，但是你想把它作为一个闭包传递给另外一个方法，并且保持你的代码 `DRY`。为了做到这个，
 你可以利用 Ruby 的 method 方法。
 
-{% highlight ruby linenos %}
+```ruby
 class Array
   def iterate!(code)
     self.each_with_index do |n, i|
@@ -353,13 +353,13 @@ array.iterate!(method(:square))
 puts array.inspect
 
 # => [1, 4, 9, 16]
-{% endhighlight %}
+```
 
 在这个例子中，我们已经有一个叫 square 的方法可以很好的解决手头上的任务。正因为如此，通过把它
 转化为一个方法对象，我们可以把它作为一个参数重用它并传递它到 iterate! 方法。这是一个新的对象
 类型么？
 
-{% highlight ruby linenos %}
+```ruby
 def square(n)
   n ** 2
 end
@@ -367,7 +367,7 @@ end
 puts method(:square).class
 
 # => Method
-{% endhighlight %}
+```
 
 如你所料，square 不是一个 Proc，而是一个 method。这个 method object 的行为像一个 lambda，因为概念是相同的，只不过
 这是个命名方法（叫做 square），而 lambda 是匿名方法。

@@ -23,7 +23,7 @@ final。 内部类与外部类实例有特殊的关系，这种关系允许内�
 
 一个内部类被声明在另外一个类当中：
 
-{% highlight java %}
+```java
 //Top level class definition
 class MyOuterClassDemo {
    private int myVar= 1;
@@ -36,13 +36,13 @@ class MyOuterClassDemo {
     } // close inner class definition
 
 } // close Top level class definitio
-{% endhighlight %}
+```
 
 ##### 实例化一个内部类
 
 为了实例化一个内部类的实例，需要一个外部类的实例。内部类的实例只能通过外部类的实例来创建。
 
-{% highlight java %}
+```java
 //Top level class definition
 class MyOuterClassDemo {
  private int myVar= 1;
@@ -65,16 +65,16 @@ class MyOuterClassDemo {
 } // close Top level class definitio
 
 Output: Outer Value of x is :1
-{% endhighlight %}
+```
 
 上面的例子 mian 方法也可以这样写：
 
-{% highlight java %}
+```java
  public static void main(String[] args){
 	 MyOuterClassDemo.MyInnerClassDemo inner = new MyOuterClassDemo().new MyInnerClassDemo();
 	 inner.seeOuter();
  }
-{% endhighlight %}
+```
 
 #### 局部内部类
 
@@ -88,7 +88,7 @@ Output: Outer Value of x is :1
 > "Starting in Java SE 8, a local class can access local variables and parameters of the enclosing block that are final or effectively final. A variable or parameter whose value is never changed after it is initialized is effectively final."
 >因此当变量或参数在初始化之后，值再也没有改变过，那么就说明该变量或参数是 effectively final。
 
-{% highlight java %}
+```java
 //Top level class definition
 class MyOuterClassDemo {
  private int x= 1;
@@ -115,7 +115,7 @@ Output:
 
 Outer Value of x is :1
 Value of name is :local variable
-{% endhighlight %}
+```
 
 #### 匿名内部类
 
@@ -129,7 +129,7 @@ Value of name is :local variable
 
 为什么要使用匿名类，我们先看一个例子：
 
-{% highlight java %}
+```java
 abstract class Animal {
 	abstract void play();
 }
@@ -148,12 +148,12 @@ class Demo{
 }
 
 Output:  play with human
-{% endhighlight %}
+```
 
 如果此处的 Dog 类只使用了一次，那么单独定义一个Dog类是否会显得有点麻烦？
 这个时候我们可以引入匿名类：
 
-{% highlight java %}
+```java
 abstract class Animal {
 	abstract void play();
 }
@@ -170,7 +170,7 @@ class Person{
 }
 
 Output:  play with human
-{% endhighlight %}
+```
 
 由上面的例子可以看出，匿名类的一个重要作用就是**简化代码**。
 
@@ -180,7 +180,7 @@ Output:  play with human
 
 普通的实现方式：
 
-{% highlight java %}
+```java
  public class WindowClosingAdapter extends WindowAdapter {
      public void windowClosing( WindowEvent e ) {
          System.exit(0);
@@ -190,22 +190,22 @@ Output:  play with human
  ...
 
  addWindowListener( new WindowClosingAdapter() );
- {% endhighlight %}
+ ```
 
 匿名内部类的实现方式：
 
-{% highlight java %}
+```java
  addWindowListener(
      new WindowAdapter() {
          public void windowClosing( WindowEvent e ) {
              System.exit(0);
          }
      });
-{% endhighlight %}
+```
 
 * Thread 类的匿名内部类实现
 
-{% highlight java %}
+```java
 public class Demo {
     public static void main(String[] args) {
         Thread t = new Thread() {
@@ -218,11 +218,11 @@ public class Demo {
         t.start();
     }
 }
-{% endhighlight %}
+```
 
 * Runnable 接口的匿名内部类实现
 
-{% highlight java %}
+```java
 public class Demo {
     public static void main(String[] args) {
         Runnable r = new Runnable() {
@@ -236,7 +236,7 @@ public class Demo {
         t.start();
     }
 }
-{% endhighlight %}
+```
 
 #### 静态嵌套类
 
@@ -247,15 +247,15 @@ public class Demo {
 
 例如：
 
-{% highlight java %}
+```java
 class Outer{
    static class Nested{}
 }
-{% endhighlight %}
+```
 
 静态嵌套类可以被这样实例化：
 
-{% highlight java %}
+```java
 class Outer{// outer class
    static class Nested{}// static nested class
 }
@@ -266,4 +266,4 @@ class Demo{
       Outer.Nested n= new Outer.Nested();
    }
 }
-{% endhighlight %}
+```

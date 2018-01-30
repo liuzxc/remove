@@ -30,27 +30,27 @@ Sinatra，Grape)，以及多种模版引擎(ERB, Haml, Slim).
 
 1. 在model中配置分页数量, paginates_per表示每一页的文章数量
 
-{% highlight ruby %}
+```ruby
   class Article
     ...
     paginates_per 5
   end
-{% endhighlight %}
+```
 
 2. 在 Article的控制层中接收分页参数 params[:page]
 
-{% highlight ruby %}
+```ruby
   def index
     @user = User.find(params[:user_id])
     @articles = @user.articles.page params[:page]
   end
-{% endhighlight %}
+```
 
 3. 在视图层添加paginate helper方法
 
-{% highlight erb %}
+```erb
   <%= paginate @articles %>
-{% endhighlight %}
+```
 
 一个简单的分页功能就实现了，是不是超级简单呢？
 

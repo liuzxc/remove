@@ -13,7 +13,7 @@ categories: articles
 
 gravatar 提供了多种语言的代码实例，以下是ruby版本的：
 
-{% highlight ruby %}
+```ruby
 # include MD5 gem, should be part of standard ruby install
 require 'digest/md5'
 
@@ -25,14 +25,14 @@ hash = Digest::MD5.hexdigest(email_address)
 
 # compile URL which can be used in <img src="RIGHT_HERE"...
 image_src = "http://www.gravatar.com/avatar/#{hash}"
-{% endhighlight %}
+```
 
 > [Code Samples/Reference Implementations](http://en.gravatar.com/site/implement/)
 
 由于我们需要在视图的多个地方使用到 avatar，所以做好的办法是将其实现封装成一个helper方法，另外我们
 需要有个字段来保存 avatar url，而不用每次都计算：
 
-{% highlight ruby %}
+```ruby
 #app/models/user.rb
 class User
   ...
@@ -50,11 +50,11 @@ def avatar_url(user, size = 200)
   end
   user.avatar_url + "?s=#{size}"
 end
-{% endhighlight %}
+```
 
 要在导航栏和首页文章标题的开头来显示用户的头像，我们需要使用 image_tag 标签，：
 
-{% highlight erb %}
+```erb
 #app/views/layouts/application.html.erb
 ...
 <ul class="nav navbar-nav navbar-right">
@@ -75,7 +75,7 @@ end
   </li>
 <% end %>
 ...
-{% endhighlight %}
+```
 
 刷新页面就可以看到头像了：
 

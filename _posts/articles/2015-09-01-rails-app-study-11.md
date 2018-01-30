@@ -29,17 +29,17 @@ GitHub 会为你的应用生成一个 Client ID 和 Client Secret。
 
 这两个值非常重要，我们需要用它去访问 GitHub API。它们应该被存储在环境变量中，而不是被硬编码或放在版本控制库中，这样做是不安全的，但是在开发环境下，为了方便，我写在了配置文件中（记得在开发环境下不要这样做）：
 
-{% highlight ruby %}
+```ruby
 #config/environments/development.rb
 ENV['GH_BASIC_CLIENT_ID'] = '00afc453888063ee1c48'
 ENV['GH_BASIC_SECRET_ID'] = 'fe2b6a4057deb58ffd0ffa8299bada9951b79ba0'
-{% endhighlight %}
+```
 
 #### 用户授权
 
 GitHub 的示例代码采用的是 Sinatra 这个 web 框架，虽然我没怎么用过 Sinatra，但是很容易转化为 Rails 的实现。
 
-{% highlight ruby %}
+```ruby
 #app/controller/github_controller.rb
 class GithubController < ApplicationController
 
@@ -50,11 +50,11 @@ class GithubController < ApplicationController
     render :index, :locals => {:client_id => CLIENT_ID}
   end
 end
-{% endhighlight %}
+```
 
 render 方法带 locals 参数的意思是渲染一个带有参数的模版，即在 index.html.erb 模版上可以使用 client_id 这个变量。
 
-{% highlight erb %}
+```erb
 #app/views/github/index.html.erb
 <html>
   <head>
@@ -72,7 +72,7 @@ render 方法带 locals 参数的意思是渲染一个带有参数的模版，�
     </p>
   </body>
 </html>
-{% endhighlight %}
+```
 
 创建一个 index 页面用于引导用户访问 GitHub API，授权应用获取用户数据。scope 参数可以定义用户授权给应用的访问权限，你可以设置授予应用不同级别的权限，相关定义可以在 GitHub 的官方文档查到，但一般情况下，应用只需要获取用户的个人信息和邮箱即可。因此 `user:email` 的意思就是应用申请获取用户的个人信息和邮箱地址。
 
@@ -80,10 +80,10 @@ render 方法带 locals 参数的意思是渲染一个带有参数的模版，�
 
 添加路由：
 
-{% highlight ruby %}
+```ruby
 #config/routes.rb
 get '/github' => 'github#index'
-{% endhighlight %}
+```
 
 在浏览器输入链接：`http://localhost:3000`
 
@@ -99,12 +99,12 @@ get '/github' => 'github#index'
 
 点击 `Authorize application`，授权应用获取你的 GitHub 帐户数据，然后页面会报404错，为什么呢？因为你没有为回调地址设置路由，因此，我们需要添加路由和回调方法：
 
-{% highlight ruby %}
+```ruby
 #config/routes.rb
 get '/github/callback' => 'github#callback'
-{% endhighlight %}
+```
 
-{% highlight ruby %}
+```ruby
 #app/controller/github_controller.rb
 def callback
   # get temporary GitHub code...
@@ -120,7 +120,7 @@ def callback
   # extract the token and granted scopes
   access_token = JSON.parse(result)['access_token']
 end
-{% endhighlight %}
+```
 
 回调方法的作用是获取 access_token，用户授权成功以后，GitHub 会提供一个临时的 code 值，你需要把这个值又 post 回 GitHub 用于交换 access_token。获取 access_token 以后就可以发送请求给 github 获取用户信息了。
 
@@ -132,7 +132,7 @@ end
 
 拿到 access_token 之后，我们可以把它保存在 session 中。之所以把 access_token 放入 session，原因是 access_token 并不会过期，除非被撤销或删除，因此在认证的时候不用每次都获取新的 access_token。
 
-{% highlight ruby %}
+```ruby
 def callback
   ...
   result = RestClient.post('https://github.com/login/oauth/access_token',
@@ -143,27 +143,27 @@ def callback
   session[:access_token] = JSON.parse(result)['access_token']
   redirect_to github_path
 end
-{% endhighlight %}
+```
 
 添加 authenticated? 方法用于判断 access_token 是否已经获取
 
-{% highlight ruby %}
+```ruby
 def authenticated?
   session[:access_token]
 end
-{% endhighlight %}
+```
 
 authenticate! 方法取代 index 方法用于引导用户认证
 
-{% highlight ruby %}
+```ruby
 def authenticate!
   render :index, :locals => {:client_id => CLIENT_ID}
 end
-{% endhighlight %}
+```
 
 而index方法的作用是完成用户登录：
 
-{% highlight ruby %}
+```ruby
 def index
     ...
     auth_result = JSON.parse(auth_result)
@@ -185,11 +185,11 @@ def index
     redirect_to user_path(id: user.id)
   end
 end
-{% endhighlight %}
+```
 
 以下就是从 GitHub 获取的用户信息：
 
-{% highlight ruby %}
+```ruby
 {
   "login"=>"liuzxc",
   "id"=>1954295,
@@ -222,7 +222,7 @@ end
   "created_at"=>"2012-07-11T05:10:00Z",
   "updated_at"=>"2015-04-17T07:43:12Z"
 }
-{% endhighlight %}
+```
 
 在获取用户信息以后，首先判断该用户在数据库中是否存在（在 User 表中添加一个 `github_id field` 用于标示是否是 GitHub 用户），如果不存在则创建一个。在这里需要注意的是，create 会触发 validation，因此必须为用户生成随机密码，否则会创建失败。创建好之后，将用户的 id 存入 session 当中，表示当前用户已经登录，然后跳转至用户主页。
 

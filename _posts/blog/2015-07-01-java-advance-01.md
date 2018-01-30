@@ -27,7 +27,7 @@ static修饰的变量我们称之为静态变量，没有用static修饰的变�
 * 静态变量是随着类加载时被完成初始化的，它在内存中仅有一个，且JVM也只会为它分配一次内存，同时类所有的实例都共享静态变量，可以直接通过类名来访问它。
 * 但是实例变量则不同，它是伴随着实例的，每创建一个实例就会产生一个实例变量，它与该实例同生共死。
 
-{% highlight java %}
+```java
 public class Test {
   // 静态变量和实例变量都有默认值，局部变量没有默认值
   private static int i;
@@ -54,13 +54,13 @@ t1 i is: 2
 t2 i is: 2
 t1 j is: 1
 t2 j is: 1
-{% endhighlight %}
+```
 
 #### 2. 静态方法
 
 static 修饰的方法我们称之为静态方法，我们通过类名对其进行直接调用。由于他在类加载的时候就存在了，它不依赖于任何实例，所以 static 方法必须实现，也就是说他不能是抽象方法 abstract。
 
-{% highlight java %}
+```java
 public class Test {
 	private static int i;
 	private int j;
@@ -95,7 +95,7 @@ i is: 12
 i is: 22
 j is: 11
 j is: 11
-{% endhighlight %}
+```
 
 需要注意的几点是：
 
@@ -117,7 +117,7 @@ j is: 11
 
 抽象方法没有具体的实现（没有花括号，后面只跟一个分号），如果一个抽象类被继承，那么子类必须实现父类的抽象方法。
 
-{% highlight java %}
+```java
 abstract class Test {
 
     abstract void test();
@@ -143,7 +143,7 @@ output:
 
 implement sbatact methd
 intsance method
-{% endhighlight %}
+```
 
 ### 二、 Final
 {: #final}
@@ -152,7 +152,7 @@ intsance method
 
 final variable 就是一个常量，一旦被初始化就不可以被改变。
 
-{% highlight java %}
+```java
 class Test1 {
   final double PI = 3.14; //常量的名称最好大写
 
@@ -171,14 +171,14 @@ class Test1 {
 }
 
 PI is: 3.14
-{% endhighlight %}
+```
 
 ##### Blank final variable
 
 在声明时未初始化的 final variable 被称作 blank final variable， blank final variable必须在
 构造函数中被初始化，否则会抛出编译错误。
 
-{% highlight java %}
+```java
 class Test1 {
 	final double PI;
 
@@ -197,13 +197,13 @@ class Test1 {
 }
 
 PI is: 3.14
-{% endhighlight %}
+```
 
 ##### Uninitialized static final variable
 
 在声明阶段未初始化的 static final variable 只能在静态代码块中被初始化
 
-{% highlight java %}
+```java
 class Test1 {
 	static final double PI;
 
@@ -222,13 +222,13 @@ class Test1 {
 }
 
 PI is: 3.14
-{% endhighlight %}
+```
 
 #### 2. final method
 
 final method 不能被覆盖。也就是说子类可以调用父类的 fianl method，但是不能覆盖它。
 
-{% highlight java %}
+```java
 class Test {
 	static final double PI = 3.14;
 
@@ -246,13 +246,13 @@ class Test1 extends Test{
 }
 
 PI is: 3.14
-{% endhighlight %}
+```
 
 #### 3. final class
 
 final calss 不能被继承
 
-{% highlight java %}
+```java
 final class Test1 {
 	static final double PI = 3.14;
 
@@ -267,4 +267,4 @@ final class Test1 {
 }
 
 PI is: 3.14
-{% endhighlight %}
+```

@@ -26,7 +26,7 @@ ArrayList 是一个数组队列，相当于动态数组。它由数组实现，�
 
 ArrayList常见操作：
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class ArrayListDemo {
@@ -96,13 +96,13 @@ the array list contains c5 ? : true
 the array list is: []
 Array list elements: [1, 2, 4, 6, 8]
 Array list elements: [8, 6, 4, 2, 1]
-{% endhighlight %}
+```
 
 #### LinkedList
 
 LinkedList 是一个双向链表。它也可以被当作堆栈、队列或双端队列进行操作。LinkedList随机访问效率低，但随机插入、随机删除效率高。
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class LinkedListDemo {
@@ -135,7 +135,7 @@ b
 c
 d
 e
-{% endhighlight %}
+```
 
 #### Vector
 
@@ -143,7 +143,7 @@ Vector 是矢量队列，和ArrayList一样，它也是一个动态数组，由�
 Vector 是同步的，这意味着它适用于线程安全的操作，但是在多线程环境下的性能很差。如果不需要线程安全的操作，建议用ArrayList代替
 Vector (ArrayList 是非同步的，有更好的性能)。
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class VectorDemo {
@@ -169,7 +169,7 @@ Default capacity increment is: 4
 a
 b
 c
-{% endhighlight %}
+```
 
 ### Set
 {: #set}
@@ -187,7 +187,7 @@ Set 是不允许有重复记录的集合。Set 接口的实现主要有三种：
 * HashSet 允许有 NUll 值。
 * HashSet 是非同步的，但是可以显示的设置为同步的：Set s = Collections.synchronizedSet(new HashSet(...))
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class HashSetDemo {
@@ -209,7 +209,7 @@ Output:
 
 [a, b, c, d]
 [a, b, c, d, e]
-{% endhighlight %}
+```
 
 #### TreeSet
 
@@ -219,7 +219,7 @@ HashSet 消耗的时间是常数级别的，而 TreeSet 是 log(n).
 
 * TreeSet 是非同步的，但是也可以显示的指定为同步的：SortedSet s = Collections.synchronizedSortedSet(new TreeSet(...))
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class TreeSetDemo {
@@ -235,7 +235,7 @@ public class TreeSetDemo {
 }
 
 Output: [apple, black, coffee, desk]
-{% endhighlight %}
+```
 
 #### LinkedHashSet
 
@@ -245,7 +245,7 @@ LinkedHashSet 与 TreeSet 和 HashSet 很相似，除了以下几点不同：
 2. TreeSet 按照升序排序元素；
 3. LinkedHashSet 会按照插入的顺序排序，输出的顺序与插入时的顺序相同；
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class LinkedHashSetDemo {
@@ -262,7 +262,7 @@ public class LinkedHashSetDemo {
 }
 
 Output: [10, 1, 5, 0]
-{% endhighlight %}
+```
 
 ### Map
 {: #map}
@@ -281,7 +281,7 @@ TreeMap的性能比HashMap的差
 * 非同步的；
 * 允许有null值和null键；
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class HashMapDemo {
@@ -307,7 +307,7 @@ Key: Canada & Value: 50
 Key: Russan & Value: 30
 Key: China & Value: 100
 Key: America & Value: 80
-{% endhighlight %}
+```
 
 #### TreeMap
 
@@ -315,7 +315,7 @@ Key: America & Value: 80
 * 不允许键对象是null
 * 是非同步的
 
-{% highlight java %}
+```java
 import java.util.*;
 public class TreeMapDemo {
 
@@ -337,14 +337,14 @@ Key: 10 & Value: Japan
 Key: 40 & Value: China
 Key: 60 & Value: Canada
 Key: 80 & Value: America
-{% endhighlight %}
+```
 
 
 #### LinkedHashMap
 
 元素的顺序基于其插入时的顺序
 
-{% highlight java %}
+```java
 import java.util.*;
 
 public class LinkedHashMapDemo {
@@ -365,4 +365,4 @@ Key: 100 & Value: China
 Key: 10 & Value: Japan
 Key: 80 & Value: America
 Key: 30 & Value: Canada
-{% endhighlight %}
+```

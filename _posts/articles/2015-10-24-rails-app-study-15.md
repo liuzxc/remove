@@ -40,7 +40,7 @@ Autocomplete 可以帮助我减少工作量，但是我需要了解它是如何�
 
 以下是取自官方的示例代码：
 
-{% highlight coffeescript %}
+```coffeescript
 <script>
   $(function() {
     var availableTags = [
@@ -57,25 +57,25 @@ Autocomplete 可以帮助我减少工作量，但是我需要了解它是如何�
     });
   });
 </script>
-{% endhighlight %}
+```
 
 此段代码的意思是：在网页页面加载完毕的时候，jQuery 告诉 DOM 替他做一些事情，即 function() 里面需要做的。
 DOM 会去找一个叫 tags 的ID选择器，然后去执行自动补全，source 即是需要显示的列表内容。
 
 然后对应到我的需求，我需要给评论栏加上 tags 标签，source 对应的值是评论过的用户名列表，但是这个列表是未知的，我需要去服务器动态获取，幸运的是，autocomplete 的 source属性支持多种类型，一种是 Array，就像上面的 availableTags；一种是 String，说是 string，其实是一个 url 地址，jQuery 会根据这个地址发送一个 get 请求道服务器，然后返回一个 json  格式的数据，显然这种方式可以很好的满足我的需求。
 
-{% highlight erb %}
+```erb
 #app/view/comments/_form.html.erb
 <div class="form-group ui-widget">
   <div class="col-sm-5">
     <%= f.text_area :content, rows: 5, placeholder: '说点什么...', class: 'form-control', id: "tags", 'data-article-id': @article.id.to_s %>
   </div>
 </div>
-{% endhighlight %}
+```
 
 为评论栏添加 ID选择器 tags，以便 js 找到它，data-article-id 的作用是为了让 js 获取文章的 id，便于后面构造 url。
 
-{% highlight coffeescript %}
+```coffeescript
 #app/assets/javascripts/comments.coffee
 # input: it's an event that triggers whenever the input changes
 $ ->
@@ -83,21 +83,21 @@ $ ->
     id = $("#tags").data("article-id")
     $("#tags").autocomplete
       source:  '/articles/' + id + '/autocomplete.json')
-{% endhighlight %}
+```
 
 此段 coffee 代码的意思是：在页面加载完成后，js 解释器会监听ID选择器为 tags 上的输入事件，一旦有输入，则获取文章id，启动自动补全功能，根据 source 中的 url 地址，发送一个 ajax 请求到服务器去获取用户名列表。
 
-{% highlight ruby %}
+```ruby
 #config/routes.rb
 resources :articles, only: [] do
   resources :comments
   get :autocomplete
 end
-{% endhighlight %}
+```
 
 添加路由
 
-{% highlight ruby %}
+```ruby
 class ArticlesController < ApplicationController
   ....
   def autocomplete
@@ -113,15 +113,15 @@ class ArticlesController < ApplicationController
   end
   ....
 end
-{% endhighlight %}
+```
 
 autocomplete 方法用于在服务器查找匹配的用户名，jQuery 发送 ajax 消息的时候，会附带一个 term 的参数，内容即为当前输入框的文本，由于我希望用户在输入 @ 符号的时候进行匹配，所以在此处我需要对参数进行处理。
 
-{% highlight ruby %}
+```ruby
 Started GET "/articles/55fc103ebd172df3f600000c/autocomplete.json?term=I+love+%40liu" for ::1 at 2015-10-25 00:38:06 +0800
 Processing by ArticlesController#autocomplete as JSON
   Parameters: {"term"=>"I love @liu", "article_id"=>"55fc103ebd172df3f600000c"}
-{% endhighlight %}
+```
 
 现在可以看一下效果如何：
 
@@ -137,7 +137,7 @@ Processing by ArticlesController#autocomplete as JSON
 
 要解决第一个问题，我们需要为 autocomplete 添加几个新的属性：
 
-{% highlight coffeescript %}
+```coffeescript
 $ ->
   $(document).on("input", "#tags", ->
     id = $("#tags").data("article-id")
@@ -150,11 +150,11 @@ $ ->
         event.preventDefault()
         #将列表中的内容追加在@符号末尾，避免覆盖文本框中的内容
         this.value = this.value.replace(/@(\w*)$/, "@" + ui.item.value))
-{% endhighlight %}
+```
 
 对于第二个问题，我们需要判断文本框中的内容，如果没有输入 @ 符号，就不触发自动补全的功能：
 
-{% highlight coffeescript %}
+```coffeescript
 $ ->
   $(document).on("input", "#tags", ->
     content = $("#tags").val() #获取当前输入框中的文本
@@ -168,7 +168,7 @@ $ ->
         select: (event, ui) ->   #event在列表中的条目被选中时触发，默认的行为是用列表栏中选中项目的值取代文本框中的值
           event.preventDefault()
           this.value = this.value.replace(/@(\w*)$/, "@" + ui.item.value))
-{% endhighlight %}
+```
 
 在修复了这两个问题以后，再来看看效果：
 

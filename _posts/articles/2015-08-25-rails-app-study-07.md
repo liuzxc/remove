@@ -24,10 +24,10 @@ Redcarpet 是一个 Markdown 的解析器，功能强大，但是官方的文档
 
 在 Gemfile 中添加 redcarpet 和 coderay 包，然后运行 bundle
 
-{% highlight ruby %}
+```ruby
 gem 'redcarpet' #markdown 解析器
 gem 'coderay'   #代码高亮
-{% endhighlight %}
+```
 
 由于没有看懂原文的使用指南，本着万事不会问 Google 的指导思想，果断搜出了两篇指南（感谢美帝人民的分享精神😄）
 
@@ -36,7 +36,7 @@ gem 'coderay'   #代码高亮
 
 以上两篇文章都是将文本的处理封装成了 helper 方法，目的是方便使用，不用在每一个显示的地方做改动，只需要调用固定的方法即可。
 
-{% highlight ruby %}
+```ruby
 #app/helper/application_helper.rb
 module ApplicationHelper
 
@@ -94,17 +94,17 @@ module ApplicationHelper
     Redcarpet::Markdown.new(coderayified, extensions).render(text).html_safe
   end
 end
-{% endhighlight %}
+```
 
 然后在相应的视图代码中添加 markdown 方法：
 
-{% highlight erb %}
+```erb
 ...
 <div class="panel-body">
   <p><%= markdown(@article.content) %></p>
 </div>
 ...
-{% endhighlight %}
+```
 
 现在创建文章后的效果是不是超赞呢😄！
 
@@ -114,12 +114,10 @@ end
 
 原作者中的代码存在一个问题，当代码块中没有制定语言的时候就会出错，导致文章创建失败，例如文本中出现这样的代码：
 
-{% highlight ruby %}
-```
+```ruby
 def test
 end
 ```
-{% endhighlight %}
 
 保存的时候就会出错：
 
@@ -129,12 +127,12 @@ end
 
 解决的方案就是当没有制定语言的时候，设置一个默认的语言：
 
-{% highlight ruby %}
+```ruby
 class CodeRayify < Redcarpet::Render::HTML
   def block_code(code, language)
     language ||= :plaintext #设置默认语言防止出错
     CodeRay.scan(code, language).div
   end
 end
-{% endhighlight %}
+```
 

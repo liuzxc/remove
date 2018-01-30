@@ -9,15 +9,15 @@ image:
    feature: ruby_on_rails_logo.jpg
 ---
 
-####创建新的rails项目
+#### 创建新的rails项目
 
 `rails new <app_name>`
 
-####创建模型(模型的名字是单数，对应的数据表名是复数)
+#### 创建模型(模型的名字是单数，对应的数据表名是复数)
 
 `rails g model User name:string age:integer`
 
-####添加新字段
+#### 添加新字段
 
 `rails g migration add_email_to_users email:string`
 
@@ -33,7 +33,7 @@ image:
 
 
 
-####创建controller
+#### 创建controller
 
 `rails g controller Users`
 
@@ -44,7 +44,7 @@ image:
 </figure>
 
 
-{% highlight ruby %}
+```ruby
 create_table 'example' do |t|
   t.integer :int                 # int (4 bytes, max 2,147,483,647)
   t.integer :int1, :limit => 1   # tinyint (1 byte, -128 to 127)
@@ -55,7 +55,7 @@ create_table 'example' do |t|
   t.integer :int8, :limit => 8   # bigint (8 bytes)
   t.integer :int11, :limit => 11 # int (4 bytes)
 end
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/rails_reserve.png">

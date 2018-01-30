@@ -15,10 +15,10 @@ turbolinks 的主要作用是为了加速页面渲染，进度条功能只是它
 
 如果 turbolinks 3 正式发布之后，也许我这篇文章就没有什么作用了，因为版本3已经默认进度条功能是开启状态，所以完全不需要做任何特殊的配置，然是如果用的是 turbolinks 3 之前的版本，你需要做一些配置，只需要一行代码：
 
-{% highlight js %}
+```js
 #app/assets/javascripts/application.js
 Turbolinks.enableProgressBar();
-{% endhighlight %}
+```
 
 该行代码的意思是打开 Turbolinks 的进度条功能，当重新点击网站页面的时候，进度条就会出现，超 easy！
 
@@ -28,13 +28,13 @@ Turbolinks.enableProgressBar();
 
 如果想定制进度条的外观，可以通过 CSS 来实现：
 
-{% highlight js %}
+```js
 #app/assets/stylesheets/application.scss
 html.turbolinks-progress-bar::before {
   background-color: red !important;
   height: 5px !important;
 }
-{% endhighlight %}
+```
 
 然后点击网站页面，进度条变成红色，并且宽度增加：
 

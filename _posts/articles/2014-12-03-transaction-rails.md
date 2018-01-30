@@ -19,16 +19,16 @@ categories: articles
 
 我们使用事务把SQL语句包裹起来,以确保数据库的更改只发生在所有操作均成功的情况下。事务帮助开发者确保应用数据的完整性。最典型的例子是银行交易，现金被存入然后取出，如果其中一步失败，整个交易过程应当被重置。这个例子可以用以下代码来描述：
 
-{% highlight ruby linenos %}
+```ruby
 ActiveRecord::Base.transaction do
   david.withdrawal(100)
   mary.deposit(100)
 end
-{% endhighlight %}
+```
 
 在rails中，事务作为类或实例方法可以被所有的`ActiveRecord model`使用，所以这样写也是合法的：
 
-{% highlight ruby linenos %}
+```ruby
 Client.transaction do
   @client.users.create!
   @user.clients(true).first.destroy!
@@ -40,7 +40,7 @@ end
   @user.clients(true).first.destroy!
   Product.first.destroy!
 end
-{% endhighlight %}
+```
 
 你可能注意到了，这几个事务示例都引用了不同的model类。在一个单独的事务代码块中混合model类是毫无问题的，因为事务是被绑定到数据库连接而不是model实例。通常情况下，数据库中的多个记录更新必须作为一个单元被成功执行的时候才需要事务。并且rails已经将`save`和`destroy`方法放在了事务当中，所以更新一个单独的记录是不需要事务的。
 
@@ -48,21 +48,21 @@ end
 
 事务通过一个叫rollback的进程去重置记录的状态。在rails中，`rollback`只会被异常触发，这是了解事务的一个关键点。在一些项目中，我发现了有些事务代码块根本就不会回滚，因为其中的代码不会抛出异常。在这里，我对之前的银行示例代码稍微做了修改：
 
-{% highlight ruby linenos %}
+```ruby
 ctiveRecord::Base.transaction do
   david.update_attribute(:amount, david.amount -100)
   mary.update_attribute(:amount, 100)
 end
-{% endhighlight %}
+```
 
 rails中，当更新操作失败后，`update_attribute`不会抛出异常，它会返回`false`，正因为如此，所以你应该确保方法在遇到失败的时候抛出异常。更好的做法是：
 
-{% highlight ruby linenos %}
+```ruby
 ActiveRecord::Base.transaction do
   david.update_attributes!(:amount => -100)
   mary.update_attributes!(:amount => 100)
 end
-{% endhighlight %}
+```
 
 > 注意：在rails中，［!］表示方法失败时会抛出异常。
 
@@ -75,7 +75,7 @@ end
 
 在编程的时候，一个常见的错误是误用和过度使用嵌套事务。当你在一个事务中嵌套另外一个事务时，子事务会成为父事务的一部分，这会导致意想不到的结果，让我们看看rails API 文档中的例子：
 
-{% highlight ruby linenos %}
+```ruby
 User.transaction do
   User.create(:username => 'Kotori')
   User.transaction do
@@ -83,13 +83,13 @@ User.transaction do
     raise ActiveRecord::Rollback
   end
 end
-{% endhighlight %}
+```
 
 正如之前提到的，异常`ActiveRecord::Rollback` 并不会传播到事务之外，以至于父事务并不会收到子事务中抛出的异常，因此子事务和父事务中的记录都被创建了。可能这样想会简单一点，嵌套事务就像子事务的内容被移到父事务中去了，子事务中的内容为空。
 
 为了确保rollback被父事务接收到，你必须添加`:requires_new => true`选项到子事务。再次使用rails源码中的例子，你可以像这样触发嵌套事务回滚：
 
-{% highlight ruby linenos %}
+```ruby
 User.transaction do
   User.create(:username => 'Kotori')
   User.transaction(:requires_new => true) do
@@ -97,18 +97,18 @@ User.transaction do
     raise ActiveRecord::Rollback
   end
 end
-{% endhighlight %}
+```
 
 一个事务只取决于当前的数据库连接，如果你的应用需要一次写多个数据库，你需要把方法放入嵌套事务当中。例如：
 
-{% highlight ruby linenos %}
+```ruby
 Client.transaction do
   Product.transaction do
     product.buy(@quantity)
     client.update_attributes!(:sales_count => @sales_count + 1)
   end
 end
-{% endhighlight %}
+```
 
 #### 围绕事务的回调
 

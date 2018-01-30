@@ -32,20 +32,20 @@ Bootstrap 是基于 Less 构建的，还提供了一套官方支持的 Sass 移�
 
 导入 Bootstrap 样式到 `app/assets/stylesheets/application.scss`：
 
-{% highlight js %}
+```js
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
-{% endhighlight %}
+```
 
 去掉 `application.scss` 中所有的 `//= require` 和 `//= require_tree` 声明，否则会影响 Bootstrap 的正常使用
 
 引入 bootstrap js 到 `app/assets/javascripts/application.js`:
 
-{% highlight js %}
+```js
 //= require jquery
 //= require bootstrap-sprockets
-{% endhighlight %}
+```
 
 #### 页面布局
 
@@ -62,7 +62,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 以本应用为例：
 
-{% highlight erb %}
+```erb
 <div id="main-container" class="container">
   <div class="row">
 
@@ -83,7 +83,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
   </div>
 </div>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-01.png">
@@ -94,7 +94,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 导航栏
 
-{% highlight erb %}
+```erb
 <nav class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -126,7 +126,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
     </div>
   </div>
 </nav>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-03.png">
@@ -134,7 +134,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 表单
 
-{% highlight erb %}
+```erb
 <%= form_for(@user, html: {class: 'form-horizontal'}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -176,7 +176,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
     </div>
   </div>
 <% end %>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-06.png">
@@ -184,7 +184,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 表格
 
-{% highlight erb %}
+```erb
 <table class="table">
   <tbody>
     <% @articles.each do |article| %>
@@ -195,7 +195,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
     <% end %>
   </tbody>
 </table>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-04.png">
@@ -219,7 +219,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 搜索框
 
-{% highlight erb %}
+```erb
 <%= form_for home_path, method: :get, html: { role: "search", class: "navbar-form navbar-left"} do %>
 
   <div class="form-group">
@@ -230,7 +230,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
     <%= submit_tag "Search", class: "btn btn-default" %>
   </div>
 <% end %>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-07.png">
@@ -238,7 +238,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### 面板
 
-{% highlight erb %}
+```erb
 #app/views/articles/home.html.erb
 <div class="panel panel-default">
   <div class="panel-heading"></div>
@@ -253,7 +253,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
     <%= paginate @all_articles %>
   </div>
 </div>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-08.png">
@@ -262,7 +262,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
 
 #### Glyphicons 字体图标
 
-{% highlight erb %}
+```erb
 #app/views/articles/show.html.erb
 <% if current_user == @article.user %>
   <%= link_to edit_user_article_path(@user, @article) do %>
@@ -271,7 +271,7 @@ Bootstrap 的栅格系统可以在多种屏幕设备上工作，主要依赖于4
   <%= link_to [@user, @article], method: :delete, data: { confirm: 'Are you sure?' } do %>
     <span class="glyphicon glyphicon-trash"></span>
 <% end %>
-{% endhighlight %}
+```
 
 <figure>
     <img src="/images/20150823-09.png">

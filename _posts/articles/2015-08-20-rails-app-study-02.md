@@ -20,21 +20,21 @@ categories: articles
 
 2. 需要使用 bcrypt 这个 gem package，只需要在 Gemfile 中取消相应的注释即可。
 
-  {% highlight ruby %}
+  ```ruby
   # Use ActiveModel has_secure_password
   gem 'bcrypt', '~> 3.1.7'
-  {% endhighlight %}
+  ```
 
 3. 在User模型中加入 `has_secure_password` 方法，如果使用的是非关系型数据库，还需要 `include ActiveModel::SecurePassword` 模块。
 
-{% highlight ruby %}
+```ruby
 class User
   include Mongoid::Document
   include ActiveModel::SecurePassword
   .....
   has_secure_password
 end
-{% endhighlight %}
+```
 
 > 参考链接： http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password
 
@@ -42,7 +42,7 @@ end
 
 用户注册即新用户的创建，只需要修改创建新用户的表单，添加 password 和 password_confirmation field.
 
-{% highlight ruby %}
+```ruby
 # view/users/_form.html.erb
 <div class="field">
   <%= f.label :password %><br>
@@ -53,7 +53,7 @@ end
   <%= f.label :password_confirmation %><br>
   <%= f.password_field :password_confirmation %>
 </div>
-{% endhighlight %}
+```
 
 添加新的路由：
 
@@ -71,15 +71,15 @@ end
 
 添加对应的路由：
 
-{% highlight ruby %}
+```ruby
 get 'log_in' => 'sessions#new'
 get 'log_out' => 'sessions#destroy'
 resources :sessions
-{% endhighlight %}
+```
 
 创建一个登录表单
 
-{% highlight ruby %}
+```ruby
 #view/sessions/new.html.erb
 <h1>Log in</h1>
 
@@ -98,11 +98,11 @@ resources :sessions
 <figure>
     <img src="/images/20150820-02.png">
 </figure>
-{% endhighlight %}
+```
 
 用户在登录的时候，需要去验证邮箱是否注册和密码输入是否正确，`has_secure_password` 提供了校验密码的方法 `authenticate`，同时也需要将用户的 id 存入 session 当中，用于记录用户的状态。退出操作需要将玩家的 id 从 seesion 中清除。
 
-{% highlight ruby %}
+```ruby
 class SessionsController < ApplicationController
   def new
   end
@@ -124,7 +124,7 @@ class SessionsController < ApplicationController
   end
 
 end
-{% endhighlight %}
+```
 
 如果用户登录成功，则显示用户相关的信息：
 

@@ -19,7 +19,7 @@ share: true
 * [异常处理](#exception)
 * [线程](#thread)
 
-####变量
+#### 变量
 {: #variables}
 
 Java 有两种变量：
@@ -38,14 +38,14 @@ Java 有两种变量：
 > Integer 和 int 的区别: int 是 Java 提供的原始数据类型，而 Integer 是 Java 为 int 提供的封装类，它提供了很多整数相关的
 操作方法；int 的默认值是0，而 Integer 的默认值是 null
 
-####控制语句
+#### 控制语句
 {: #statement}
 
 ##### if...esle
 
 1. if语句
 
-{% highlight java %}
+```java
   int score = 90;
   if(score > 100){
     System.out.println(".....");
@@ -53,22 +53,22 @@ Java 有两种变量：
   //以上可以简写为：
   if(score > 100)
     System.out.println(".....");
-{% endhighlight %}
+```
 
 2. if...else 语句
 
-{% highlight java %}
+```java
   int score = 90;
   if(score > 100){
     System.out.println(".....");
   } else {
     System.out.println(".....");
   }
-{% endhighlight %}
+```
 
 3. if...else if...else
 
-{% highlight java %}
+```java
   int score = 90;
   if (score > 100) {
     System.out.println(".....");
@@ -77,13 +77,13 @@ Java 有两种变量：
   } else {
     ....
   }
-{% endhighlight %}
+```
 
-#####switch
+##### switch
 
 * switch语句中的条件表达式的值只能是int，string或枚举类型
 
-{% highlight java %}
+```java
  int score = 90;
  switch(score){
  case 90 :
@@ -96,11 +96,11 @@ Java 有两种变量：
      System.out.println("C");
      break;
  }
-{% endhighlight %}
+```
 
-#####循环
+##### 循环
 
-{% highlight java %}
+```java
 int[] arr = {1,2,3,4,5};
 
 for(int i=0;i<arr.length;i++) {...}
@@ -108,14 +108,13 @@ for(int i=0;i<arr.length;i++) {...}
 for(int i : arr) {...}
 
 while(i < arr.length) {...}
-
-{% endhighlight %}
+```
 
 可以通过 break 关键字跳出当前循环，如果要跳出嵌套循环该如何做呢？
 
 1. 使用标号
 
-{% highlight java %}
+```java
  ok:
  for(int i=0; i<=10 && !bo; i++){
     System.out.println("i:"+i);
@@ -126,11 +125,11 @@ while(i < arr.length) {...}
        }
     }
  }
-{% endhighlight %}
+```
 
 2. 控制外层循环表达式
 
-{% highlight java %}
+```java
 boolean con = false;
 for(int i=0; i<=10 && !con; i++){
 System.out.println("i:"+i);
@@ -142,28 +141,28 @@ System.out.println("i:"+i);
 	   }
 	}
 }
-{% endhighlight %}
+```
 
-####Java API
+#### Java API
 {: #java_api}
 
 要使用API中的类，你必须要知道它被放在哪个包中，有两种方式指定 Java 使用的类：
 
 1. import 把 import 放在源文件的最前面；
 
-{% highlight java %}
+```java
 import java.util.ArrayList;
-{% endhighlight %}
+```
 
 2. 在程序中打出全名；
 
-{% highlight java %}
+```java
 java.util.ArrayList<String> myList = new java.util.ArrayList<String>();
-{% endhighlight %}
+```
 
 ArrayList: ArrayList 不同于普通数组，创建时不需要指定大小，并且可以调用其提供的大量方法；
 
-{% highlight java %}
+```java
 import java.util.ArrayList;
 class Array {
   public static void main(String[] args){
@@ -180,17 +179,17 @@ class Array {
 	  boolean isEmpty = myList.isEmpty();
   }
 }
-{% endhighlight %}
+```
 
 Math:
 
-{% highlight java %}
+```java
 Math.ceil(11.3) => 12 向上取整
 Math.floor(11.6) => 11 向下取整
 Math.round(11.5) => 12 四舍五入向下取整，算法为Math.floor(x+0.5)
-{% endhighlight %}
+```
 
-####类
+#### 类
 {: #class}
 
 `public class Test{...}`
@@ -198,16 +197,16 @@ Math.round(11.5) => 12 四舍五入向下取整，算法为Math.floor(x+0.5)
 * 类名必须和文件名相同
 * 一个文件可以有多个类，但是只能有一个是public的
 
-#####内部类
+##### 内部类
 
-{% highlight ruby %}
+```ruby
 class OuterClass {
 
   class InnerClass {
     void go() {...}
   }
 }
-{% endhighlight %}
+```
 
 1. 内部类可以使用外部类的所有方法和变量
 2. 内部类的实例一定会绑在外部类的实例上
@@ -215,13 +214,13 @@ class OuterClass {
 ####继承
 {: #inherit}
 
-{% highlight java %}
+```java
 public class <子类> extends <父类> {}
-{% endhighlight %}
+```
 
 继承下来的方法可以被覆盖掉，但是实例变量不能被覆盖掉
 
-#####4种访问权限：
+##### 4种访问权限：
 
 1. private: private类型的成员不会被继承；
 2. default: 只有在同一包中的默认事物可以存取；
@@ -235,19 +234,19 @@ public class <子类> extends <父类> {}
 |  no modifier|    Y    |     Y     |     N      |    N    |
 |  private    |    Y    |     N     |     N      |    N    |
 
-#####方法的覆盖：
+##### 方法的覆盖：
 
 1. 参数必须一样，且返回类型必须兼容；
 2. 不能降低方法的存取权限；
 
-#####方法的重载：
+##### 方法的重载：
 
 重载的意义是方法的名称相同，但参数不同，重载与多态毫无关系。
 
 1. 返回类型可以不同，但不可以只改变返回类型；
 2. 可以更改存取权限；
 
-{% highlight java %}
+```java
 public class Animal {
  public void beFriendly() {
    System.out.println("father befriendly");
@@ -275,59 +274,59 @@ public class Cat extends Animal {
     System.out.println(c.weight);
   }
 }
-{% endhighlight %}
+```
 
-####抽象
+#### 抽象
 {: #abstract}
 
 抽象类：抽象类代表没有人能创建出该类的实例，抽象类除了被继承过之外，没有用途，没有值，没有目的。
 
-{% highlight java %}
+```java
 abstract class Animal {}
-{% endhighlight %}
+```
 
 抽象方法：抽象方法代表此方法一定被覆盖过。
 
 * 抽象方法没有实体
 
-{% highlight java %}
+```java
 public abstract void eat();
-{% endhighlight %}
+```
 
 * 如果声明一个抽象的方法，必须将类也标记为抽象的，不能在非抽象类中拥有抽象方法，但抽象类中可以有非抽象方法。
 
-####接口
+#### 接口
 {: #interface}
 
 接口`interface`可以用来解决多重继承问题,接口的方法一定是抽象的。
 
 接口的定义：
 
-{% highlight java %}
+```java
 public interface Pet {....}
-{% endhighlight %}
+```
 
 接口的实现：
 
-{% highlight java %}
+```java
 public class Dog extends Canine implements Pet {....}
 //类可以实现多个接口
 public class Dog extends Canine implements Pet, Saveable, Paintable {....}
-{% endhighlight %}
+```
 
 Pet.java:
 
-{% highlight java %}
+```java
 public interface Pet {
   //接口的方法必须是抽象的，所以它们没有内容，必须以分号结尾
   abstract void beFriendly();
   abstract void play();
 }
-{% endhighlight %}
+```
 
 Dog.java:
 
-{% highlight java %}
+```java
 public class Dog implements Pet {
  //Dog类必须实现Pet的方法
  public void beFriendly() {
@@ -343,18 +342,18 @@ public class Dog implements Pet {
    d.play();
  }
 }
-{% endhighlight %}
+```
 
-####构造器
+#### 构造器
 {: #constructor}
 
-#####构造函数
+##### 构造函数
 
 构造函数带有你在初始化对象时会执行的程序代码，也就是新建一个对象时会被执行，如果你没有写构造函数，编译器会帮你写。
 但是需要注意，编译器只会在你完全没有设定构造函数时才会帮你写构造函数。如果你已经写了一个有参数的构造函数，并且你还
 需要一个没有参数的构造函数，你必须自己手动写。
 
-{% highlight java %}
+```java
 public class Duck{
   //构造函数没有返回类型，而且要与类的名称相同
   public Duck(){
@@ -369,12 +368,12 @@ public class Duck{
     Duck d = new Duck();
   }
 }
-{% endhighlight %}
+```
 
 > 在 Ruby 中构造函数名为 intialize，但是 Ruby 和 Java 不同的是，Ruby 并不支持函数重载，它通过设置默认参数来实现带有
 不同个数参数的构造函数
 
-{% highlight ruby %}
+```ruby
 class Duck
    def initialize(name = nil)
      puts "init object"
@@ -382,11 +381,11 @@ class Duck
 end
 
 d = Duck.new
-{% endhighlight %}
+```
 
 在创建新对象时，所有继承下来的构造函数都会执行，先执行父类的，再执行子类的
 
-{% highlight java %}
+```java
 public class Duck1 extends Duck{
     public Duck1(){
        System.out.println("duck1 initialize");
@@ -399,11 +398,11 @@ public class Duck1 extends Duck{
 
 => duck initlalize
    duck1 initlalize
-{% endhighlight %}
+```
 
 > Ruby 在创建新的对象时，并不会自动执行来自父类的构造函数
 
-{% highlight ruby %}
+```ruby
 class Duck
    def initialize
      puts "duck init"
@@ -421,7 +420,7 @@ class Duck1 < Duck
 end
 
 d1 = Duck1.new => "duck1 init"
-{% endhighlight %}
+```
 
 super() VS this()
 
@@ -429,7 +428,7 @@ super() VS this()
 2. this() 用于从某个构造函数调用同一个类的另外一个构造函数，this() 只能用在构造函数中，且必须是第一行语句
 3. 每个构造函数可以选择调用 super() 或 this()，但不能同时调用
 
-{% highlight java %}
+```java
 public class Duck1 extends Duck{
     public Duck1(){
        System.out.println("duck1 initialize");
@@ -446,19 +445,19 @@ public class Duck1 extends Duck{
 => duck initlalize
    duck1 initialize
    duck1 initialize100
-{% endhighlight %}
+```
 
-####静态
+#### 静态
 {: #static}
 
-#####静态方法
+##### 静态方法
 
 用static关键字标记方法是静态方法
 
 1. 静态的方法不能调用非静态的变量
 2. 静态方法也不能调用非静态的方法
 
-{% highlight ruby %}
+```ruby
 class Test{
    public static void test(){
      System.out.println("static method");
@@ -470,12 +469,12 @@ class Test{
       t.test(); // Java 类的实例可以调用静态方法， 而 Ruby 不可以
    }
 }
-{% endhighlight %}
+```
 
 > Java 中的静态方法类似于 Ruby 的类方法，但不同的是 Java 的静态方法可以被类的实例所调用，
 而 Ruby 类的实例无法调用类方法
 
-{% highlight ruby %}
+```ruby
 class Test
     def self.test
        puts "class method"
@@ -483,14 +482,14 @@ class Test
 end
 
 Test.test
-{% endhighlight %}
+```
 
-#####静态变量
+##### 静态变量
 
 1. 静态变量被同类的所有实例所共享
 2. 静态变量会在该类的任何静态方法执行之前就初始化
 
-{% highlight java %}
+```java
 public class Test{
    public static int count = 0;
    public Test(){
@@ -506,11 +505,11 @@ public class Test{
 
 count: 1
 count: 2
-{% endhighlight %}
+```
 
 > Java 的静态变量类似于 Ruby 的类变量
 
-{% highlight ruby %}
+```ruby
 class Test
     @@count = 0
     def initialize
@@ -524,16 +523,16 @@ t1 = Test.new
 
 @@count: 1
 @@count: 2
-{% endhighlight %}
+```
 
-#####静态final变量
+##### 静态final变量
 
 一个被标记为 final 的变量到表它一旦被初始化之后就不会改动，也就是说类加载之后静态 fianl 变量就一直会维持原值
 
 1. 常量的名称应该是大写字母
 2. Java 中的常量是把变量同时标记为 static 和 final 的
 
-{% highlight java %}
+```java
 public class Test{
    //常量的名称应该是大写字母
    public static final int SIZE = 100;
@@ -542,22 +541,22 @@ public class Test{
      System.out.println(Test.SIZE);
    }
 }
-{% endhighlight %}
+```
 
-#######final的其他用途
+####### final的其他用途
 
 1. final 的 method 不能被覆盖；
 2. final 的类不能被继承；
 
 
-####异常处理
+#### 异常处理
 {: #exception}
 
 异常是一种 Exception 类型的对象
 编译器不会注意 RuntimeException 类型的异常
 方法可以用 throws 关键字抛出异常对象
 
-{% highlight java %}
+```java
 try {
 	//危险动作
 } catch(Exception ex) {
@@ -565,9 +564,9 @@ try {
 } finally {
     //不管有没有异常都得执行的程序
 }
-{% endhighlight %}
+```
 
-{% highlight java %}
+```java
 public class Test{
    public void divide() throws Exception {
      for(int i=10;i>=0;i--){
@@ -586,11 +585,11 @@ public class Test{
      }
    }
 }
-{% endhighlight %}
+```
 
 > java的异常处理机制与ruby的非常相似
 
-{% highlight ruby %}
+```ruby
 begin
   ...
 rescue(exception ex)
@@ -598,11 +597,11 @@ rescue(exception ex)
 ensure
   ...
 end
-{% endhighlight %}
+```
 
 ######处理多种异常
 
-{% highlight java %}
+```java
 public void play() throws Exception1, Exception2 {....}
 
 try {
@@ -612,16 +611,16 @@ try {
 } catch(Exception2 ex2) {
 	...
 }
-{% endhighlight %}
+```
 
-####线程
+#### 线程
 {: #thread}
 
 ##### Java 有两种方法来创建线程：
 
 * 从 Thread 类继承一个新的线程类，重载它的 run() 方法
 
-{% highlight java %}
+```java
 class Thread1 extends Thread{
     public void run(){
         play();
@@ -638,7 +637,7 @@ class Thread1 extends Thread{
        System.out.println("main");
    }
 }
-{% endhighlight %}
+```
 
 * 实现 Runnable 接口，覆盖它的 run() 方法
 
@@ -646,7 +645,7 @@ class Thread1 extends Thread{
 
 Runnable 接口只有一个方法：public void run()，且没有参数
 
-{% highlight java %}
+```java
 public class MyRunnable implements Runnable {
     public void run() {
       doMore();
@@ -656,9 +655,9 @@ public class MyRunnable implements Runnable {
       System.out.println("MyRunnable");
     }
 }
-{% endhighlight %}
+```
 
-{% highlight java %}
+```java
 public class ThreadTester {
     public static void main(String[] args){
         Runnable threadJob = new MyRunnable();
@@ -671,7 +670,7 @@ public class ThreadTester {
         System.out.println("back main");
     }
 }
-{% endhighlight %}
+```
 
 ##### 线程的状态
 
@@ -697,13 +696,13 @@ public class ThreadTester {
   * 最高优先级：10
   * 默认优先级： 5
 
-#####synchronized
+##### synchronized
 
 synchronized 关键字来修饰方法使它每次只能被单一的线程存取。
 
 `private synchronized void play(){...}`
 
-{% highlight java %}
+```java
 public class Test implements Runnable{
    public void run() {
      for(int i=5;i>0;i--){
@@ -733,11 +732,11 @@ two: 5
 two: 10
 one: 5
 one: 10
-{% endhighlight %}
+```
 
 加上 synchronized 关键字后：
 
-{% highlight java %}
+```java
 public class Test implements Runnable{
    public synchronized void run() {
      for(int i=5;i>0;i--){
@@ -767,4 +766,4 @@ two: 2
 two: 3
 two: 5
 two: 10
- {% endhighlight %}
+ ```

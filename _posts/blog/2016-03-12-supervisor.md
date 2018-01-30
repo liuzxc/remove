@@ -33,24 +33,24 @@ supervisor 主要由两部分组成：
 
 然后可以通过 supervisord 命令启动 supervisord.
 
-{% highlight bash %}
+```bash
 $ ps aux | grep super
 vagrant   1800  0.0  2.4  53680 12140 ?        Ss   06:33   0:00 /usr/bin/python /usr/bin/supervisord
 vagrant   1813  0.0  0.1  10432   668 pts/0    S+   06:37   0:00 grep --color=auto super
-{% endhighlight %}
+```
 
 我们可以看到 supervisord 已经被启动了， 然后进入 supervisorctl 的 shell 界面。
 
-{% highlight bash %}
+```bash
 $ supervisorctl
 supervisor> status
 supervisor>
-{% endhighlight %}
+```
 
 由于目前没有添加任何需要管理的进程，所以 status 没有输出人和结果，接下来我们添加一个需要管理的进程
 (以启动一个 celery 的 worker 为例)：
 
-{% highlight bash %}
+```bash
 [program:celeryd]
 command=celery worker --app=task -l info ; 启动命令
 stdout_logfile=/var/log/supervisor/celeryd_out.log ; stdout 日志输出位置
@@ -58,11 +58,11 @@ stderr_logfile=/var/log/supervisor/celeryd_err.log ; stderr 日志输出位置
 autostart=true ; 在 supervisord 启动的时候自动启动
 autorestart=true ; 程序异常退出后自动重启
 startsecs=10 ; 启动 10 秒后没有异常退出，就当作已经正常启动
-{% endhighlight %}
+```
 
 然后运行以下命令更新配置并启动进程：
 
-{% highlight bash %}
+```bash
 $ supervisorctl reread (只更新配置文件)
 celeryd: available
 
@@ -71,11 +71,11 @@ celeryd: added process group
 
 $ supervisorctl status
 celeryd                          RUNNING    pid 1919, uptime 0:00:18
-{% endhighlight %}
+```
 
 我们看到 celery worker 已经被成功启动了。你可以使用不同的命令来控制进程的启动和关闭。
 
-{% highlight bash %}
+```bash
 $ supervisorctl stop celeryd
 celeryd: stopped
 $ supervisorctl start celeryd
@@ -83,15 +83,15 @@ celeryd: started
 $ supervisorctl restart celeryd
 celeryd: stopped
 celeryd: started
-{% endhighlight %}
+```
 
 把所有的配置文件都放在 `supervisord.conf` 并不是个好主意，一旦管理的进程过多，就很麻烦。所以一般都会
 新建一个目录来专门放置进程的配置文件，然后通过 include 的方式来获取这些配置信息
 
-{% highlight bash %}
+```bash
 [include]
 files = /etc/supervisor/conf.d/*.conf
-{% endhighlight %}
+```
 
 然后在目录 `/etc/supervisor/conf.d` 下新建一个配置文件 `celery.conf`, 配置信息与上面的一致，效果
 是一样的。

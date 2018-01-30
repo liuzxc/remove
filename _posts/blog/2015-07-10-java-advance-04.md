@@ -70,7 +70,7 @@ catch block 总是跟着 try block 后面去处理其中的异常，try block �
 
 #### 单个 catch block
 
-{% highlight java %}
+```java
 public class Example {
   public static void main(String[] args){
 //    try{
@@ -91,7 +91,8 @@ public class Example {
     }
   }
 }
-{% endhighlight %}
+```
+
 
 #### 多个 catch block
 
@@ -99,7 +100,7 @@ public class Example {
 * catch(Exception e) 可以捕获所有类型的异常。
 * 如果有多个 catch block， catch(Exception e) 最好放在最后。
 
-{% highlight java %}
+```java
 public class Example {
   public static void main(String[] args){
     try{
@@ -119,13 +120,14 @@ public class Example {
 }
 
 Output:  Warning: ArrayIndexOutOfBoundsException
-{% endhighlight %}
+```
+
 
 #### 嵌套 try ... catch
 
 如果内层的 catch block 没有捕获到异常，那么控制权会转移到外层 catch block。
 
-{% highlight java %}
+```java
 public class Example {
   public static void main(String[] args){
     try{
@@ -149,13 +151,14 @@ public class Example {
 }
 
 Output => Warning: ArrayIndexOutOfBoundsException
-{% endhighlight %}
+```
+
 
 ### finally block
 
 * 如果 finally block 出现异常，其行为和其他异常表现是一样的
 
-{% highlight java %}
+```java
 public class Example {
   public static void main(String[] args){
     try{
@@ -178,12 +181,13 @@ Output:
 
 b: 10
 Error: don't divide a number by zero
-{% endhighlight %}
+```
+
 
 * 即使 try block 和 catch block 中包含了像 return，break，continue 这样的控制转换语句，
 finally 中的代码依然会被执行。
 
-{% highlight java %}
+```java
 public class Example {
   static int test(){
     try{
@@ -206,11 +210,12 @@ Output:
 b: 10
 finally block
 10
-{% endhighlight %}
+```
+
 
 * 如果在 try block 中使用了 System.exit(0)，finally 块中的代码不会被执行。
 
-{% highlight java %}
+```java
 public class Example {
   static int test(){
       try{
@@ -232,7 +237,8 @@ public class Example {
 Output:
 
 b: 10
-{% endhighlight %}
+```
+
 
 ### throw 关键字
 
@@ -244,7 +250,7 @@ Java 定义了一些异常类，例如 ArithmeticException， ArrayIndexOutOfBou
 
 #### throw 用户自定义异常
 
-{% highlight java %}
+```java
 class MyOwnException extends Exception{
   public MyOwnException(String msg){
     super(msg);
@@ -272,11 +278,12 @@ public class Example {
 Output:
 
 length cannot be less than zero
-{% endhighlight %}
+```
+
 
 #### throw 系统已定义异常
 
-{% highlight java %}
+```java
 public class Example {
   static int test(int length) {
     if(length < 0){
@@ -298,4 +305,4 @@ public class Example {
 Output:
 
 length cannot be less than zero
-{% endhighlight %}
+```

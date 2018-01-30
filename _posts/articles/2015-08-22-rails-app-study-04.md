@@ -28,7 +28,7 @@ categories: articles
 编辑和显示这样的操作，需要保证用户当前是登录状态且有足够的权限。因此，需要实现用户是否登录和是否是admin
 user 这两个方法：
 
-{% highlight ruby %}
+```ruby
 class ApplicationController < ActionController::Base
   ...
   helper_method :admin?
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
     current_user.admin
   end
 end
-{% endhighlight %}
+```
 
 require_login 方法作用是验证当前玩家是否是登录状态，如果不是的话，将请求重定向到登录页面。require_admin
 方法用来判断玩家是否是管理员账户，并将其设置为 helper_method
@@ -69,9 +69,9 @@ require_login 方法作用是验证当前玩家是否是登录状态，如果不
 当用户在对自己的信息进行查看和编辑之前，我们需要验证该用户是否处于登录状态，我们需要在 User controller
 中添加以下代码：
 
-{% highlight ruby %}
+```ruby
 before_action :require_login, expect: [:new, :create]
-{% endhighlight %}
+```
 
  before_action 的意思是动作在控制层方法执行之前执行，expect 参数的意思是除开数组中的方法。该段代码
  的意思是用户在进行信息的查看（show, index)，更新(update)和删除(destroy)操作之前，需要运行 require_login
@@ -84,19 +84,19 @@ before_action，相当于功能一样，只是名字不同而已。
 我们希望普通用户只更新自己的信息，而没有权限去更改别人的信息，实现的办法是对比 session 和参数中传过来的 user_id 是否
 相同，如果相同则表明更新的是玩家自身的信息。
 
-{% highlight ruby %}
+```ruby
 def validate_user
   # current_user.id 并不是一个字符串，所以需要 to_s
   if current_user.id.to_s != params[:user_id]
     redirect_to home_path
   end
 end
-{% endhighlight %}
+```
 
 然后在相应的控制器中添加过滤器即可：
 
-{% highlight ruby %}
+```ruby
 before_action :validate_user, only: [:update, :destroy]
-{% endhighlight %}
+```
 
 一个简单的访问权限控制功能就实现了，虽然有一些漏洞，之后会逐渐完善，但是我们从中主要是学习过滤器和 helper_method 的用法。已经深夜两点了，洗洗睡吧！
