@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Discord 如何存储数十亿消息数据
-excerpt: cassandra 在 Discord 中的应用
+excerpt: Cassandra 在 Discord 中的应用
 comments: true
 share: true
 categories: articles
